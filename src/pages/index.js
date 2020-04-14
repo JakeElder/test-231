@@ -1,5 +1,9 @@
-import { useEffect } from 'react'
+import React from 'react'
 
-export default function() {
-  return null
+import LoadingPage from '../components/LoadingPage.js'
+
+function IndexPage() {
+  return <LoadingPage />
 }
+
+export default IndexPage

@@ -2,7 +2,7 @@ import React from 'react'
 import 'reset-css'
 import styled from 'styled-components'
 import { useHotkeys } from 'react-hotkeys-hook'
-import ky from 'ky'
+import axios from 'axios'
 
 import Header from '../Header'
 import Footer from '../Footer'
@@ -23,7 +23,7 @@ const App = ({ children }) => {
       process.env.NODE_ENV === 'development' &&
       process.env.ENABLE_GATSBY_REFRESH_ENDPOINT
     ) {
-      await ky.post('/__refresh')
+      await axios.post('/__refresh')
       console.log('[PRISMIC] refreshing')
     }
   })
