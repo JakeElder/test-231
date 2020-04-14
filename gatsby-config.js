@@ -6,8 +6,8 @@ const siteUrl = (() => {
   if (process.env.NODE_ENV === 'production') {
     if (process.env.NOW_GITHUB_DEPLOYMENT) {
       return process.env.NOW_GITHUB_COMMIT_REF === 'master'
-        ? 'https://piyapodok.org'
-        : 'https://stage.piyapodok.org'
+        ? 'https://cmu.run'
+        : 'https://stage.cmu.run'
     }
     return 'http://localhost:9000'
   }
@@ -33,7 +33,7 @@ const config = {
     {
       resolve: `@jakeelder/gatsby-source-prismic`,
       options: {
-        repositoryName: `piyapodok`,
+        repositoryName: `test-231`,
         accessToken: `${process.env.API_KEY}`,
         linkResolver: () => {}
       }
@@ -49,8 +49,8 @@ const config = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         icon: `src/images/favicon.svg`,
-        name: `Piyapodok`,
-        short_name: `Piyapodok`,
+        name: `Test 231`,
+        short_name: `Test 231`,
         start_url: `/`,
         display: `minimal-ui`
       }
@@ -60,12 +60,6 @@ const config = {
       options: {
         displayName: true
       }
-    },
-    {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        exclude: ['/']
-      }
     }
   ]
 }
@@ -74,7 +68,7 @@ if (addGAPlugin) {
   config.plugins.push({
     resolve: `gatsby-plugin-google-analytics`,
     options: {
-      trackingId: 'UA-141661441-3'
+      trackingId: 'UA-141661441-4'
     }
   })
 }
