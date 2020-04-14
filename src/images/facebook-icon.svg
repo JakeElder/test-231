@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>facebook-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home-Page---Narrow" transform="translate(-286.000000, -3570.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Footer" transform="translate(0.000000, 3551.000000)">
+                <g id="Top-Bar">
+                    <g id="Socials" transform="translate(244.000000, 19.000000)">
+                        <g id="facebook-icon" transform="translate(42.000000, 0.000000)">
+                            <path d="M16.22208,0.10048 C7.51808,0.10048 0.46208,7.15776 0.46208,15.86048 C0.46208,24.56448 7.51808,31.6192 16.22208,31.6192 C24.92608,31.6192 31.98208,24.56448 31.98208,15.86048 C31.98208,7.15776 24.92544,0.10048 16.22208,0.10048 Z M20.39296,15.79456 L17.664,15.79456 C17.664,20.15552 17.664,25.52704 17.664,25.52704 L13.6192,25.52704 C13.6192,25.52704 13.6192,20.21056 13.6192,15.79456 L11.69536,15.79456 L11.69536,12.3584 L13.6192,12.3584 L13.6192,10.13184 C13.6192,8.53824 14.37568,6.05056 17.70176,6.05056 L20.69696,6.06208 L20.69696,9.39968 C20.69696,9.39968 18.87552,9.39968 18.52224,9.39968 C18.16704,9.39968 17.66464,9.57696 17.66464,10.33472 L17.66464,12.35904 L20.74816,12.35904 L20.39296,15.79456 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

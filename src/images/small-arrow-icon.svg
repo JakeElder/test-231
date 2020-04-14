@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="5px" height="9px" viewBox="0 0 5 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>small-arrow</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Footer-Link" transform="translate(0.000000, -5.000000)" fill="#959595">
+            <path d="M5.75,9.5 L7.00951298,11.4592424 C7.30816515,11.9238125 7.17366214,12.5425263 6.70909209,12.8411785 C6.54779476,12.9448696 6.36008612,13 6.1683345,13 L0.831665498,13 C0.279380749,13 -0.168334502,12.5522847 -0.168334502,12 C-0.168334502,11.8082484 -0.113204122,11.6205397 -0.00951297701,11.4592424 L1.25,9.5 C2.04884044,8.25735931 3.70378788,7.89758813 4.94642857,8.69642857 C5.26875133,8.90363606 5.54279251,9.17767724 5.75,9.5 Z" id="small-arrow" transform="translate(3.500000, 9.500000) rotate(-270.000000) translate(-3.500000, -9.500000) "></path>
+        </g>
+    </g>
+</svg>

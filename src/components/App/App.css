@@ -1,0 +1,31 @@
+@import url('https://use.typekit.net/eom1sol.css');
+
+@font-face {
+  font-family: 'ibm-plex-thai-looped';
+  src: url('../../../node_modules/@ibm/plex/IBM-Plex-Sans-Thai-Looped/fonts/complete/woff2/IBMPlexSansThaiLooped-Regular.woff2')
+    format('woff2');
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+
+@font-face {
+  font-family: 'ibm-plex-thai-looped';
+  src: url('../../../node_modules/@ibm/plex/IBM-Plex-Sans-Thai-Looped/fonts/complete/woff2/IBMPlexSansThaiLooped-Regular.woff2')
+    format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+
+@font-face {
+  font-family: 'ibm-plex-thai-looped';
+  src: url('../../../node_modules/@ibm/plex/IBM-Plex-Sans-Thai-Looped/fonts/complete/woff2/IBMPlexSansThaiLooped-Text.woff2')
+    format('woff2');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+}

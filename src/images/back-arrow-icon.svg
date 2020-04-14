@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="8px" viewBox="0 0 12 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>back-arrow-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Home-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Under-Construction-Page---Narrow" transform="translate(-26.000000, -23.000000)" fill="#AFAFAF" fill-rule="nonzero">
+            <g id="Group-2" transform="translate(20.000000, 15.000000)">
+                <g id="iconfinder_ARROW_2133471" transform="translate(6.000000, 8.000000)">
+                    <path d="M11.4674556,3.55748373 C9.48191979,3.55748373 7.99276792,3.55748373 7,3.55748373 C5.90203813,3.55748373 4.25509533,3.55748373 2.0591716,3.55748373 L4.79289941,0.885032538 C5.00591716,0.676789588 5.00591716,0.364425163 4.79289941,0.156182213 C4.57988166,-0.0520607375 4.26035503,-0.0520607375 4.04733728,0.156182213 L0.390532544,3.73101952 L0,4.11279826 L4.08284024,7.86117137 C4.18934911,7.96529284 4.33136095,8 4.43786982,8 C4.57988166,8 4.72189349,7.93058568 4.82840237,7.82646421 C5.04142012,7.61822126 5.00591716,7.30585683 4.79289941,7.09761388 L2.09467456,4.59869848 L11.4674556,4.59869848 C11.7514793,4.59869848 12,4.35574837 12,4.07809111 C12,3.80043384 11.7514793,3.55748373 11.4674556,3.55748373 Z" id="back-arrow-icon"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
