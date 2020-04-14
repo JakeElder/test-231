@@ -35,6 +35,7 @@ const config = {
       options: {
         repositoryName: `test-231`,
         accessToken: `${process.env.API_KEY}`,
+        lang: 'en-gb',
         linkResolver: () => {}
       }
     },
