@@ -56,5 +56,28 @@ describe('Authenticated Flow', () => {
 
     // Check required content exists
     cy.get('[data-component=ident]').contains('Jake Elder')
+
+    // Interact with question
+    cy.get('[value=Which]').click()
+    cy.get('[value=mean]').click()
+
+    // Submit, check appropriate reponse is sent
+    cy.route({
+      method: 'post',
+      url: '/api/answers',
+      status: 200,
+      response: {}
+    }).as('first-section-submission')
+
+    cy.get('button')
+      .click()
+      .should('have.attr', 'disabled', 'disabled')
+
+    cy.wait('@first-section-submission').then(({ request }) => {
+      expect(request.headers).to.include({
+        Authorization: `Bearer: ${bearerToken}`
+      })
+      expect(request.body.getAll('focusWords')).to.eql(['Which', 'mean'])
+    })
   })
 })
