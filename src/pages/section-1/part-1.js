@@ -3,8 +3,11 @@ import axios from 'axios'
 
 import Ident from '../../components/Ident'
 
+import useToken from '../../hooks/use-token'
+
 function Section1Part1Page() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const { token } = useToken()
 
   function onSubmit(e) {
     e.preventDefault()
@@ -12,6 +15,7 @@ function Section1Part1Page() {
 
     axios.post('/api/answers', new FormData(e.target), {
       headers: {
+        Authorization: `Bearer: ${token}`,
         'Content-Type': 'multipart/form-data'
       }
     })

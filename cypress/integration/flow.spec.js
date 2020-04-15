@@ -75,7 +75,7 @@ describe('Authenticated Flow', () => {
 
     cy.wait('@first-section-submission').then(({ request }) => {
       expect(request.headers).to.include({
-        Authorization: `Bearer: ${bearerToken}`
+        Authorization: `Bearer: ${responseToken}`
       })
       expect(request.body.getAll('focusWords')).to.eql(['Which', 'mean'])
     })
