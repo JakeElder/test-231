@@ -61,13 +61,16 @@ describe('Authenticated Flow', () => {
     cy.get('[value=Which]').click()
     cy.get('[value=mean]').click()
 
-    // Submit, check appropriate reponse is sent
-    cy.stubAnswerSubmission({ as: 'first-section-submission' })
+    // Stub answer submission
+    cy.stubAnswerSubmission({ as: 'first-section-submission', delay: 150 })
 
+    // Press submit and make sure it's disabled after
     cy.get('button')
       .click()
       .should('have.attr', 'disabled', 'disabled')
 
+    // Check the answer request has the bearer token and 
+    // has the correct data sent
     cy.wait('@first-section-submission').then(({ request }) => {
       expect(request.headers).to.include({
         Authorization: `Bearer: ${responseToken}`

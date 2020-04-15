@@ -1,28 +1,17 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React from 'react'
+import { navigate } from 'gatsby'
 
 import Ident from '../../components/Ident'
 
-import useToken from '../../hooks/use-token'
+import useAnswerForm from '../../hooks/use-answer-form'
 
 function Section1Part1Page() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { token } = useToken()
-
-  function onSubmit(e) {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    axios.post('/api/answers', new FormData(e.target), {
-      headers: {
-        Authorization: `Bearer: ${token}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-  }
+  const { onSubmit, isSubmitting } = useAnswerForm({
+    onSuccess: () => navigate('/section-1/part-2')
+  })
 
   return (
-    <div data-page="section-2-part-1">
+    <div data-page="section-1-part-1">
       <Ident />
       <form onSubmit={onSubmit}>
         <label htmlFor="Which">Which</label>

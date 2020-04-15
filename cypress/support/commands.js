@@ -39,8 +39,9 @@ Cypress.Commands.add('expectSessionGetRequest', ({ bearerToken }) => {
   })
 })
 
-Cypress.Commands.add('stubAnswerSubmission', ({ as }) => {
+Cypress.Commands.add('stubAnswerSubmission', ({ as, delay = 0 }) => {
   cy.route({
+    delay,
     method: 'post',
     url: '/api/answers',
     status: 200,
