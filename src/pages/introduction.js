@@ -1,19 +1,15 @@
 import React from 'react'
+import { Link } from 'gatsby'
 
-import useCurrentUser from '../hooks/use-current-user'
+import Ident from '../components/Ident'
 
 function IntroductionPage() {
-  const { user } = useCurrentUser()
-
-  if (user === null) {
-    return <div data-page="introduction">introduction</div>
-  }
-
   return (
     <div data-page="introduction">
-      <div data-component="ident">{user.name}</div>
+      <Ident />
       <div>
         introduction
+        <Link data-component="button" to="/section-1/part-1">Continue</Link>
       </div>
     </div>
   )

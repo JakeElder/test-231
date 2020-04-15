@@ -49,5 +49,12 @@ describe('Authenticated Flow', () => {
 
     // Check the ident is rendered with returned users name
     cy.get('[data-component=ident]').contains('Jake Elder')
+
+    // Click continue and make sure the page is changed
+    cy.get('[data-component=button]').click()
+    cy.url().should('eq', `${Cypress.config().baseUrl}/section-1/part-1`)
+
+    // Check required content exists
+    cy.get('[data-component=ident]').contains('Jake Elder')
   })
 })
