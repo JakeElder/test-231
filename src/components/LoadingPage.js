@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
+import { navigate } from 'gatsby'
 
 function LoadingPage() {
   useEffect(() => {
     ;(async () => {
       const res = await axios.post('/api/session', {})
-      console.log(res.status)
+      if (res.status === 404) {
+        navigate('/test-unavailable')
+      }
     })()
   }, [])
 
-  return <div className="loading-page">loading</div>
+  return <div data-page="loading-page">loading</div>
 }
 
 export default LoadingPage
