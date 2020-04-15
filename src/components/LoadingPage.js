@@ -18,7 +18,7 @@ function LoadingPage({ token }) {
         navigate('/introduction')
       }
     })()
-  }, [])
+  }, [token, setToken])
 
   return <div data-page="loading-page">loading</div>
 }

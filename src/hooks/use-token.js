@@ -1,3 +1,5 @@
+// TODO: useState
+
 function useToken() {
   const { localStorage } = window
   return {

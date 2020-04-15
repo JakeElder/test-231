@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 
-import useToken from '../hooks/use-token'
+import useCurrentUser from '../hooks/use-current-user'
 
 function IntroductionPage() {
-  const { token } = useToken()
+  const { user } = useCurrentUser()
 
-  useEffect(() => {
-    ;(async () => {
-      const res = await axios.get('/api/session', {
-        headers: {
-          Authorization: `Bearer: ${token}`
-        }
-      })
-      console.log(res)
-    })()
-  }, [])
-  return <div data-page="introduction">introduction</div>
+  if (user === null) {
+    return <div data-page="introduction">introduction</div>
+  }
+
+  return (
+    <div data-page="introduction">
+      <div data-component="ident">{user.name}</div>
+      <div>
+        introduction
+      </div>
+    </div>
+  )
 }
 
 export default IntroductionPage

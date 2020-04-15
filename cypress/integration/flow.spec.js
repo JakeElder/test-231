@@ -46,5 +46,8 @@ describe('Authenticated Flow', () => {
 
     // Check the correct Authorization token is sent in the subsequent request
     cy.expectSessionGetRequest({ bearerToken: responseToken })
+
+    // Check the ident is rendered with returned users name
+    cy.get('[data-component=ident]').contains('Jake Elder')
   })
 })
