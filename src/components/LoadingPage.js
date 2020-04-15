@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import { navigate } from 'gatsby'
 
-function LoadingPage() {
+function LoadingPage({ token }) {
   useEffect(() => {
     ;(async () => {
-      const res = await axios.post('/api/session', {})
+      const res = await axios.post('/api/session', { token })
       if (res.status === 404) {
         navigate('/test-unavailable')
       }

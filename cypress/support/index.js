@@ -1,3 +1,4 @@
+import './commands'
 import url from 'url'
 
 Cypress.Server.defaults({
