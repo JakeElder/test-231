@@ -38,3 +38,12 @@ Cypress.Commands.add('expectSessionGetRequest', ({ bearerToken }) => {
     })
   })
 })
+
+Cypress.Commands.add('stubAnswerSubmission', ({ as }) => {
+  cy.route({
+    method: 'post',
+    url: '/api/answers',
+    status: 200,
+    response: {}
+  }).as(as)
+})

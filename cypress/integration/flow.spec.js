@@ -62,12 +62,7 @@ describe('Authenticated Flow', () => {
     cy.get('[value=mean]').click()
 
     // Submit, check appropriate reponse is sent
-    cy.route({
-      method: 'post',
-      url: '/api/answers',
-      status: 200,
-      response: {}
-    }).as('first-section-submission')
+    cy.stubAnswerSubmission({ as: 'first-section-submission' })
 
     cy.get('button')
       .click()
