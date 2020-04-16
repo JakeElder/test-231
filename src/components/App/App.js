@@ -7,15 +7,11 @@ import axios from 'axios'
 import Header from '../Header'
 import Footer from '../Footer'
 import Page from '../Page'
+import GlobalStyles from '../GlobalStyles'
 
 import useCurrentPage from '../../hooks/use-current-page'
 
 import './App.css'
-
-const Root = styled.div`
-  font-family: 'ibm-plex-thai-looped', 'museo-sans-rounded';
-  color: #555;
-`
 
 const App = ({ children }) => {
   useHotkeys('shift+r', async () => {
@@ -29,13 +25,13 @@ const App = ({ children }) => {
   })
   const { lang, data: currentPageData } = useCurrentPage()
   return (
-    <Root lang={lang}>
+    <GlobalStyles>
       <Page>
         <Header breadcrumb={currentPageData.breadcrumbText} />
         {children}
         <Footer />
       </Page>
-    </Root>
+    </GlobalStyles>
   )
 }
 
