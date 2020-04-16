@@ -1,4 +1,3 @@
-import React from 'react'
 import { wrapParenned } from '../utils/string-utils'
 
 function WrapParenned({ component, children }) {

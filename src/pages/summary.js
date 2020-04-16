@@ -1,9 +1,8 @@
 import React from 'react'
-import { Link } from 'gatsby'
 
 import Ident from '../components/Ident'
 
-function IntroductionPage() {
+function SummaryPage() {
   return (
     <div data-page="summary">
       <Ident />
@@ -14,4 +13,4 @@ function IntroductionPage() {
   )
 }
 
-export default IntroductionPage
+export default SummaryPage
