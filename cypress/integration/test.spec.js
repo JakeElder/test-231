@@ -230,3 +230,45 @@ describe('Completing Section 3', () => {
     cy.get('[data-page=section-4]').should('exist')
   })
 })
+
+describe('Completing Section 4', () => {
+  it.only('Sends the correct data and redirects to the summary', () => {
+    // Start server
+    cy.server()
+
+    // Stub session get request
+    cy.stubSessionGetRequest()
+
+    // Load Section 4
+    cy.visit('/section-4', {
+      onBeforeLoad(win) {
+        win.localStorage.setItem('token', jwtToken)
+      }
+    })
+
+    // Check required content exists
+    cy.get('[data-component=ident]').contains('Jake Elder')
+
+    // Interact with questions
+    cy.get('[name="line-1-answer"][value=falling]').click()
+    cy.get('[name="line-2-sentence-1-answer"][value=falling]').click()
+    cy.get('[name="line-2-sentence-2-answer"][value=rising]').click()
+
+    // Stub answer submission
+    cy.stubAnswerSubmission({ as: 'answer-submission' })
+
+    // Submit
+    cy.get('button').click()
+
+    // Check the answer request has the correct data sent
+    cy.wait('@answer-submission').then(({ request }) => {
+      expect(request.body.get('line-1-answer')).to.equal('falling')
+      expect(request.body.get('line-2-sentence-1-answer')).to.equal('falling')
+      expect(request.body.get('line-2-sentence-2-answer')).to.equal('rising')
+    })
+
+    // On to Summary
+    cy.url().should('eq', `${Cypress.config().baseUrl}/summary`)
+    cy.get('[data-page=summary]').should('exist')
+  })
+})
