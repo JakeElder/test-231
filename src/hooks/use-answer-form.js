@@ -9,15 +9,14 @@ function useAnswerForm({ onSuccess }) {
 
   async function onSubmit(e) {
     e.preventDefault()
-    setIsSubmitting(true)
-
-    await axios.post('/api/answers', new FormData(e.target), {
+    const data = new FormData(e.target)
+    await axios.post('/api/answers', data, {
       headers: {
         Authorization: `Bearer: ${token}`,
         'Content-Type': 'multipart/form-data'
       }
     })
-
+    setIsSubmitting(true)
     onSuccess()
   }
 
