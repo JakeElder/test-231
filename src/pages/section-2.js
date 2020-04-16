@@ -5,9 +5,9 @@ import Ident from '../components/Ident'
 
 import useAnswerForm from '../hooks/use-answer-form'
 
-function Section1Part1Page() {
+function Section2Page() {
   const { onSubmit, isSubmitting } = useAnswerForm({
-    onSuccess: () => true//navigate('/section-1/part-2')
+    onSuccess: () => navigate('/section-3')
   })
 
   const sentences = [
@@ -45,4 +45,4 @@ function Section1Part1Page() {
   )
 }
 
-export default Section1Part1Page
+export default Section2Page

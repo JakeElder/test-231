@@ -76,7 +76,7 @@ describe('Beginning the Test', () => {
   })
 })
 
-describe('Completing Section 1 Part 1', () => {
+describe('Completing Section 1 [Part 1]', () => {
   it('Sends the correct data and redirects to part 2', () => {
     // Start server
     cy.server()
@@ -120,7 +120,7 @@ describe('Completing Section 1 Part 1', () => {
   })
 })
 
-describe('Completing Section 1 Part 2', () => {
+describe('Completing Section 1 [Part 2]', () => {
   it('Sends the correct data and redirects to section 2', () => {
     // Start server
     cy.server()
@@ -152,7 +152,7 @@ describe('Completing Section 1 Part 2', () => {
 })
 
 describe('Completing Section 2', () => {
-  it.only('Sends the correct data and redirects to section 3', () => {
+  it('Sends the correct data and redirects to section 3', () => {
     // Start server
     cy.server()
 
@@ -185,5 +185,48 @@ describe('Completing Section 2', () => {
       expect(request.body.getAll('sentence-1-answers')).to.eql(['3', '5'])
       expect(request.body.getAll('sentence-2-answers')).to.eql(['1'])
     })
+
+    // On to Section 3
+    cy.url().should('eq', `${Cypress.config().baseUrl}/section-3`)
+    cy.get('[data-page=section-3]').should('exist')
+  })
+})
+
+describe('Completing Section 3', () => {
+  it('Sends the correct data and redirects to section 4', () => {
+    // Start server
+    cy.server()
+
+    // Stub session get request
+    cy.stubSessionGetRequest()
+
+    // Load Section 3
+    cy.visit('/section-3', {
+      onBeforeLoad(win) {
+        win.localStorage.setItem('token', jwtToken)
+      }
+    })
+
+    // Check required content exists
+    cy.get('[data-component=ident]').contains('Jake Elder')
+
+    // Interact with questions
+    cy.get('[name="sentence-1-answers"][value=Hon]').click()
+    cy.get('[name="sentence-1-answers"][value=po]').click()
+
+    // Stub answer submission
+    cy.stubAnswerSubmission({ as: 'answer-submission' })
+
+    // Submit
+    cy.get('button').click()
+
+    // Check the answer request has the correct data sent
+    cy.wait('@answer-submission').then(({ request }) => {
+      expect(request.body.getAll('sentence-1-answers')).to.eql(['Hon', 'po'])
+    })
+
+    // On to Section 4
+    cy.url().should('eq', `${Cypress.config().baseUrl}/section-4`)
+    cy.get('[data-page=section-4]').should('exist')
   })
 })

@@ -5,7 +5,7 @@ import Ident from '../../components/Ident'
 
 import useAnswerForm from '../../hooks/use-answer-form'
 
-function Section1Part1Page() {
+function Section1Part2Page() {
   const { onSubmit, isSubmitting } = useAnswerForm({
     onSuccess: () => navigate('/section-2')
   })
@@ -32,4 +32,4 @@ function Section1Part1Page() {
   )
 }
 
-export default Section1Part1Page
+export default Section1Part2Page
