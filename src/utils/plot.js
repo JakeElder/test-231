@@ -5,12 +5,13 @@ export function getSectionDividerType(top, bottom) {
     case (!top || !bottom):
       return 'none'
     case top === 'past' && bottom === 'past':
+    case top === 'future' && bottom === 'future':
       return 'partial'
     case top === 'past' && bottom === 'present':
     case top === 'present' && bottom === 'future':
       return 'full'
     default:
-      throw new Error('Bad Section Combo')
+      throw new Error(`Bad section combo: ${top} : ${bottom}`)
   }
 }
 

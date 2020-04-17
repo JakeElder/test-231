@@ -23,7 +23,7 @@ describe('Plot Utils', () => {
     it('throws when top == future', () => {
       expect(() => getSectionDividerType('future', 'past')).to.throw()
       expect(() => getSectionDividerType('future', 'present')).to.throw()
-      expect(() => getSectionDividerType('future', 'future')).to.throw()
+      expect(getSectionDividerType('future', 'future')).to.equal('partial')
     })
     it('returns the correct type when no bottom', () => {
       expect(getSectionDividerType('past', null)).to.equal('none')
@@ -32,7 +32,7 @@ describe('Plot Utils', () => {
     })
   })
 
-  context.only('getFinalisedSectionTypes', () => {
+  context('getFinalisedSectionTypes', () => {
     it('Returns all as "future" if plot is not finished and no current section set', () => {
       const input = [false, [{ props: {} }, { props: {} }, { props: {} }]]
       const expected = ['future', 'future', 'future']
