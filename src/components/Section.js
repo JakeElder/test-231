@@ -101,13 +101,15 @@ const PureFutureSection = (() => {
   )
 })()
 
-export const PureSection = props => {
-  switch (props.type) {
+export const PureSection = ({ type, ...rest }) => {
+  switch (type) {
     case 'past':
-      return <PurePastSection {...props} />
+      return <PurePastSection {...rest} />
     case 'present':
-      return <PurePresentSection {...props} />
+      return <PurePresentSection {...rest} />
     case 'future':
-      return <PureFutureSection {...props} />
+      return <PureFutureSection {...rest} />
   }
 }
+
+export default props => <PureSection {...props} />
