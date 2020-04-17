@@ -101,7 +101,7 @@ const PureFutureSection = (() => {
   )
 })()
 
-export const PureSection = ({ type, ...rest }) => {
+export const PureSection = ({ type = 'future', ...rest }) => {
   switch (type) {
     case 'past':
       return <PurePastSection {...rest} />
