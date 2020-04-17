@@ -6,4 +6,8 @@ export default {
   component: PureSection
 }
 
-export const Default = () => <PureSection>Section 1</PureSection>
+const label = 'Section 1'
+
+export const Past = () => <PureSection type="past">{label}</PureSection>
+export const Present = () => <PureSection type="present">{label}</PureSection>
+export const Future = () => <PureSection type="future">{label}</PureSection>

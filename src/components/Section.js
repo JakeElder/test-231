@@ -3,13 +3,16 @@ import styled from 'styled-components'
 
 import SideBarContainer from './SideBarContainer'
 
-import uncheckedCheckbox from '../images/unchecked-checkbox.svg'
+import pastCheckbox from '../images/past-checkbox.svg'
+import presentCheckbox from '../images/present-checkbox.svg'
+import futureCheckbox from '../images/future-checkbox.svg'
 
-const Root = styled.div`
+const BaseRoot = styled.div`
   font-weight: 15px;
+  max-width: 300px;
 `
 
-const Main = styled.div`
+const BaseMain = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,17 +20,94 @@ const Main = styled.div`
   line-height: 48px;
 `
 
-const Checkbox = styled.img.attrs({ src: uncheckedCheckbox })``
+const CheckedCheckbox = styled.img`
+  position: relative;
+  right: -3px;
+  bottom: -1px;
+`
+
+const UncheckedCheckbox = styled.img``
 
 const Text = ({ children }) => children
 
-export const PureSection = ({ children }) => (
-  <Root>
-    <SideBarContainer>
-      <Main>
-        <Text>{children}</Text>
-        <Checkbox />
-      </Main>
-    </SideBarContainer>
-  </Root>
-)
+const PurePastSection = (() => {
+  const Root = styled(BaseRoot)`
+    background: #f3f3f3;
+    color: #bebebe;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
+  `
+
+  const Main = styled(BaseMain)``
+
+  const Checkbox = styled(CheckedCheckbox).attrs({ src: pastCheckbox })``
+
+  return ({ children }) => (
+    <Root>
+      <SideBarContainer>
+        <Main>
+          <Text>{children}</Text>
+          <Checkbox />
+        </Main>
+      </SideBarContainer>
+    </Root>
+  )
+})()
+
+const PurePresentSection = (() => {
+  const Root = styled(BaseRoot)`
+    background: #fff;
+    color: #555;
+  `
+
+  const Main = styled(BaseMain)``
+
+  const Checkbox = styled(UncheckedCheckbox).attrs({
+    src: presentCheckbox
+  })``
+
+  return ({ children }) => (
+    <Root>
+      <SideBarContainer>
+        <Main>
+          <Text>{children}</Text>
+          <Checkbox />
+        </Main>
+      </SideBarContainer>
+    </Root>
+  )
+})()
+
+const PureFutureSection = (() => {
+  const Root = styled(BaseRoot)`
+    color: #777;
+    background: #f3f3f3;
+  `
+
+  const Main = styled(BaseMain)``
+
+  const Checkbox = styled(UncheckedCheckbox).attrs({
+    src: futureCheckbox
+  })``
+
+  return ({ children }) => (
+    <Root>
+      <SideBarContainer>
+        <Main>
+          <Text>{children}</Text>
+          <Checkbox />
+        </Main>
+      </SideBarContainer>
+    </Root>
+  )
+})()
+
+export const PureSection = props => {
+  switch (props.type) {
+    case 'past':
+      return <PurePastSection {...props} />
+    case 'present':
+      return <PurePresentSection {...props} />
+    case 'future':
+      return <PureFutureSection {...props} />
+  }
+}
