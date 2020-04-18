@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { addParameters } from '@storybook/react'
 
+import 'reset-css'
 import '!style-loader!css-loader!../src/components/App/App.css'
 import GlobalStyles from '../src/components/GlobalStyles'
 
