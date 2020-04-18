@@ -98,7 +98,7 @@ export function PurePlot({ children, finished = false }) {
 
   // Wrap everything with ElementWrapper to terminate them
   const finalElements = sectionsWithDividers.map(e => (
-    <ElementWrapper>{e}</ElementWrapper>
+    <ElementWrapper key={`${e.key}-wrapper`}>{e}</ElementWrapper>
   ))
 
   return <Root>{finalElements}</Root>

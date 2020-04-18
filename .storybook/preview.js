@@ -14,7 +14,8 @@ const Pad = styled.div`
 addParameters({
   backgrounds: [
     { name: 'White', value: '#fff', default: true },
-    { name: 'Not Quite White', value: '#f5f5f5' }
+    { name: 'Not Quite White', value: '#f5f5f5' },
+    { name: 'Slate', value: '#494949' }
   ]
 })
 
