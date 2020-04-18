@@ -8,7 +8,7 @@ import '!style-loader!css-loader!../src/components/App/App.css'
 import GlobalStyles from '../src/components/GlobalStyles'
 
 const Pad = styled.div`
-  padding: 0;
+  padding: 16px;
 `
 
 addParameters({
