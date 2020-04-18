@@ -1,9 +1,9 @@
 import React from 'react'
 
-function splitMarkParens(input) {
+export function splitMarkPattern(input, pattern) {
   let match
   const output = []
-  while (match = input.match(/{.+?}/)) {
+  while (match = input.match(pattern)) {
     if (match.index > 0) {
       output.push([input.substr(0, match.index), false])
     }
@@ -16,7 +16,11 @@ function splitMarkParens(input) {
   return output
 }
 
-function wrapMarked(input, Wrapper) {
+export function splitMarkParens(input) {
+  return splitMarkPattern(input, /{.+?}/)
+}
+
+export function wrapMarked(input, Wrapper) {
   return input.map(([substring, isMarked]) => {
     if (isMarked) {
       return <Wrapper key={substring}>{substring}</Wrapper>
@@ -25,11 +29,11 @@ function wrapMarked(input, Wrapper) {
   })
 }
 
-function wrapParenned(input, Wrapper) {
-  const marked = splitMarkParens(input)
+export function wrapMatches(input, pattern, Wrapper) {
+  const marked = splitMarkPattern(input, pattern)
   return wrapMarked(marked, Wrapper)
 }
 
-export { splitMarkParens }
-export { wrapMarked }
-export { wrapParenned }
+export function wrapParenned(input, Wrapper) {
+  return wrapMatches(input, /{.+?}/, Wrapper)
+}
