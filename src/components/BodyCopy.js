@@ -5,7 +5,8 @@ const Root = styled.div`
   h1 {
     font-size: 24px;
     font-weight: 500;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    line-height: 1.3;
   }
 
   p {

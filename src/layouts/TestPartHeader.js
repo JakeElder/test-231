@@ -8,6 +8,7 @@ const Root = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   box-sizing: border-box;
+  white-space: nowrap;
 `
 
 export function PureTestPartHeader({ children }) {
