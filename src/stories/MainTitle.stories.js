@@ -2,7 +2,7 @@ import React from 'react'
 import { PureMainTitle } from '../components/MainTitle'
 
 export default {
-  title: 'MainTitle',
+  title: 'Main Title',
   component: PureMainTitle
 }
 

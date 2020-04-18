@@ -15,7 +15,7 @@ const SideBarWrapper = styled.div`
 `
 
 export default {
-  title: 'SideBar',
+  title: 'Side Bar',
   component: PureSideBar,
   decorators: [storyFn => <SideBarWrapper>{storyFn()}</SideBarWrapper>]
 }
