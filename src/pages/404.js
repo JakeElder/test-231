@@ -1,6 +1,4 @@
 const NotFoundPage = () => {
-  return (
-    null
-  )
+  return null
 }
 export default NotFoundPage

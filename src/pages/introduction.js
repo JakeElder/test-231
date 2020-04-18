@@ -9,7 +9,9 @@ function IntroductionPage() {
       <Ident />
       <div>
         introduction
-        <Link data-component="button" to="/section-1/part-1">Continue</Link>
+        <Link data-component="button" to="/section-1/part-1">
+          Continue
+        </Link>
       </div>
     </div>
   )

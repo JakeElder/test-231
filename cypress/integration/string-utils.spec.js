@@ -1,4 +1,4 @@
-import { isElementOfType }  from 'react-dom/test-utils'
+import { isElementOfType } from 'react-dom/test-utils'
 import { splitMarkParens, wrapMarked } from '../../src/utils/string-utils'
 
 describe('String Utils', () => {

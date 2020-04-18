@@ -12,7 +12,7 @@ function Section2Page() {
 
   const sentences = [
     "The students wanted to meet the dean but they have to wait 'til tomorrow",
-    "Adam said Jane wanted to buy a new house"
+    'Adam said Jane wanted to buy a new house'
   ].map((sentence, idx) => {
     const words = sentence.split(' ')
     const wordCount = words.length

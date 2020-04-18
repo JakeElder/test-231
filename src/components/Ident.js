@@ -57,8 +57,7 @@ const Name = (() => {
 })()
 
 const Institute = (() => {
-  const Root = styled.div`
-  `
+  const Root = styled.div``
 
   const Copy = styled.div`
     font-size: 12px;
@@ -75,7 +74,6 @@ const Institute = (() => {
 
     return <Root>{main}</Root>
   }
-
 })()
 
 export function PureIdent({ name, institute }) {

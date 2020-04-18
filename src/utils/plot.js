@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 export function getSectionDividerType(top, bottom) {
   switch (true) {
-    case (!top || !bottom):
+    case !top || !bottom:
       return 'none'
     case top === 'past' && bottom === 'past':
     case top === 'future' && bottom === 'future':

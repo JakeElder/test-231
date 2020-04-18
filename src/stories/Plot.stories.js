@@ -51,7 +51,7 @@ export const LastSectionCurrent = () => {
     <PurePlot>
       <PureSection>Introduction</PureSection>
       <PureSection>Section 1</PureSection>
-      <PureSection >Section 2</PureSection>
+      <PureSection>Section 2</PureSection>
       <PureSection>Section 3</PureSection>
       <PureSection>Section 4</PureSection>
       <PureSection current>Summary</PureSection>

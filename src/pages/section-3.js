@@ -11,7 +11,11 @@ function makeSyllableWrapper(sentenceNumber) {
     return (
       <span>
         {children}
-        <input name={`sentence-${sentenceNumber}-answers`} type="checkbox" value={children}/>
+        <input
+          name={`sentence-${sentenceNumber}-answers`}
+          type="checkbox"
+          value={children}
+        />
       </span>
     )
   }
@@ -28,7 +32,9 @@ function Section3Page() {
     <div data-page="section-3">
       <Ident />
       <form onSubmit={onSubmit}>
-        <WrapParenned component={makeSyllableWrapper(1)}>{sentence}</WrapParenned>
+        <WrapParenned component={makeSyllableWrapper(1)}>
+          {sentence}
+        </WrapParenned>
         <button disabled={isSubmitting}>Continue</button>
       </form>
     </div>

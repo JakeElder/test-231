@@ -106,7 +106,7 @@ describe('Completing Section 1 [Part 1]', () => {
       .click()
       .should('have.attr', 'disabled', 'disabled')
 
-    // Check the answer request has the bearer token and 
+    // Check the answer request has the bearer token and
     // has the correct data sent
     cy.wait('@first-section-submission').then(({ request }) => {
       expect(request.headers).to.include({

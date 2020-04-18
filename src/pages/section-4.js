@@ -23,14 +23,30 @@ function Section4Page() {
         <div>
           <div>
             We are heading out to dinner now.{' '}
-            <input type="radio" name="line-2-sentence-1-answer" value="rising" />
-            <input type="radio" name="line-2-sentence-1-answer" value="falling" />
+            <input
+              type="radio"
+              name="line-2-sentence-1-answer"
+              value="rising"
+            />
+            <input
+              type="radio"
+              name="line-2-sentence-1-answer"
+              value="falling"
+            />
             <input type="radio" name="line-2-sentence-1-answer" value="level" />
           </div>
           <div>
             Do you want to join us?{' '}
-            <input type="radio" name="line-2-sentence-2-answer" value="rising" />
-            <input type="radio" name="line-2-sentence-2-answer" value="falling" />
+            <input
+              type="radio"
+              name="line-2-sentence-2-answer"
+              value="rising"
+            />
+            <input
+              type="radio"
+              name="line-2-sentence-2-answer"
+              value="falling"
+            />
             <input type="radio" name="line-2-sentence-2-answer" value="level" />
           </div>
         </div>

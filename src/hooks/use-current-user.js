@@ -17,7 +17,7 @@ function useCurrentUser() {
       set(res.data.data)
     })()
   }, [set, token])
-  
+
   return { user }
 }
 

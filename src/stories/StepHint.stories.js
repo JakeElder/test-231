@@ -6,6 +6,6 @@ export default {
   component: PureStepHint
 }
 
-const hint = "Once you are ready to start the test, press the continue button."
+const hint = 'Once you are ready to start the test, press the continue button.'
 
 export const Default = () => <PureStepHint>{hint}</PureStepHint>

@@ -6,9 +6,7 @@ function SummaryPage() {
   return (
     <div data-page="summary">
       <Ident />
-      <div>
-        summary
-      </div>
+      <div>summary</div>
     </div>
   )
 }
