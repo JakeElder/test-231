@@ -15,8 +15,8 @@ export const Default = () => (
     <Header.MainTitle>
       <MainTitle />
     </Header.MainTitle>
-    <Header.MainTitle>
+    <Header.MainSubTitle>
       <MainSubTitle />
-    </Header.MainTitle>
+    </Header.MainSubTitle>
   </Header>
 )

@@ -7,7 +7,6 @@ const Root = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 25px;
   box-sizing: border-box;
 `
 
@@ -17,7 +16,7 @@ export function PureTestPartHeader({ children }) {
 
 const MainTitle = (() => {
   const Root = styled.div`
-    margin-bottom: 7px;
+    margin-bottom: 12px;
   `
   return function({ children }) {
     return <Root>{children}</Root>
@@ -25,7 +24,9 @@ const MainTitle = (() => {
 })()
 
 const MainSubTitle = (() => {
-  const Root = styled.div``
+  const Root = styled.div`
+    margin-bottom: 25px;
+  `
   return function({ children }) {
     return <Root>{children}</Root>
   }
