@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="15px" viewBox="0 0 13 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>pause-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Section-1" transform="translate(-373.000000, -335.000000)" fill="#777777" fill-rule="nonzero">
+            <g id="Group-9" transform="translate(340.000000, 323.000000)">
+                <g id="Group-6" transform="translate(17.050000, 12.438117)">
+                    <path d="M19.05,-1.15463195e-14 C19.9,-1.15463195e-14 20.55,0.65 20.55,1.5 L20.55,12.35 C20.55,13.2 19.85,13.9 19.05,13.9 L17.5,13.9 C16.65,13.9 16,13.25 16,12.4 L16,1.5 C16,0.65 16.65,-1.15463195e-14 17.5,-1.15463195e-14 L19.05,-1.15463195e-14 Z M26.6,-1.15463195e-14 C27.45,-1.15463195e-14 28.1,0.65 28.1,1.5 L28.1,12.35 C28.1,13.2 27.45,13.9 26.6,13.9 L25.05,13.9 C24.25,13.9 23.55,13.25 23.55,12.4 L23.55,1.5 C23.55,0.65 24.25,-1.15463195e-14 25.05,-1.15463195e-14 L26.6,-1.15463195e-14 Z" id="pause-icon"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

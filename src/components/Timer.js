@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import humanInterval from 'human-interval'
+
+import { formatDuration } from '../utils/number-utils'
 
 const Root = styled.div`
   max-width: 300px;
@@ -31,16 +32,6 @@ const Divider = styled.div`
 const Allotted = styled.div`
   font-size: 18px;
 `
-
-function formatDuration(duration) {
-  const seconds = humanInterval(duration) / 1000
-  const minutes = Math.floor(seconds / 60)
-  const modSeconds = seconds % 60
-
-  return `${minutes
-    .toString()
-    .padStart(2, '0')}:${modSeconds.toString().padStart(2, '0')}`
-}
 
 export function PureTimer({ passed, allotted }) {
   return (
