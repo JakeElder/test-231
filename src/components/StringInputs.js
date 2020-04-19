@@ -1,6 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { PureToneIcon } from './ToneIcon'
+
 const common = {
   base: css`
     display: inline-block;
@@ -37,10 +39,18 @@ const bounded = {
   disabled: css``
 }
 
-const Checkbox = styled.input.attrs({ type: 'checkbox' })`
+const input = css`
   visibility: hidden;
   position: absolute;
   pointer-events: none;
+`
+
+const Checkbox = styled.input.attrs({ type: 'checkbox' })`
+  ${input}
+`
+
+const Radio = styled.input.attrs({ type: 'radio' })`
+  ${input}
 `
 
 export const PureWordInput = (() => {
@@ -119,7 +129,12 @@ export const PureSyllableInput = (() => {
 
   return function({ children: word, selected, disabled, name }) {
     const control = name ? (
-      <Checkbox name={name} value={word} selected={selected} />
+      <Checkbox
+        name={name}
+        value={word}
+        selected={selected}
+        disabled={disabled}
+      />
     ) : null
     return (
       <Word selected={selected} disabled={disabled}>
@@ -167,9 +182,58 @@ export const PureSpaceInput = (() => {
   `
 
   return function({ selected, disabled, name }) {
-    const control = name ? <Checkbox name={name} selected={selected} /> : null
+    const control = name ? (
+      <Checkbox name={name} selected={selected} disabled={disabled} />
+    ) : null
     return (
       <Word selected={selected} disabled={disabled}>
+        {control}
+      </Word>
+    )
+  }
+})()
+
+export const PureToneInput = (() => {
+  const base = css`
+    ${common.base}
+    ${bounded.base}
+    width: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
+  const unselected = css`
+    ${common.unselected}
+    ${bounded.unselected}
+    color: #dfdfdf;
+  `
+  const selected = css`
+    ${common.selected}
+    ${bounded.selected}
+  `
+  const enabled = css`
+    ${common.enabled}
+    ${bounded.enabled}
+  `
+  const disabled = css`
+    ${common.disabled}
+    ${bounded.disabled}
+  `
+
+  const Word = styled.span`
+    ${base}
+    ${props => (props.selected ? selected : unselected)}
+    ${props => (props.disabled ? disabled : enabled)}
+   }
+  `
+
+  return function({ type, selected, disabled, name }) {
+    const control = name ? (
+      <Radio name={name} selected={selected} value={type} disabled={disabled} />
+    ) : null
+    return (
+      <Word selected={selected} disabled={disabled}>
+        <PureToneIcon type={type} white={selected} />
         {control}
       </Word>
     )
