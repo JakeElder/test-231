@@ -31,15 +31,6 @@ const config = {
     `gatsby-image`,
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `@jakeelder/gatsby-source-prismic`,
-      options: {
-        repositoryName: `test-231`,
-        accessToken: `${process.env.API_KEY}`,
-        lang: 'en-gb',
-        linkResolver: () => {}
-      }
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
