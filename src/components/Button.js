@@ -1,8 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { Link } from 'gatsby'
-
 const disabledStyles = css`
   background: #dfdfdf;
   font-size: 20px;

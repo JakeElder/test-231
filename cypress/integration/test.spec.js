@@ -44,7 +44,7 @@ describe('Entry Process', () => {
 
       // Check we redirect to the introduction page
       cy.url().should('eq', `${Cypress.config().baseUrl}/introduction`)
-      cy.get('[data-page=introduction]').should('exist')
+      cy.contains('Introduction')
     })
   })
 })
@@ -71,7 +71,7 @@ describe('Beginning the Test', () => {
     cy.get('[data-component=ident]').contains('Jake Elder')
 
     // Click continue and make sure the page is changed
-    cy.get('[data-component=button]').click()
+    cy.contains('Continue').click()
     cy.url().should('eq', `${Cypress.config().baseUrl}/section-1/part-1`)
   })
 })

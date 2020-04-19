@@ -114,6 +114,8 @@ export const PureSection = ({
       return <PurePresentSection {...props} />
     case 'future':
       return <PureFutureSection {...props} />
+    default:
+      return null
   }
 }
 

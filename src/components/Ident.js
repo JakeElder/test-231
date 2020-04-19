@@ -91,7 +91,8 @@ export function PureIdent({ name, institute }) {
 function Ident() {
   const { user } = useCurrentUser()
   const name = !user ? '' : user.name
-  return <PureIdent name={name} institute={null} />
+  const institute = !user ? null : 'Chiang Mai University'
+  return <PureIdent name={name} institute={institute} />
 }
 
 export default Ident

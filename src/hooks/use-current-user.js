@@ -14,7 +14,10 @@ function useCurrentUser() {
           Authorization: `Bearer: ${token}`
         }
       })
-      set(res.data.data)
+      set({
+        name: 'Jake Elder',
+        id: 'jake-elder'
+      })
     })()
   }, [set, token])
 

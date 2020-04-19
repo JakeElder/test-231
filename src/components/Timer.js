@@ -43,4 +43,8 @@ export function PureTimer({ passed, allotted }) {
   )
 }
 
-export default props => <PureTimer {...props} />
+function Timer() {
+  return <PureTimer passed={0} allotted={15 * 60 * 1000} />
+}
+
+export default Timer
