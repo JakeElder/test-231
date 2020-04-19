@@ -5,7 +5,7 @@ const Root = styled.div`
   font-weight: 200;
   font-size: 15px;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   color: #797979;
 `
 

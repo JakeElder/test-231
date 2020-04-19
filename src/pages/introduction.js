@@ -27,10 +27,10 @@ function IntroductionPage() {
             <TestPart.Header>
               <Header>
                 <Header.Title>
-                  <Title>{title.main}</Title>
+                  <Title>{title}</Title>
                 </Header.Title>
                 <Header.Subtitle>
-                  <Subtitle>{title.sub}</Subtitle>
+                  <Subtitle>Quiz 3 | Introduction</Subtitle>
                 </Header.Subtitle>
               </Header>
             </TestPart.Header>

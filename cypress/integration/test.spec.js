@@ -68,7 +68,7 @@ describe('Beginning the Test', () => {
     cy.expectSessionGetRequest({ bearerToken: jwtToken })
 
     // Check the ident is rendered with returned users name
-    cy.get('[data-component=ident]').contains('Jake Elder')
+    cy.contains('Jake Elder')
 
     // Click continue and make sure the page is changed
     cy.contains('Continue').click()
@@ -95,8 +95,17 @@ describe('Completing Section 1 [Part 1]', () => {
     cy.get('[data-component=ident]').contains('Jake Elder')
 
     // Interact with question
-    cy.get('[value=Which]').click()
-    cy.get('[value=mean]').click()
+    cy.get('[data-question=1]').within(() =>{
+      cy.contains('Which').click()
+      cy.contains('you').click()
+    })
+    cy.get('[data-question=2]').within(() =>{
+      cy.contains('driving').click()
+    })
+    cy.get('[data-question=3]').within(() =>{
+      cy.contains('Now').click()
+      cy.contains('ride').click()
+    })
 
     // Stub answer submission
     cy.stubAnswerSubmission({ as: 'first-section-submission', delay: 150 })
@@ -112,7 +121,9 @@ describe('Completing Section 1 [Part 1]', () => {
       expect(request.headers).to.include({
         Authorization: `Bearer: ${jwtToken}`
       })
-      expect(request.body.getAll('focusWords')).to.eql(['Which', 'mean'])
+      expect(request.body.getAll('answer-1')).to.eql(['Which', 'you'])
+      expect(request.body.getAll('answer-2')).to.eql(['driving'])
+      expect(request.body.getAll('answer-3')).to.eql(['Now', 'ride'])
     })
 
     // On to Section 1 Part 2

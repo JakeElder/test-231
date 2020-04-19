@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 
 import { PureToneIcon } from './ToneIcon'
 
+import useCheckbox from '../hooks/use-checkbox'
+
 const common = {
   base: css`
     display: inline-block;
@@ -85,18 +87,27 @@ export const PureWordInput = (() => {
     ${props => (props.disabled ? disabled : enabled)}
   `
 
-  return function({ children: word, selected, disabled, name }) {
+  return function({ children: word, selected, disabled, name, onClick }) {
     const control = name ? (
-      <Checkbox name={name} value={word} selected={selected} />
+      <Checkbox name={name} value={word} checked={selected} readOnly />
     ) : null
     return (
-      <Word selected={selected} disabled={disabled}>
+      <Word selected={selected} disabled={disabled} onClick={onClick}>
         {word}
         {control}
       </Word>
     )
   }
 })()
+
+export function WordInput({ children: word, name }) {
+  const { checked, toggle } = useCheckbox()
+  return (
+    <PureWordInput selected={checked} name={name} onClick={toggle}>
+      {word}
+    </PureWordInput>
+  )
+}
 
 export const PureSyllableInput = (() => {
   const base = css`

@@ -75,7 +75,7 @@ function LoadingAudioPlayer() {
   return <Root />
 }
 
-function AudioPlayer({ playing, position, duration }) {
+function PlayingAudioPlayer({ playing, position, duration }) {
   const formattedPosition = formatDuration(position)
   const formattedDuration = formatDuration(duration)
   const completePercent = (100 / duration) * position
@@ -83,10 +83,10 @@ function AudioPlayer({ playing, position, duration }) {
     <Root>
       <PlayPauseButtons>
         <PlayButton>
-          <PlayIcon on={playing} />
+          <PlayIcon on={!playing} />
         </PlayButton>
         <PauseButton>
-          <PauseIcon on={!playing} />
+          <PauseIcon on={playing} />
         </PauseButton>
       </PlayPauseButtons>
       <Timeline position={completePercent} />
@@ -99,11 +99,15 @@ function AudioPlayer({ playing, position, duration }) {
   )
 }
 
-export function PureAudioPlayer({ loading, ...rest }) {
+export function PureAudioPlayer({ loading, wat, ...rest }) {
   if (loading) {
     return <LoadingAudioPlayer />
   }
-  return <AudioPlayer {...rest} />
+  return <PlayingAudioPlayer {...rest} />
 }
 
-export default props => <PureAudioPlayer {...props} />
+function AudioPlayer() {
+  return <PureAudioPlayer position={0} duration={60 * 3 * 1000} />
+}
+
+export default AudioPlayer

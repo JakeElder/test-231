@@ -61,6 +61,23 @@ const Footer = (() => {
   }
 })()
 
+const AnswerArea = styled.div``
+
+const AudioPlayer = styled.div`
+  & + ${AnswerArea} {
+    margin-top: 30px;
+  }
+`
+
+const Instruction = styled.div`
+  & + ${AudioPlayer} {
+    margin-top: 26px;
+  }
+`
+
 PureTestPart.Header = Header
 PureTestPart.Body = Body
 PureTestPart.Footer = Footer
+PureTestPart.Instruction = Instruction
+PureTestPart.AudioPlayer = AudioPlayer
+PureTestPart.AnswerArea = AnswerArea

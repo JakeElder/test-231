@@ -88,6 +88,6 @@ export function PureToneIcon({ type, white }) {
     case 'level':
       return <Level color={color} />
     default:
-      null
+      return null
   }
 }

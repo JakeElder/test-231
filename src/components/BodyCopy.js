@@ -18,6 +18,10 @@ const Root = styled.div`
   p:not(:last-child) {
     margin-bottom: 18px;
   }
+
+  em {
+    font-weight: 500;
+  }
 `
 
 export function PureBodyCopy({ children }) {
