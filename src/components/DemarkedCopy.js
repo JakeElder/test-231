@@ -8,27 +8,13 @@ const Root = styled.div`
 `
 
 const Line = (() => {
-  const padTop = css`
-    padding-top: 4px;
-  `
-
-  const padBottom = css`
-    padding-bottom: 4px;
-  `
-
-  const Root = styled.div`
-    display: flex;
-    line-height: 46px;
-  `
-
   const Demarkation = styled.div`
-  font-size: 15px;
+    font-size: 15px;
     background-color: #f3f3f3;
     color: #777;
     width: 156px;
-    ${props => props.first && padTop}
-    ${props => props.last && padBottom}
   `
+
   const Container = styled.div`
     padding-left: 20px;
     padding-right: 30px;
@@ -36,18 +22,35 @@ const Line = (() => {
 
   const Content = styled.div`
     flex: 1;
-    ${props => props.first && padTop}
-    ${props => props.last && padBottom}
   `
-  return function({ children, first, last }) {
+
+  const Root = styled.div`
+    &:first-child ${Demarkation}, &:first-child ${Content} {
+      padding-top: 10px;
+    }
+    &:last-child ${Demarkation}, &:last-child ${Content} {
+      padding-bottom: 10px;
+    }
+    display: flex;
+    line-height: 34px;
+  `
+
+  const ContentGroup = styled.div``
+
+  return function({ children }) {
     const [demarkation, content] = children
+    const contentArray = [content].flat()
+    const groupedContent = contentArray.map((c, idx) => (
+      <ContentGroup key={`cgroup-${idx}`}>{c}</ContentGroup>
+    ))
+
     return (
       <Root>
-        <Demarkation first={first} last={last}>
+        <Demarkation>
           <Container>{demarkation}</Container>
         </Demarkation>
-        <Content first={first} last={last}>
-          <Container>{content}</Container>
+        <Content>
+          <Container>{groupedContent}</Container>
         </Content>
       </Root>
     )
@@ -55,11 +58,18 @@ const Line = (() => {
 })()
 
 const Divider = (() => {
+  const pad = css`
+    margin-top: 8px;
+    margin-bottom: 9px;
+  `
+
   const DemarkationDivider = styled.div`
     border-bottom: 1px solid #e9e9e9;
+    ${pad}
   `
   const ContentDivider = styled.div`
     border-bottom: 1px solid #f0f0f0;
+    ${pad}
   `
   return function() {
     return (
@@ -75,10 +85,6 @@ const Divider = (() => {
 
 export function PureDemarkedCopy({ children }) {
   const lines = React.Children.toArray(children)
-  lines[0] = React.cloneElement(lines[0], { first: true })
-  lines[lines.length - 1] = React.cloneElement(lines[lines.length - 1], {
-    last: true
-  })
   const seperatedLines = (() => {
     if (lines.length === 1) {
       return lines
