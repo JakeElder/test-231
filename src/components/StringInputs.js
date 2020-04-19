@@ -2,6 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 const base = css`
+  & + & {
+    margin-left: 2px;
+  }
   display: inline-block;
   border-radius: 2px;
   height: 24px;
@@ -42,11 +45,14 @@ const Input = styled.input`
   pointer-events: none;
 `
 
-export function PureWordInput({ children: word, selected, disabled }) {
+export function PureWordInput({ children: word, selected, disabled, name }) {
+  const control = name ? (
+    <Input type="checkbox" name={name} value={word} selected={selected} />
+  ) : null
   return (
     <Root selected={selected} disabled={disabled}>
       {word}
-      <Input type="checkbox" name={name} value={word} selected={selected} />
+      {control}
     </Root>
   )
 }

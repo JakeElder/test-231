@@ -1,5 +1,5 @@
 import React from 'react'
-import { PureWordInput } from '../components/WordInput'
+import { PureWordInput } from '../components/StringInputs'
 
 export default {
   title: 'Word Input',
@@ -12,4 +12,10 @@ export const SelectedDisabled = () => (
   <PureWordInput selected disabled>
     listening
   </PureWordInput>
+)
+export const Grouped = () => (
+  <>
+    <PureWordInput selected>Which</PureWordInput>
+    <PureWordInput>test</PureWordInput>
+  </>
 )
