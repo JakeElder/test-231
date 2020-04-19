@@ -26,7 +26,7 @@ const Rising = ({ color }) => (
   </svg>
 )
 
-const Level = ({ color }) => (
+const Falling = ({ color }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="18"
@@ -52,7 +52,7 @@ const Level = ({ color }) => (
   </svg>
 )
 
-const Falling = ({ color }) => (
+const Level = ({ color }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="20"
