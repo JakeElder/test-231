@@ -21,7 +21,7 @@ const Part = styled.div`
   margin-left: 9px;
 `
 
-function MainSubTitleWithPart({ children, part }) {
+function SubtitleWithPart({ children, part }) {
   return (
     <Root>
       {children}
@@ -32,16 +32,16 @@ function MainSubTitleWithPart({ children, part }) {
   )
 }
 
-function MainSubTitle({ children }) {
+function Subtitle({ children }) {
   return <Root>{children}</Root>
 }
 
-export function PureMainSubTitle({ children, part }) {
+export function PureSubtitle({ children, part }) {
   const content = wrapMatches(children, /\s\|\s/, DividerWrapper)
   if (!part) {
-    return <MainSubTitle>{content}</MainSubTitle>
+    return <Subtitle>{content}</Subtitle>
   }
-  return <MainSubTitleWithPart part={part}>{content}</MainSubTitleWithPart>
+  return <SubtitleWithPart part={part}>{content}</SubtitleWithPart>
 }
 
-export default props => <PureMainSubTitle {...props} />
+export default props => <PureSubtitle {...props} />

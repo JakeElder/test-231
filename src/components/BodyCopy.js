@@ -2,7 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Root = styled.div`
-  h1 {
+  h1,
+  h2,
+  h3 {
     font-size: 24px;
     font-weight: 500;
     margin-bottom: 20px;
@@ -21,5 +23,3 @@ const Root = styled.div`
 export function PureBodyCopy({ children }) {
   return <Root>{children}</Root>
 }
-
-export default props => <PureBodyCopy {...props} />

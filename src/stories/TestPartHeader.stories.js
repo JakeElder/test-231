@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { PureTestPartHeader as Header } from '../layouts/TestPartHeader'
-import { Default as MainTitle } from './MainTitle.stories.js'
-import { WithPart as MainSubTitle } from './MainSubTitle.stories.js'
+import { Default as StandardTitle } from './StandardTitle.stories.js'
+import { WithPart as Subtitle } from './Subtitle.stories.js'
 
 export default {
   title: 'Test Part Header',
@@ -12,11 +12,19 @@ export default {
 
 export const Default = () => (
   <Header>
-    <Header.MainTitle>
-      <MainTitle />
-    </Header.MainTitle>
-    <Header.MainSubTitle>
-      <MainSubTitle />
-    </Header.MainSubTitle>
+    <Header.Title>
+      <StandardTitle />
+    </Header.Title>
+    <Header.Subtitle>
+      <Subtitle />
+    </Header.Subtitle>
+  </Header>
+)
+
+export const WithoutSubtitle = () => (
+  <Header>
+    <Header.Title>
+      <StandardTitle />
+    </Header.Title>
   </Header>
 )

@@ -6,8 +6,8 @@ const Root = styled.div`
   font-size: 28px;
 `
 
-export function PureMainTitle({ children }) {
+export function PureStandardTitle({ children }) {
   return <Root>{children}</Root>
 }
 
-export default props => <PureMainTitle {...props} />
+export default props => <PureStandardTitle {...props} />

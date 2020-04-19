@@ -14,7 +14,7 @@ describe('Entry Process', () => {
       cy.expectSessionPostRequest({ token })
 
       cy.url().should('eq', `${Cypress.config().baseUrl}/test-unavailable`)
-      cy.get('[data-page=test-unavailable]').should('exist')
+      cy.contains('Test Unavailable')
     })
   })
 

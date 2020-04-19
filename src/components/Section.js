@@ -41,12 +41,12 @@ const PurePastSection = (() => {
 
   const Checkbox = styled(CheckedCheckbox).attrs({ src: pastCheckbox })``
 
-  return ({ children }) => (
+  return ({ children, completable }) => (
     <Root>
       <SideBarContainer>
         <Main>
           <Text>{children}</Text>
-          <Checkbox />
+          {completable && <Checkbox />}
         </Main>
       </SideBarContainer>
     </Root>
@@ -65,12 +65,12 @@ const PurePresentSection = (() => {
     src: presentCheckbox
   })``
 
-  return ({ children }) => (
+  return ({ children, completable }) => (
     <Root>
       <SideBarContainer>
         <Main>
           <Text>{children}</Text>
-          <Checkbox />
+          {completable && <Checkbox />}
         </Main>
       </SideBarContainer>
     </Root>
@@ -89,26 +89,31 @@ const PureFutureSection = (() => {
     src: futureCheckbox
   })``
 
-  return ({ children }) => (
+  return ({ children, completable }) => (
     <Root>
       <SideBarContainer>
         <Main>
           <Text>{children}</Text>
-          <Checkbox />
+          {completable && <Checkbox />}
         </Main>
       </SideBarContainer>
     </Root>
   )
 })()
 
-export const PureSection = ({ type = 'future', ...rest }) => {
+export const PureSection = ({
+  type = 'future',
+  completable = true,
+  ...rest
+}) => {
+  const props = { completable, ...rest }
   switch (type) {
     case 'past':
-      return <PurePastSection {...rest} />
+      return <PurePastSection {...props} />
     case 'present':
-      return <PurePresentSection {...rest} />
+      return <PurePresentSection {...props} />
     case 'future':
-      return <PureFutureSection {...rest} />
+      return <PureFutureSection {...props} />
   }
 }
 
