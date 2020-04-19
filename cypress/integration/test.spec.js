@@ -232,7 +232,7 @@ describe('Completing Section 3', () => {
 })
 
 describe('Completing Section 4', () => {
-  it.only('Sends the correct data and redirects to the summary', () => {
+  it('Sends the correct data and redirects to the summary', () => {
     // Start server
     cy.server()
 
