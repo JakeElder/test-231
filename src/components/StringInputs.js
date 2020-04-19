@@ -1,60 +1,137 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-const base = css`
-  & + & {
-    margin-left: 2px;
-  }
-  display: inline-block;
-  border-radius: 2px;
-  height: 24px;
-  line-height: 24px;
-  padding: 0 4px;
-  border-width: 1px;
-  border-style: solid;
-  cursor: pointer;
-`
+const common = {
+  base: css`
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    box-sizing: border-box;
+    cursor: pointer;
+  `,
+  selected: css`
+    color: #fff;
+    background-color: #2764da;
+  `,
+  unselected: css`
+  `,
+  enabled: css`
+    cursor: pointer;
+  `,
+  disabled: css`
+    cursor: not-allowed;
+  `
+}
 
-const selected = css`
-  border-color: transparent;
-  color: #fff;
-  background-color: #2764da;
-`
+const bounded = {
+  base: css`
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+  `,
+  selected: css`
+    border-color: transparent;
+  `,
+  unselected: css`
+    border-color: #e3e3e3;
+  `,
+  enabled: css`
+  `,
+  disabled: css`
+  `
+}
 
-const unselected = css`
-  border-color: #e3e3e3;
-`
-
-const enabled = css`
-  cursor: pointer;
-`
-
-const disabled = css`
-  cursor: not-allowed;
-`
-
-const Root = styled.span`
-  ${base}
-  ${props => (props.selected ? selected : unselected)}
-  ${props => (props.disabled ? disabled : enabled)}
-`
-
-const Input = styled.input`
+const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   visibility: hidden;
   position: absolute;
   pointer-events: none;
 `
 
-export function PureWordInput({ children: word, selected, disabled, name }) {
-  const control = name ? (
-    <Input type="checkbox" name={name} value={word} selected={selected} />
-  ) : null
-  return (
-    <Root selected={selected} disabled={disabled}>
-      {word}
-      {control}
-    </Root>
-  )
-}
+export const PureWordInput = (() => {
+  const base = css`
+    ${common.base}
+    ${bounded.base}
+    & + & {
+      margin-left: 2px;
+    }
+    padding: 0 4px;
+  `
+  const unselected = css`
+    ${common.unselected}
+    ${bounded.unselected}
+  `
+  const selected = css`
+    ${common.selected}
+    ${bounded.selected}
+  `
+  const enabled = css`
+    ${common.enabled}
+    ${bounded.enabled}
+  `
+  const disabled = css`
+    ${common.disabled}
+    ${bounded.disabled}
+  `
+
+  const Word = styled.span`
+    ${base}
+    ${props => (props.selected ? selected : unselected)}
+    ${props => (props.disabled ? disabled : enabled)}
+  `
+
+  return function({ children: word, selected, disabled, name }) {
+    const control = name ? (
+      <Checkbox name={name} value={word} selected={selected} />
+    ) : null
+    return (
+      <Word selected={selected} disabled={disabled}>
+        {word}
+        {control}
+      </Word>
+    )
+  }
+})()
+
+export const PureSyllableInput = (() => {
+  const base = css`
+    ${common.base}
+    padding-left: 2px;
+    padding-right: 2px;
+    & + & {
+      margin-left: 1px;
+    }
+  `
+  const unselected = css`
+    ${common.unselected}
+  background-color: #f0f0f0;
+  `
+  const selected = css`
+    ${common.selected}
+  `
+  const enabled = css`
+    ${common.enabled}
+  `
+  const disabled = css`
+    ${common.disabled}
+  `
+
+  const Word = styled.span`
+    ${base}
+    ${props => (props.selected ? selected : unselected)}
+    ${props => (props.disabled ? disabled : enabled)}
+  `
+
+  return function({ children: word, selected, disabled, name }) {
+    const control = name ? (
+      <Checkbox name={name} value={word} selected={selected} />
+    ) : null
+    return (
+      <Word selected={selected} disabled={disabled}>
+        {word}
+        {control}
+      </Word>
+    )
+  }
+})()
 
 export default props => <PureWordInput {...props} />
