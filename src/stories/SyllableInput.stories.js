@@ -2,7 +2,7 @@ import React from 'react'
 import { PureSyllableInput } from '../components/StringInputs'
 
 export default {
-  title: 'Syllable Input',
+  title: 'Input :: Syllable',
   component: PureSyllableInput
 }
 

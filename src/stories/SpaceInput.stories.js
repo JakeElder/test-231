@@ -2,7 +2,7 @@ import React from 'react'
 import { PureSpaceInput } from '../components/StringInputs'
 
 export default {
-  title: 'Space Input',
+  title: 'Input :: Space',
   component: PureSpaceInput
 }
 

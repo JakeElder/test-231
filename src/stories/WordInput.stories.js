@@ -2,7 +2,7 @@ import React from 'react'
 import { PureWordInput } from '../components/StringInputs'
 
 export default {
-  title: 'Word Input',
+  title: 'Input :: Word',
   component: PureWordInput
 }
 
