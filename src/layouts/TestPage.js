@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Root = styled.div`
-display: flex;
-height: 100%;
+  display: flex;
+  height: 100%;
 `
 
 export function PureTestPage({ children }) {

@@ -12,7 +12,10 @@ export const Default = () => (
       {['Person A', 'I am so happy. I passed the test']}
     </PureDemarkedCopy.Line>
     <PureDemarkedCopy.Line>
-      {['Person B', ['Congratulations!', 'Now you can give me a ride to school.']]}
+      {[
+        'Person B',
+        ['Congratulations!', 'Now you can give me a ride to school.']
+      ]}
     </PureDemarkedCopy.Line>
   </PureDemarkedCopy>
 )

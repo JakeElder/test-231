@@ -6,6 +6,4 @@ export default {
   component: PureToneSelector
 }
 
-export const Default = () => (
-  <PureToneSelector name="example-selector" />
-)
+export const Default = () => <PureToneSelector name="example-selector" />

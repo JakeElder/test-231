@@ -6,6 +6,8 @@ export default {
   component: PureToneInput
 }
 
-export const Default = () => <PureToneInput type="rising"/>
+export const Default = () => <PureToneInput type="rising" />
 export const Selected = () => <PureToneInput type="falling" selected />
-export const SelectedDisabled = () => ( <PureToneInput type="level" selected disabled />)
+export const SelectedDisabled = () => (
+  <PureToneInput type="level" selected disabled />
+)

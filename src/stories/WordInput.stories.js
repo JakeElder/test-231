@@ -15,9 +15,7 @@ export const SelectedDisabled = () => (
 )
 export const Grouped = () => (
   <>
-    Preceding{' '}
-    <PureWordInput selected>Which</PureWordInput>
-    <PureWordInput>test</PureWordInput>
-    {' '}post
+    Preceding <PureWordInput selected>Which</PureWordInput>
+    <PureWordInput>test</PureWordInput> post
   </>
 )

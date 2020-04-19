@@ -7,7 +7,9 @@ export default {
 }
 
 export const Default = () => <PureSyllableInput>Hon</PureSyllableInput>
-export const Selected = () => <PureSyllableInput selected>Hon</PureSyllableInput>
+export const Selected = () => (
+  <PureSyllableInput selected>Hon</PureSyllableInput>
+)
 export const SelectedDisabled = () => (
   <PureSyllableInput selected disabled>
     Hon

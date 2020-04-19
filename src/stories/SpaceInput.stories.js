@@ -8,7 +8,7 @@ export default {
 
 export const Default = () => <PureSpaceInput />
 export const Selected = () => <PureSpaceInput selected />
-export const SelectedDisabled = () => ( <PureSpaceInput selected disabled />)
+export const SelectedDisabled = () => <PureSpaceInput selected disabled />
 export const Grouped = () => (
   <>
     The
