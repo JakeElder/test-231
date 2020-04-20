@@ -15,7 +15,6 @@ export function PureTestPart({ children }) {
 
 const Header = (() => {
   const Root = styled.div`
-    margin-bottom: 36px;
     flex: 0;
   `
   return function({ children }) {
@@ -30,6 +29,8 @@ const Header = (() => {
 const Body = (() => {
   const Root = styled.div`
     flex: 1;
+    padding: 36px 0 60px 0;
+    overflow: scroll;
   `
   return function({ children }) {
     return (

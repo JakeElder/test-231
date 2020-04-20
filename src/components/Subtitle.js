@@ -11,6 +11,8 @@ const Root = styled.div`
   display: flex;
   align-items: baseline;
   color: #555;
+  height: 26px;
+  line-height: 26px;
 `
 
 const DividerWrapper = styled.div`

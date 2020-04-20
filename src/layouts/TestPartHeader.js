@@ -17,7 +17,7 @@ export function PureTestPartHeader({ children }) {
 
 const Title = (() => {
   const margin = css`
-    margin: 6px 0 12px 0;
+    margin: 6px 0 8px 0;
   `
   const Root = styled.div`
     ${props => (props.noSubtitle ? '' : margin)}

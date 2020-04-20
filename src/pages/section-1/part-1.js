@@ -13,10 +13,9 @@ import Sidebar from '../../components/Sidebar'
 import PlainButton from '../../components/PlainButton'
 import AudioPlayer from '../../components/AudioPlayer'
 import { PureDemarkedCopy as DemarkedCopy } from '../../components/DemarkedCopy'
-import { WordInput } from '../../components/StringInputs'
+import { WordInput, PureWordInput as W } from '../../components/StringInputs'
 
 import useTitle from '../../hooks/use-title'
-
 import useAnswerForm from '../../hooks/use-answer-form'
 
 const q1Choice = word => <WordInput name="answer-1">{word}</WordInput>
@@ -45,7 +44,9 @@ function Section1Part1Page() {
                     <Title>{title}</Title>
                   </Header.Title>
                   <Header.Subtitle>
-                    <Subtitle part={[1, 2]}>Quiz 3 | Section 1: Identify the Focus Words</Subtitle>
+                    <Subtitle part={[1, 2]}>
+                      Quiz 3 | Section 1: Identify the Focus Words
+                    </Subtitle>
                   </Header.Subtitle>
                 </Header>
               </TestPart.Header>
@@ -58,9 +59,14 @@ function Section1Part1Page() {
                     <p>
                       As you listen, follow along with the transcript below, and
                       click on the focus words in each hightlighted statement.
-                      For example, are you listening to me? Some of the
-                      statements may have more than one focus word. You may
-                      listen to the dialogue twice.
+                      For example, <W disabled>are</W>
+                      <W disabled>you</W>
+                      <W disabled selected>
+                        listening
+                      </W>
+                      <W disabled>to</W>
+                      <W disabled>me</W>? Some of the statements may have more
+                      than one focus word. You may listen to the dialogue twice.
                     </p>
                   </BodyCopy>
                 </TestPart.Instruction>

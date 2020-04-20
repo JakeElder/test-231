@@ -21,7 +21,7 @@ const common = {
     cursor: pointer;
   `,
   disabled: css`
-    cursor: not-allowed;
+    cursor: default;
   `
 }
 
@@ -59,8 +59,8 @@ export const PureWordInput = (() => {
   const base = css`
     ${common.base}
     ${bounded.base}
-    & + & {
-      margin-left: 2px;
+    :not(:last-of-type) {
+      margin-right: 2px;
     }
     padding: 0 4px;
   `
@@ -100,10 +100,10 @@ export const PureWordInput = (() => {
   }
 })()
 
-export function WordInput({ children: word, name }) {
+export function WordInput({ children: word, name, ...rest }) {
   const { checked, toggle } = useCheckbox()
   return (
-    <PureWordInput selected={checked} name={name} onClick={toggle}>
+    <PureWordInput selected={checked} name={name} onClick={toggle} {...rest}>
       {word}
     </PureWordInput>
   )

@@ -73,6 +73,8 @@ describe('Beginning the Test', () => {
     // Click continue and make sure the page is changed
     cy.contains('Continue').click()
     cy.url().should('eq', `${Cypress.config().baseUrl}/section-1/part-1`)
+    cy.contains('Section 1')
+    cy.contains('part 1')
   })
 })
 
@@ -95,14 +97,14 @@ describe('Completing Section 1 [Part 1]', () => {
     cy.get('[data-component=ident]').contains('Jake Elder')
 
     // Interact with question
-    cy.get('[data-question=1]').within(() =>{
+    cy.get('[data-question=1]').within(() => {
       cy.contains('Which').click()
       cy.contains('you').click()
     })
-    cy.get('[data-question=2]').within(() =>{
+    cy.get('[data-question=2]').within(() => {
       cy.contains('driving').click()
     })
-    cy.get('[data-question=3]').within(() =>{
+    cy.get('[data-question=3]').within(() => {
       cy.contains('Now').click()
       cy.contains('ride').click()
     })
@@ -128,6 +130,8 @@ describe('Completing Section 1 [Part 1]', () => {
 
     // On to Section 1 Part 2
     cy.url().should('eq', `${Cypress.config().baseUrl}/section-1/part-2`)
+    cy.contains('Section 1')
+    cy.contains('part 2')
   })
 })
 
@@ -150,8 +154,17 @@ describe('Completing Section 1 [Part 2]', () => {
     cy.get('[data-component=ident]').contains('Jake Elder')
 
     // Interact with question
-    cy.get('[value=What]').click()
-    cy.get('[value=do]').click()
+    cy.get('[data-question=1]').within(() => {
+      cy.contains('What').click()
+    })
+    cy.get('[data-question=2]').within(() => {
+      cy.contains('Both').click()
+      cy.contains('weight').click()
+    })
+    cy.get('[data-question=3]').within(() => {
+      cy.contains('have').click()
+      cy.contains('bicycle').click()
+    })
 
     // Submit
     cy.get('button').click()

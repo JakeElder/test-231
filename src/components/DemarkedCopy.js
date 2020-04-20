@@ -26,16 +26,20 @@ const Line = (() => {
 
   const Root = styled.div`
     &:first-child ${Demarkation}, &:first-child ${Content} {
-      padding-top: 10px;
+      padding-top: 15px;
     }
     &:last-child ${Demarkation}, &:last-child ${Content} {
-      padding-bottom: 10px;
+      padding-bottom: 15px;
     }
     display: flex;
-    line-height: 34px;
+    line-height: 28px;
   `
 
-  const ContentGroup = styled.div``
+  const ContentGroup = styled.div`
+    :not(:last-of-type) {
+      margin-bottom: 2px;
+    }
+  `
 
   return function({ children }) {
     const [demarkation, content] = children
@@ -59,8 +63,8 @@ const Line = (() => {
 
 const Divider = (() => {
   const pad = css`
-    margin-top: 8px;
-    margin-bottom: 9px;
+    margin-top: 12px;
+    margin-bottom: 12px;
   `
 
   const DemarkationDivider = styled.div`

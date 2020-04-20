@@ -6,7 +6,7 @@ const Root = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow: hidden;
 `
 
 export function PureTestPage({ children }) {
