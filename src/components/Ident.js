@@ -12,13 +12,14 @@ const Root = styled.div`
 `
 
 const Avatar = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background-color: #fff;
   background-image: url(${defaultAvatar});
   background-repeat: no-repeat;
-  background-position: center 10px;
+  background-position: center 9px;
+  background-size: 82%;
   margin-right: 10px;
 `
 
@@ -35,12 +36,14 @@ const LoadingStrip = styled.div`
 
 const Name = (() => {
   const Root = styled.div`
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   `
 
   const Copy = styled.div`
-    font-weight: 500;
+    font-weight: 400;
+    letter-spacing: 0.2px;
     font-size: 16px;
+    color: #eee;
   `
 
   return function({ children: name }) {
@@ -60,7 +63,9 @@ const Institute = (() => {
   const Root = styled.div``
 
   const Copy = styled.div`
+    letter-spacing: 0.2px;
     font-size: 12px;
+    color: #ddd;
   `
 
   return function({ children: institute }) {
