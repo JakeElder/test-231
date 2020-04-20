@@ -47,7 +47,9 @@
     "babel-loader": "^8.1.0",
     "cypress": "^4.4.0",
     "prettier": "^1.19.1",
-    "start-server-and-test": "^1.10.11"
+    "start-server-and-test": "^1.10.11",
+    "@testing-library/react-hooks": "^3.2.1",
+    "react-test-renderer": "^16.11.0"
   },
   "keywords": [
     "gatsby"

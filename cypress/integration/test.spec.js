@@ -219,7 +219,7 @@ describe('Completing Section 2', () => {
 
     // On to Section 3
     cy.url().should('eq', `${Cypress.config().baseUrl}/section-3`)
-    cy.get('[data-page=section-3]').should('exist')
+    cy.contains('Section 3')
   })
 })
 

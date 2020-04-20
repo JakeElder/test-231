@@ -1,44 +1,104 @@
 import React from 'react'
 import { navigate } from 'gatsby'
 
-import Ident from '../components/Ident'
-import WrapParenned from '../components/WrapParenned'
+import App from '../components/App/App'
+import { PureTestPage as TestPage } from '../layouts/TestPage'
+import { PureTestPart as TestPart } from '../layouts/TestPart'
+import { PureTestPartHeader as Header } from '../layouts/TestPartHeader'
+import { PureBodyCopy as BodyCopy } from '../components/BodyCopy'
+import { PureStandardTitle as Title } from '../components/StandardTitle'
+import { PureSubtitle as Subtitle } from '../components/Subtitle'
+import { PureButton as Button } from '../components/Button'
+import Sidebar from '../components/Sidebar'
+import PlainButton from '../components/PlainButton'
+import AudioPlayer from '../components/AudioPlayer'
+import { PureDemarkedCopy as DemarkedCopy } from '../components/DemarkedCopy'
+import { SyllableInput } from '../components/StringInputs'
+
+import useTitle from '../hooks/use-title'
 
 import useAnswerForm from '../hooks/use-answer-form'
 
-function makeSyllableWrapper(sentenceNumber) {
-  return ({ children }) => {
-    return (
-      <span>
-        {children}
-        <input
-          name={`sentence-${sentenceNumber}-answers`}
-          type="checkbox"
-          value={children}
-        />
-      </span>
-    )
-  }
-}
+const r = (n, v) => (
+  <SyllableInput key={v} name={`answer-${n}`}>
+    {v}
+  </SyllableInput>
+)
 
-function Section3Page() {
+function Section2Page() {
+  const title = useTitle()
+
   const { onSubmit, isSubmitting } = useAnswerForm({
     onSuccess: () => navigate('/section-4')
   })
 
-  const sentence = '{Hon}{est}{y} is the best {po}{li}{cy}'
-
   return (
-    <div data-page="section-3">
-      <Ident />
-      <form onSubmit={onSubmit}>
-        <WrapParenned component={makeSyllableWrapper(1)}>
-          {sentence}
-        </WrapParenned>
-        <button disabled={isSubmitting}>Continue</button>
-      </form>
-    </div>
+    <form onSubmit={onSubmit}>
+      <App>
+        <TestPage>
+          <TestPage.SideBar>
+            <Sidebar current="section-3" />
+          </TestPage.SideBar>
+          <TestPage.TestPart>
+            <TestPart>
+              <TestPart.Header>
+                <Header>
+                  <Header.Title>
+                    <Title>{title}</Title>
+                  </Header.Title>
+                  <Header.Subtitle>
+                    <Subtitle>
+                      Quiz 3 | Section 3: Identify the Tonic Syllable
+                    </Subtitle>
+                  </Header.Subtitle>
+                </Header>
+              </TestPart.Header>
+              <TestPart.Body>
+                <TestPart.Instruction>
+                  <BodyCopy>
+                    <p>
+                      <em>Listen to the following sentences.</em>
+                    </p>
+                    <p>
+                      Mark the <em>tonic syllable</em>. You must mark the{' '}
+                      <em>specific syllable</em> that is the tonic syllable. You
+                      will hear each sentence twice.
+                    </p>
+                  </BodyCopy>
+                </TestPart.Instruction>
+                <TestPart.AudioPlayer>
+                  <AudioPlayer />
+                </TestPart.AudioPlayer>
+                <TestPart.AnswerArea>
+                  <DemarkedCopy>
+                    <DemarkedCopy.Line>
+                      {[
+                        'Sentence 1',
+                        <div data-question={1} key="question">
+                          {r(1, 'Hon')}
+                          {r(1, 'est')}
+                          {r(1, 'y')}
+                          is the best
+                          {r(2, 'pol')}
+                          {r(2, 'i')}
+                          {r(2, 'cy')}.
+                        </div>
+                      ]}
+                    </DemarkedCopy.Line>
+                  </DemarkedCopy>
+                </TestPart.AnswerArea>
+              </TestPart.Body>
+              <TestPart.Footer>
+                <PlainButton disabled={isSubmitting}>
+                  <Button disabled={isSubmitting}>Continue</Button>
+                </PlainButton>
+              </TestPart.Footer>
+            </TestPart>
+          </TestPage.TestPart>
+        </TestPage>
+      </App>
+    </form>
   )
 }
 
-export default Section3Page
+export default Section2Page

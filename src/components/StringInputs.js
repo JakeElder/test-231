@@ -156,6 +156,19 @@ export const PureSyllableInput = (() => {
   }
 })()
 
+export function SyllableInput({ value, name, ...rest }) {
+  // const { checked, toggle } = useCheckbox()
+  return (
+    <PureSyllableInput
+      // selected={checked}
+      name={name}
+      value={value}
+      // onClick={toggle}
+      {...rest}
+    />
+  )
+}
+
 export const PureSpaceInput = (() => {
   const base = css`
     ${common.base}
