@@ -19,7 +19,7 @@ function Sidebar({ current }) {
           <Section current={current === 'section-2'}>Section 2</Section>
           <Section current={current === 'section-3'}>Section 3</Section>
           <Section current={current === 'section-4'}>Section 4</Section>
-          <Section current={current === 'section-5'}>Summary</Section>
+          <Section current={current === 'summary'} completable={false}>Summary</Section>
         </Plot>
       </SideBar.Plot>
       <SideBar.Timer>

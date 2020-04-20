@@ -13,7 +13,6 @@ import Sidebar from '../components/Sidebar'
 import PlainButton from '../components/PlainButton'
 import AudioPlayer from '../components/AudioPlayer'
 import { PureDemarkedCopy as DemarkedCopy } from '../components/DemarkedCopy'
-import { PureToneInput } from '../components/StringInputs'
 import { PureToneSelector, ToneSelector } from '../components/ToneSelector'
 
 import useTitle from '../hooks/use-title'

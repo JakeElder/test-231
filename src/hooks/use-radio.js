@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import globalHook from './use-global-hook'
 
 const initialState = { selections: [] }
