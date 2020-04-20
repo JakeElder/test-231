@@ -271,22 +271,28 @@ export const PureToneInput = (() => {
     ${bounded.disabled}
   `
 
-  const Word = styled.span`
+  const Box = styled.span`
     ${base}
     ${props => (props.selected ? selected : unselected)}
     ${props => (props.disabled ? disabled : enabled)}
    }
   `
 
-  return function({ type, selected, disabled, name }) {
+  return function({ type, selected, disabled, name, onClick }) {
     const control = name ? (
-      <Radio name={name} selected={selected} value={type} disabled={disabled} />
+      <Radio
+        name={name}
+        checked={selected}
+        value={type}
+        disabled={disabled}
+        readOnly
+      />
     ) : null
     return (
-      <Word selected={selected} disabled={disabled}>
+      <Box selected={selected} disabled={disabled} onClick={onClick}>
         <PureToneIcon type={type} white={selected} />
         {control}
-      </Word>
+      </Box>
     )
   }
 })()
