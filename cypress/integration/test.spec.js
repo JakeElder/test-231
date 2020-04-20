@@ -273,7 +273,7 @@ describe('Completing Section 3', () => {
 
     // On to Section 4
     cy.url().should('eq', `${Cypress.config().baseUrl}/section-4`)
-    cy.get('[data-page=section-4]').should('exist')
+    cy.contains('Section 4')
   })
 })
 
@@ -296,9 +296,20 @@ describe('Completing Section 4', () => {
     cy.get('[data-component=ident]').contains('Jake Elder')
 
     // Interact with questions
-    cy.get('[name="line-1-answer"][value=falling]').click()
-    cy.get('[name="line-2-sentence-1-answer"][value=falling]').click()
-    cy.get('[name="line-2-sentence-2-answer"][value=rising]').click()
+    cy.get('[data-line=2]').within(() => {
+      cy.get('[data-rising-tone-input]:eq(0)').click()
+      cy.get('[data-level-tone-input]:eq(1)').click()
+    })
+    cy.get('[data-line=3]').within(() => {
+      cy.get('[data-level-tone-input]:eq(0)').click()
+      cy.get('[data-falling-tone-input]:eq(1)').click()
+    })
+    cy.get('[data-line=4]').within(() => {
+      cy.get('[data-falling-tone-input]').click()
+    })
+    cy.get('[data-line=5]').within(() => {
+      cy.get('[data-rising-tone-input]').click()
+    })
 
     // Stub answer submission
     cy.stubAnswerSubmission({ as: 'answer-submission' })
@@ -308,9 +319,12 @@ describe('Completing Section 4', () => {
 
     // Check the answer request has the correct data sent
     cy.wait('@answer-submission').then(({ request }) => {
-      expect(request.body.get('line-1-answer')).to.equal('falling')
-      expect(request.body.get('line-2-sentence-1-answer')).to.equal('falling')
-      expect(request.body.get('line-2-sentence-2-answer')).to.equal('rising')
+      expect(request.body.get('answer-1')).to.equal('rising')
+      expect(request.body.get('answer-2')).to.equal('level')
+      expect(request.body.get('answer-3')).to.equal('level')
+      expect(request.body.get('answer-4')).to.equal('falling')
+      expect(request.body.get('answer-5')).to.equal('falling')
+      expect(request.body.get('answer-6')).to.equal('rising')
     })
 
     // On to Summary

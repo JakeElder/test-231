@@ -14,7 +14,7 @@ import PlainButton from '../components/PlainButton'
 import AudioPlayer from '../components/AudioPlayer'
 import { PureDemarkedCopy as DemarkedCopy } from '../components/DemarkedCopy'
 import { PureToneInput } from '../components/StringInputs'
-import { ToneSelector } from '../components/ToneSelector'
+import { PureToneSelector, ToneSelector } from '../components/ToneSelector'
 
 import useTitle from '../hooks/use-title'
 
@@ -54,7 +54,7 @@ function Section4Page() {
                     <p>
                       Indicate the rising, falling or level intonation patterns
                       in the blanks provided. The first one has been done for
-                      you. Wou may hear the dialogue <em>twice</em>.
+                      you. You may hear the dialogue <em>twice</em>.
                     </p>
                   </BodyCopy>
                 </TestPart.Instruction>
@@ -66,34 +66,50 @@ function Section4Page() {
                     <DemarkedCopy.Line>
                       {[
                         'Person A',
-                        <div data-sentence={1} key="question">
+                        <div key="copy">
                           Where are you going?
-                          <ToneSelector name="question-1" />
+                          <PureToneSelector selected="falling" disabled />
                         </div>
                       ]}
                     </DemarkedCopy.Line>
-                    <DemarkedCopy.Line>
+                    <DemarkedCopy.Line data-line={2}>
                       {[
                         'Person B',
                         [
-                          <div data-sentence={2} key="question">
+                          <div key="q1">
                             We are heading out to dinner now.
-                            <ToneSelector name="question-2" />
+                            <ToneSelector name="answer-1" />
                           </div>,
-                          <div data-sentence={3} key="question">
+                          <div key="q2">
                             Do you want to join us?
-                            <ToneSelector name="question-3" />
+                            <ToneSelector name="answer-2" />
                           </div>
                         ]
                       ]}
                     </DemarkedCopy.Line>
-                    <DemarkedCopy.Line>
+                    <DemarkedCopy.Line data-line={3}>
                       {[
                         'Person A',
-                        <div data-sentence={4} key="question">
+                        <div key="q">
                           Tonight, I have planned
-                          <ToneSelector name="question-4" /> to study for the exam tomorrow.
-                          <ToneSelector name="question-5" />
+                          <ToneSelector name="answer-3" /> to study for the exam tomorrow.
+                          <ToneSelector name="answer-4" />
+                        </div>
+                      ]}
+                    </DemarkedCopy.Line>
+                    <DemarkedCopy.Line data-line={4}>
+                      {[
+                        'Person B',
+                        <div key="q">
+                          And you think you can do without dinner tonight.<ToneSelector name="answer-5" /> 
+                        </div>
+                      ]}
+                    </DemarkedCopy.Line>
+                    <DemarkedCopy.Line data-line={5}>
+                      {[
+                        'Person A',
+                        <div key="q">
+                          No! I bought some sandwiches from HB7. <ToneSelector name="answer-6" /> 
                         </div>
                       ]}
                     </DemarkedCopy.Line>

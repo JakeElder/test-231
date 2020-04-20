@@ -41,7 +41,7 @@ const Line = (() => {
     }
   `
 
-  return function({ children }) {
+  return function({ children, ...rest }) {
     const [demarkation, content] = children
     const contentArray = [content].flat()
     const groupedContent = contentArray.map((c, idx) => (
@@ -49,7 +49,7 @@ const Line = (() => {
     ))
 
     return (
-      <Root>
+      <Root {...rest}>
         <Demarkation>
           <Container>{demarkation}</Container>
         </Demarkation>

@@ -16,7 +16,12 @@ const Falling = styled.div`
   margin: 0 3px;
 `
 
-export function PureToneSelector({ name, selected, onSelect }) {
+export function PureToneSelector({
+  name,
+  selected,
+  onSelect = () => {},
+  disabled
+}) {
   return (
     <Root>
       <PureToneInput
@@ -24,6 +29,7 @@ export function PureToneSelector({ name, selected, onSelect }) {
         name={name}
         selected={selected === 'rising'}
         onClick={() => onSelect('rising')}
+        disabled={disabled}
       />
       <Falling>
         <PureToneInput
@@ -31,6 +37,7 @@ export function PureToneSelector({ name, selected, onSelect }) {
           name={name}
           selected={selected === 'falling'}
           onClick={() => onSelect('falling')}
+          disabled={disabled}
         />
       </Falling>
       <PureToneInput
@@ -38,6 +45,7 @@ export function PureToneSelector({ name, selected, onSelect }) {
         name={name}
         selected={selected === 'level'}
         onClick={() => onSelect('level')}
+        disabled={disabled}
       />
     </Root>
   )

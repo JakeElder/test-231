@@ -288,8 +288,11 @@ export const PureToneInput = (() => {
         readOnly
       />
     ) : null
+
+    const extra = { [`data-${type}-tone-input`]: true }
+
     return (
-      <Box selected={selected} disabled={disabled} onClick={onClick}>
+      <Box selected={selected} disabled={disabled} onClick={onClick} {...extra}>
         <PureToneIcon type={type} white={selected} />
         {control}
       </Box>
