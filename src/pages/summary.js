@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'gatsby'
 
 import App from '../components/App/App'
 import { PureTestPage as TestPage } from '../layouts/TestPage'
@@ -8,7 +7,6 @@ import { PureTestPartHeader as Header } from '../layouts/TestPartHeader'
 import { PureBodyCopy as BodyCopy } from '../components/BodyCopy'
 import { PureStandardTitle as Title } from '../components/StandardTitle'
 import { PureSubtitle as Subtitle } from '../components/Subtitle'
-import { PureButton as Button } from '../components/Button'
 import Sidebar from '../components/Sidebar'
 
 import useTitle from '../hooks/use-title'
