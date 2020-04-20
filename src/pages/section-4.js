@@ -16,8 +16,9 @@ import { PureDemarkedCopy as DemarkedCopy } from '../components/DemarkedCopy'
 import { PureToneSelector, ToneSelector } from '../components/ToneSelector'
 
 import useTitle from '../hooks/use-title'
-
 import useAnswerForm from '../hooks/use-answer-form'
+
+import audio from '../audio/section-4.mp3'
 
 function Section4Page() {
   const title = useTitle()
@@ -58,7 +59,7 @@ function Section4Page() {
                   </BodyCopy>
                 </TestPart.Instruction>
                 <TestPart.AudioPlayer>
-                  <AudioPlayer />
+                  <AudioPlayer src={audio} />
                 </TestPart.AudioPlayer>
                 <TestPart.AnswerArea>
                   <DemarkedCopy>
@@ -91,7 +92,8 @@ function Section4Page() {
                         'Person A',
                         <div key="q">
                           Tonight, I have planned
-                          <ToneSelector name="answer-3" /> to study for the exam tomorrow.
+                          <ToneSelector name="answer-3" /> to study for the exam
+                          tomorrow.
                           <ToneSelector name="answer-4" />
                         </div>
                       ]}
@@ -100,7 +102,8 @@ function Section4Page() {
                       {[
                         'Person B',
                         <div key="q">
-                          And you think you can do without dinner tonight.<ToneSelector name="answer-5" /> 
+                          And you think you can do without dinner tonight.
+                          <ToneSelector name="answer-5" />
                         </div>
                       ]}
                     </DemarkedCopy.Line>
@@ -108,7 +111,8 @@ function Section4Page() {
                       {[
                         'Person A',
                         <div key="q">
-                          No! I bought some sandwiches from HB7. <ToneSelector name="answer-6" /> 
+                          No! I bought some sandwiches from HB7.{' '}
+                          <ToneSelector name="answer-6" />
                         </div>
                       ]}
                     </DemarkedCopy.Line>

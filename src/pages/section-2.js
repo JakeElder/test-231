@@ -16,8 +16,9 @@ import { PureDemarkedCopy as DemarkedCopy } from '../components/DemarkedCopy'
 import { SpaceInput, PureSpaceInput as S } from '../components/StringInputs'
 
 import useTitle from '../hooks/use-title'
-
 import useAnswerForm from '../hooks/use-answer-form'
+
+import audio from '../audio/section-2.mp3'
 
 const q1Choice = v => <SpaceInput key={v} name="answer-1" value={v} />
 const q2Choice = v => <SpaceInput key={v} name="answer-2" value={v} />
@@ -72,7 +73,7 @@ function Section2Page() {
                   </BodyCopy>
                 </TestPart.Instruction>
                 <TestPart.AudioPlayer>
-                  <AudioPlayer />
+                  <AudioPlayer src={audio} />
                 </TestPart.AudioPlayer>
                 <TestPart.AnswerArea>
                   <DemarkedCopy>

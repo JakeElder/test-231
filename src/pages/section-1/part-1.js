@@ -18,6 +18,8 @@ import { WordInput, PureWordInput as W } from '../../components/StringInputs'
 import useTitle from '../../hooks/use-title'
 import useAnswerForm from '../../hooks/use-answer-form'
 
+import audio from '../../audio/section-1-part-1.mp3'
+
 const q1Choice = word => <WordInput name="answer-1">{word}</WordInput>
 const q2Choice = word => <WordInput name="answer-2">{word}</WordInput>
 const q3Choice = word => <WordInput name="answer-3">{word}</WordInput>
@@ -71,7 +73,7 @@ function Section1Part1Page() {
                   </BodyCopy>
                 </TestPart.Instruction>
                 <TestPart.AudioPlayer>
-                  <AudioPlayer />
+                  <AudioPlayer src={audio} />
                 </TestPart.AudioPlayer>
                 <TestPart.AnswerArea>
                   <DemarkedCopy>

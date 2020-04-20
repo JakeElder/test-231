@@ -16,8 +16,9 @@ import { PureDemarkedCopy as DemarkedCopy } from '../components/DemarkedCopy'
 import { SyllableInput } from '../components/StringInputs'
 
 import useTitle from '../hooks/use-title'
-
 import useAnswerForm from '../hooks/use-answer-form'
+
+import audio from '../audio/section-3.mp3'
 
 const r = (n, v) => (
   <SyllableInput key={v} name={`answer-${n}`}>
@@ -67,7 +68,7 @@ function Section3Page() {
                   </BodyCopy>
                 </TestPart.Instruction>
                 <TestPart.AudioPlayer>
-                  <AudioPlayer />
+                  <AudioPlayer src={audio} />
                 </TestPart.AudioPlayer>
                 <TestPart.AnswerArea>
                   <DemarkedCopy>
