@@ -25,7 +25,7 @@ const r = (n, v) => (
   </SyllableInput>
 )
 
-function Section2Page() {
+function Section3Page() {
   const title = useTitle()
 
   const { onSubmit, isSubmitting } = useAnswerForm({
@@ -74,7 +74,7 @@ function Section2Page() {
                     <DemarkedCopy.Line>
                       {[
                         'Sentence 1',
-                        <div data-question={1} key="question">
+                        <div data-sentence={1} key="question">
                           {r(1, 'Hon')}
                           {r(1, 'est')}
                           {r(1, 'y')}
@@ -82,6 +82,34 @@ function Section2Page() {
                           {r(2, 'pol')}
                           {r(2, 'i')}
                           {r(2, 'cy')}.
+                        </div>
+                      ]}
+                    </DemarkedCopy.Line>
+                    <DemarkedCopy.Line>
+                      {[
+                        'Sentence 2',
+                        <div data-sentence={2} key="question">
+                          {r(3, 'Po')}
+                          {r(3, 'li')}
+                          {r(3, 'tic')}
+                          {r(3, 'ians')}
+                          hardly keep their
+                          {r(4, 'prom')}
+                          {r(4, 'ise')}.
+                        </div>
+                      ]}
+                    </DemarkedCopy.Line>
+                    <DemarkedCopy.Line>
+                      {[
+                        'Sentence 3',
+                        <div data-sentence={3} key="question">
+                          My
+                          {r(5, 'Fam')}
+                          {r(5, 'i')}
+                          {r(5, 'ly')}
+                          will be in New York this
+                          {r(6, 'win')}
+                          {r(6, 'ter')}.
                         </div>
                       ]}
                     </DemarkedCopy.Line>
@@ -101,4 +129,4 @@ function Section2Page() {
   )
 }
 
-export default Section2Page
+export default Section3Page

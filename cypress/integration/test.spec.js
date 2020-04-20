@@ -204,6 +204,7 @@ describe('Completing Section 2', () => {
     cy.get('[data-question=3]').within(() => {
       cy.get('[data-space-input]:eq(6)').click()
     })
+
     // Stub answer submission
     cy.stubAnswerSubmission({ as: 'second-section-submission' })
 
@@ -242,9 +243,18 @@ describe('Completing Section 3', () => {
     cy.get('[data-component=ident]').contains('Jake Elder')
 
     // Interact with questions
-    cy.get('[name="sentence-1-answers"][value=Hon]').click()
-    cy.get('[name="sentence-1-answers"][value=po]').click()
-
+    cy.get('[data-sentence=1]').within(() => {
+      cy.contains('Hon').click()
+      cy.contains('i').click()
+    })
+    cy.get('[data-sentence=2]').within(() => {
+      cy.contains('Po').click()
+      cy.contains('ise').click()
+    })
+    cy.get('[data-sentence=3]').within(() => {
+      cy.contains('ly').click()
+      cy.contains('win').click()
+    })
     // Stub answer submission
     cy.stubAnswerSubmission({ as: 'answer-submission' })
 
@@ -253,7 +263,12 @@ describe('Completing Section 3', () => {
 
     // Check the answer request has the correct data sent
     cy.wait('@answer-submission').then(({ request }) => {
-      expect(request.body.getAll('sentence-1-answers')).to.eql(['Hon', 'po'])
+      expect(request.body.get('answer-1')).to.eql('Hon')
+      expect(request.body.get('answer-2')).to.eql('i')
+      expect(request.body.get('answer-3')).to.eql('Po')
+      expect(request.body.get('answer-4')).to.eql('ise')
+      expect(request.body.get('answer-5')).to.eql('ly')
+      expect(request.body.get('answer-6')).to.eql('win')
     })
 
     // On to Section 4

@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { PureToneIcon } from './ToneIcon'
 
 import useCheckbox from '../hooks/use-checkbox'
+import useRadio from '../hooks/use-radio'
 
 const common = {
   base: css`
@@ -132,40 +133,42 @@ export const PureSyllableInput = (() => {
     ${common.disabled}
   `
 
-  const Word = styled.span`
+  const Syllable = styled.span`
     ${base}
     ${props => (props.selected ? selected : unselected)}
     ${props => (props.disabled ? disabled : enabled)}
   `
 
-  return function({ children: word, selected, disabled, name }) {
+  return function({ children: syllable, selected, disabled, name, onClick }) {
     const control = name ? (
-      <Checkbox
+      <Radio
         name={name}
-        value={word}
-        selected={selected}
+        value={syllable}
+        checked={selected}
         disabled={disabled}
+        readOnly
       />
     ) : null
     return (
-      <Word selected={selected} disabled={disabled}>
-        {word}
+      <Syllable selected={selected} disabled={disabled} onClick={onClick}>
+        {syllable}
         {control}
-      </Word>
+      </Syllable>
     )
   }
 })()
 
-export function SyllableInput({ value, name, ...rest }) {
-  // const { checked, toggle } = useCheckbox()
+export function SyllableInput({ children: syllable, name, ...rest }) {
+  const { selected, select } = useRadio(name, syllable)
   return (
     <PureSyllableInput
-      // selected={checked}
+      selected={selected}
       name={name}
-      value={value}
-      // onClick={toggle}
+      onClick={select}
       {...rest}
-    />
+    >
+      {syllable}
+    </PureSyllableInput>
   )
 }
 
