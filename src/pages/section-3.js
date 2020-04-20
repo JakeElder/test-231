@@ -77,9 +77,7 @@ function Section3Page() {
                         <div data-sentence={1} key="question">
                           {r(1, 'Hon')}
                           {r(1, 'est')}
-                          {r(1, 'y')}
-                          is the best
-                          {r(2, 'pol')}
+                          {r(1, 'y')} is the best {r(2, 'pol')}
                           {r(2, 'i')}
                           {r(2, 'cy')}.
                         </div>
@@ -92,9 +90,7 @@ function Section3Page() {
                           {r(3, 'Po')}
                           {r(3, 'li')}
                           {r(3, 'tic')}
-                          {r(3, 'ians')}
-                          hardly keep their
-                          {r(4, 'prom')}
+                          {r(3, 'ians')} hardly keep their {r(4, 'prom')}
                           {r(4, 'ise')}.
                         </div>
                       ]}
@@ -106,9 +102,7 @@ function Section3Page() {
                           My
                           {r(5, 'Fam')}
                           {r(5, 'i')}
-                          {r(5, 'ly')}
-                          will be in New York this
-                          {r(6, 'win')}
+                          {r(5, 'ly')} will be in New York this {r(6, 'win')}
                           {r(6, 'ter')}.
                         </div>
                       ]}

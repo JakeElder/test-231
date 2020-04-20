@@ -2,7 +2,7 @@
 
 
 function useToken() {
-  const { localStorage } = globalThis
+  const { localStorage } = (window || {})
 
   if (!localStorage) {
     return {
