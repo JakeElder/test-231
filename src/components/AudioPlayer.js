@@ -120,7 +120,6 @@ function AudioPlayer({ src }) {
 
   useEffect(() => {
     return () => {
-      clearInterval(intervalId)
       sound.current.stop()
       sound.current.off()
       sound.current.unload()
@@ -146,6 +145,9 @@ function AudioPlayer({ src }) {
           }, 100)
         )
       },
+      onstop() {
+        clearInterval(intervalId)
+      },
       onpause() {
         setPlaying(false)
         clearInterval(intervalId)
@@ -154,11 +156,7 @@ function AudioPlayer({ src }) {
   }
 
   function toggle() {
-    if (playing) {
-      sound.current.pause()
-      return
-    }
-    sound.current.play()
+    playing ? sound.current.pause() : sound.current.play()
   }
 
   if (loaded) {
