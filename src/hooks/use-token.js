@@ -1,17 +1,20 @@
 // TODO: useState
 
-function useToken() {
-  const { localStorage } = window || {}
-
-  if (!localStorage) {
-    return {
-      set: () => {}
-    }
+function getLocalStorage() {
+  if (typeof window !== 'undefined') {
+    return window.localStorage
   }
-
   return {
-    set: token => localStorage.setItem('sid', token),
-    token: localStorage.getItem('sid')
+    setItem: () => {},
+    getItem: () => {}
+  }
+}
+
+function useToken() {
+  const ls = getLocalStorage()
+  return {
+    set: token => ls.setItem('sid', token),
+    token: ls.getItem('sid')
   }
 }
 
