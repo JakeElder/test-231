@@ -17,33 +17,41 @@ Cypress.Commands.add('expectSessionPostRequest', ({ token }) => {
   })
 })
 
-Cypress.Commands.add('stubSessionGetRequest', () => {
-  cy.route({
-    method: 'get',
-    url: '/api/session',
-    status: 200,
-    response: {
-      data: {
-        name: 'Jake Elder',
-        id: 'jake-elder'
+Cypress.Commands.add('stubSessionGetRequest', ({ token, status = 200 }) => {
+  const props = (() => {
+    if (status === 200) {
+      return {
+        status,
+        response: {
+          data: {
+            name: 'Jake Elder',
+            id: 'jake-elder'
+          }
+        }
       }
     }
+    return {
+      status: 404,
+      response: {}
+    }
+  })()
+
+  cy.route({
+    method: 'get',
+    url: `/api/session/${token}`,
+    ...props
   }).as('session-get-request')
 })
 
-Cypress.Commands.add('expectSessionGetRequest', ({ bearerToken }) => {
-  cy.wait('@session-get-request').then(({ request }) => {
-    expect(request.headers).to.include({
-      Authorization: `Bearer: ${bearerToken}`
-    })
-  })
+Cypress.Commands.add('expectSessionGetRequest', () => {
+  cy.wait('@session-get-request')
 })
 
-Cypress.Commands.add('stubAnswerSubmission', ({ as, delay = 0 }) => {
+Cypress.Commands.add('stubAnswerSubmission', ({ token, as, delay = 0 }) => {
   cy.route({
     delay,
     method: 'post',
-    url: '/api/answers',
+    url: `/api/session/${token}/answers`,
     status: 200,
     response: {}
   }).as(as)

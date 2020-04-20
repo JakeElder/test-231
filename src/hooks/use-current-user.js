@@ -9,15 +9,8 @@ function useCurrentUser() {
 
   useEffect(() => {
     ;(async () => {
-      const res = await axios.get('/api/session', {
-        headers: {
-          Authorization: `Bearer: ${token}`
-        }
-      })
-      set({
-        name: 'Jake Elder',
-        id: 'jake-elder'
-      })
+      const res = await axios.get(`/api/session/${token}`)
+      set(res.data.data)
     })()
   }, [set, token])
 

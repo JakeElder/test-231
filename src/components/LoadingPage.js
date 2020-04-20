@@ -9,12 +9,12 @@ function LoadingPage({ token }) {
 
   useEffect(() => {
     ;(async () => {
-      const res = await axios.post('/api/session', { token })
+      const res = await axios.get(`/api/session/${token}`)
       if (res.status === 404) {
         navigate('/test-unavailable')
       }
       if (res.status === 200) {
-        setToken(res.data.token)
+        setToken(token)
         navigate('/introduction')
       }
     })()

@@ -1,17 +1,19 @@
-const jwtToken = 'JWT'
+const token = '0044-jjkl'
 
 describe('Entry Process', () => {
   context('When using an invalid token', () => {
     it('Shows the test unavailable page', () => {
       cy.server()
-      cy.stubSessionPostRequest({ status: 404, response: {} })
 
-      const token = 'T0k3N'
+      cy.stubSessionGetRequest({ token, status: 404 })
 
       cy.visit(`?token=${token}`)
       cy.get('[data-page=loading-page]').should('exist')
 
-      cy.expectSessionPostRequest({ token })
+      cy.expectSessionGetRequest().then(() => {
+        // Make sure sid isn't saved
+        expect(localStorage.getItem('sid')).to.equal(null)
+      })
 
       cy.url().should('eq', `${Cypress.config().baseUrl}/test-unavailable`)
       cy.contains('Test Unavailable')
@@ -23,24 +25,18 @@ describe('Entry Process', () => {
       // Start a server to enable mocks
       cy.server()
 
-      // Define mock tokens
-      const clientToken = 'T0K3N'
-
       // Stub session request
-      cy.stubSessionPostRequest({
-        status: 200,
-        response: { token: jwtToken }
-      })
+      cy.stubSessionGetRequest({ token })
 
       // Check the loading page shows when navigating to the root
-      cy.visit(`?token=${clientToken}`)
+      cy.visit(`?token=${token}`)
       cy.get('[data-page=loading-page]').should('exist')
 
       // Check the same token is sent for the session request call
-      cy.expectSessionPostRequest({ token: clientToken })
-
-      // Stub session get request
-      cy.stubSessionGetRequest()
+      cy.expectSessionGetRequest().then(() => {
+        // Make sure sid is saved
+        expect(localStorage.getItem('sid')).to.equal(token)
+      })
 
       // Check we redirect to the introduction page
       cy.url().should('eq', `${Cypress.config().baseUrl}/introduction`)
@@ -55,17 +51,17 @@ describe('Beginning the Test', () => {
     cy.server()
 
     // Stub session get request
-    cy.stubSessionGetRequest()
+    cy.stubSessionGetRequest({ token })
 
     // Load the introduction page
     cy.visit('/introduction', {
       onBeforeLoad(win) {
-        win.localStorage.setItem('token', jwtToken)
+        win.localStorage.setItem('sid', token)
       }
     })
 
-    // Check the correct Authorization token is sent in the subsequent request
-    cy.expectSessionGetRequest({ bearerToken: jwtToken })
+    // Check the session request is made
+    cy.expectSessionGetRequest()
 
     // Check the ident is rendered with returned users name
     cy.contains('Jake Elder')
@@ -84,14 +80,17 @@ describe('Completing Section 1 [Part 1]', () => {
     cy.server()
 
     // Stub session get request
-    cy.stubSessionGetRequest()
+    cy.stubSessionGetRequest({ token })
 
     // Load Section 1 Part 1
     cy.visit('/section-1/part-1', {
       onBeforeLoad(win) {
-        win.localStorage.setItem('token', jwtToken)
+        win.localStorage.setItem('sid', token)
       }
     })
+
+    // Check the session request is made
+    cy.expectSessionGetRequest()
 
     // Check required content exists
     cy.get('[data-component=ident]').contains('Jake Elder')
@@ -110,19 +109,19 @@ describe('Completing Section 1 [Part 1]', () => {
     })
 
     // Stub answer submission
-    cy.stubAnswerSubmission({ as: 'first-section-submission', delay: 150 })
+    cy.stubAnswerSubmission({
+      token,
+      as: 'first-section-submission',
+      delay: 150
+    })
 
     // Press submit and make sure it's disabled after
     cy.get('button')
       .click()
       .should('have.attr', 'disabled', 'disabled')
 
-    // Check the answer request has the bearer token and
-    // has the correct data sent
+    // Check the answer request has the correct data sent
     cy.wait('@first-section-submission').then(({ request }) => {
-      expect(request.headers).to.include({
-        Authorization: `Bearer: ${jwtToken}`
-      })
       expect(request.body.getAll('answer-1')).to.eql(['Which', 'you'])
       expect(request.body.getAll('answer-2')).to.eql(['driving'])
       expect(request.body.getAll('answer-3')).to.eql(['Now', 'ride'])
@@ -141,12 +140,12 @@ describe('Completing Section 1 [Part 2]', () => {
     cy.server()
 
     // Stub session get request
-    cy.stubSessionGetRequest()
+    cy.stubSessionGetRequest({ token })
 
     // Load Section 1 Part 2
     cy.visit('/section-1/part-2', {
       onBeforeLoad(win) {
-        win.localStorage.setItem('token', jwtToken)
+        win.localStorage.setItem('sid', token)
       }
     })
 
@@ -181,12 +180,12 @@ describe('Completing Section 2', () => {
     cy.server()
 
     // Stub session get request
-    cy.stubSessionGetRequest()
+    cy.stubSessionGetRequest({ token })
 
     // Load Section 2
     cy.visit('/section-2', {
       onBeforeLoad(win) {
-        win.localStorage.setItem('token', jwtToken)
+        win.localStorage.setItem('sid', token)
       }
     })
 
@@ -206,7 +205,7 @@ describe('Completing Section 2', () => {
     })
 
     // Stub answer submission
-    cy.stubAnswerSubmission({ as: 'second-section-submission' })
+    cy.stubAnswerSubmission({ token, as: 'second-section-submission' })
 
     // Submit
     cy.get('button').click()
@@ -230,12 +229,12 @@ describe('Completing Section 3', () => {
     cy.server()
 
     // Stub session get request
-    cy.stubSessionGetRequest()
+    cy.stubSessionGetRequest({ token })
 
     // Load Section 3
     cy.visit('/section-3', {
       onBeforeLoad(win) {
-        win.localStorage.setItem('token', jwtToken)
+        win.localStorage.setItem('sid', token)
       }
     })
 
@@ -256,7 +255,7 @@ describe('Completing Section 3', () => {
       cy.contains('win').click()
     })
     // Stub answer submission
-    cy.stubAnswerSubmission({ as: 'answer-submission' })
+    cy.stubAnswerSubmission({ token, as: 'answer-submission' })
 
     // Submit
     cy.get('button').click()
@@ -283,12 +282,12 @@ describe('Completing Section 4', () => {
     cy.server()
 
     // Stub session get request
-    cy.stubSessionGetRequest()
+    cy.stubSessionGetRequest({ token })
 
     // Load Section 4
     cy.visit('/section-4', {
       onBeforeLoad(win) {
-        win.localStorage.setItem('token', jwtToken)
+        win.localStorage.setItem('sid', token)
       }
     })
 
@@ -312,7 +311,7 @@ describe('Completing Section 4', () => {
     })
 
     // Stub answer submission
-    cy.stubAnswerSubmission({ as: 'answer-submission' })
+    cy.stubAnswerSubmission({ token, as: 'answer-submission' })
 
     // Submit
     cy.get('button').click()
