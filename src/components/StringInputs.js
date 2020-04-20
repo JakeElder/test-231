@@ -192,17 +192,41 @@ export const PureSpaceInput = (() => {
     }
   `
 
-  return function({ selected, disabled, name }) {
+  return function({ selected, disabled, name, value, onClick }) {
     const control = name ? (
-      <Checkbox name={name} selected={selected} disabled={disabled} />
+      <Checkbox
+        name={name}
+        value={value}
+        checked={selected}
+        disabled={disabled}
+        readOnly
+      />
     ) : null
     return (
-      <Word selected={selected} disabled={disabled}>
+      <Word
+        data-space-input
+        selected={selected}
+        disabled={disabled}
+        onClick={onClick}
+      >
         {control}
       </Word>
     )
   }
 })()
+
+export function SpaceInput({ value, name, ...rest }) {
+  const { checked, toggle } = useCheckbox()
+  return (
+    <PureSpaceInput
+      selected={checked}
+      name={name}
+      value={value}
+      onClick={toggle}
+      {...rest}
+    />
+  )
+}
 
 export const PureToneInput = (() => {
   const base = css`

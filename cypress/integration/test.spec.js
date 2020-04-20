@@ -171,7 +171,7 @@ describe('Completing Section 1 [Part 2]', () => {
 
     // On to Section 2
     cy.url().should('eq', `${Cypress.config().baseUrl}/section-2`)
-    cy.get('[data-page=section-2]').should('exist')
+    cy.contains('Section 2')
   })
 })
 
@@ -193,11 +193,17 @@ describe('Completing Section 2', () => {
     // Check required content exists
     cy.get('[data-component=ident]').contains('Jake Elder')
 
-    // Interact with questions
-    cy.get('[name="sentence-1-answers"][value=3]').click()
-    cy.get('[name="sentence-1-answers"][value=5]').click()
-    cy.get('[name="sentence-2-answers"][value=1]').click()
-
+    // Interact with question
+    cy.get('[data-question=1]').within(() => {
+      cy.get('[data-space-input]:eq(1)').click()
+    })
+    cy.get('[data-question=2]').within(() => {
+      cy.get('[data-space-input]:eq(5)').click()
+      cy.get('[data-space-input]:eq(2)').click()
+    })
+    cy.get('[data-question=3]').within(() => {
+      cy.get('[data-space-input]:eq(6)').click()
+    })
     // Stub answer submission
     cy.stubAnswerSubmission({ as: 'second-section-submission' })
 
@@ -206,8 +212,9 @@ describe('Completing Section 2', () => {
 
     // Check the answer request has the correct data sent
     cy.wait('@second-section-submission').then(({ request }) => {
-      expect(request.body.getAll('sentence-1-answers')).to.eql(['3', '5'])
-      expect(request.body.getAll('sentence-2-answers')).to.eql(['1'])
+      expect(request.body.getAll('answer-1')).to.eql(['1'])
+      expect(request.body.getAll('answer-2')).to.eql(['2', '5'])
+      expect(request.body.getAll('answer-3')).to.eql(['6'])
     })
 
     // On to Section 3
