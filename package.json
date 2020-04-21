@@ -71,7 +71,9 @@
     "cypress": "start-server-and-test develop http://localhost:3000 cy:open",
     "cypress:api": "start-server-and-test develop:now http://localhost:3000 cy:open",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "db:reset": "node ./bin/reset",
+    "db:seed": "node ./bin/seed"
   },
   "repository": {
     "type": "git",

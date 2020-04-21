@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+const { reset } = require('../api-modules/db')
+
+console.log('DB :: Resetting')
+reset().then(() => {
+  console.log('DB :: Reset')
+})

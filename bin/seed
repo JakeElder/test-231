@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+const { seed } = require('../api-modules/db')
+
+console.log('DB :: Seeding')
+seed().then(() => {
+  console.log('DB :: Seeded')
+})
