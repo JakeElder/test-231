@@ -1,11 +1,22 @@
-module.exports = (req, res) => {
-  if (req.query.id !== '0033-jjkl' && req.query.id !== '0033-rngg') {
-    return res.status(404).send()
+const url = require('url')
+const { MongoClient } = require('mongodb')
+
+const { connectToDatabase } = require('../api-modules/db')
+
+module.exports = async (req, res) => {
+  const db = await connectToDatabase(process.env.MONGODB_URI)
+  const collection = await db.collection('sessions')
+  const user = await collection.findOne({ id: req.query.id })
+
+  if (!user) {
+    res.status(404).send()
+    return
   }
-  res.json({
+
+  res.status(200).json({
     data: {
-      name: req.query.id === '0033-jjkl' ? 'Jake Elder' : 'Jirapat Jangjamras',
-      id: req.query.id
+      id: user.id,
+      name: user.name
     }
   })
 }
