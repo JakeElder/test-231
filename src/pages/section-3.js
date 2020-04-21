@@ -30,6 +30,7 @@ function Section3Page() {
   const title = useTitle()
 
   const { onSubmit, isSubmitting } = useAnswerForm({
+    sectionId: 'section-3',
     onSuccess: () => navigate('/section-4')
   })
 

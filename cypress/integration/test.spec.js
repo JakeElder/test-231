@@ -111,7 +111,7 @@ describe('Completing Section 1 [Part 1]', () => {
     // Stub answer submission
     cy.stubAnswerSubmission({
       token,
-      as: 'first-section-submission',
+      as: 'answer-submission',
       delay: 150
     })
 
@@ -121,10 +121,13 @@ describe('Completing Section 1 [Part 1]', () => {
       .should('have.attr', 'disabled', 'disabled')
 
     // Check the answer request has the correct data sent
-    cy.wait('@first-section-submission').then(({ request }) => {
-      expect(request.body.getAll('answer-1')).to.eql(['Which', 'you'])
-      expect(request.body.getAll('answer-2')).to.eql(['driving'])
-      expect(request.body.getAll('answer-3')).to.eql(['Now', 'ride'])
+    cy.wait('@answer-submission').then(({ request }) => {
+      expect(request.body).to.deep.equal({
+        'section-id': 'section-1-part-1',
+        'answer-1': ['Which', 'you'],
+        'answer-2': ['driving'],
+        'answer-3': ['Now', 'ride']
+      })
     })
 
     // On to Section 1 Part 2
@@ -165,8 +168,24 @@ describe('Completing Section 1 [Part 2]', () => {
       cy.contains('bicycle').click()
     })
 
+    // Stub answer submission
+    cy.stubAnswerSubmission({
+      token,
+      as: 'answer-submission',
+      delay: 150
+    })
+
     // Submit
     cy.get('button').click()
+
+    cy.wait('@answer-submission').then(({ request }) => {
+      expect(request.body).to.deep.equal({
+        'section-id': 'section-1-part-2',
+        'answer-1': ['What'],
+        'answer-2': ['Both', 'weight'],
+        'answer-3': ['have', 'bicycle']
+      })
+    })
 
     // On to Section 2
     cy.url().should('eq', `${Cypress.config().baseUrl}/section-2`)
@@ -205,16 +224,19 @@ describe('Completing Section 2', () => {
     })
 
     // Stub answer submission
-    cy.stubAnswerSubmission({ token, as: 'second-section-submission' })
+    cy.stubAnswerSubmission({ token, as: 'answer-submission' })
 
     // Submit
     cy.get('button').click()
 
     // Check the answer request has the correct data sent
-    cy.wait('@second-section-submission').then(({ request }) => {
-      expect(request.body.getAll('answer-1')).to.eql(['1'])
-      expect(request.body.getAll('answer-2')).to.eql(['2', '5'])
-      expect(request.body.getAll('answer-3')).to.eql(['6'])
+    cy.wait('@answer-submission').then(({ request }) => {
+      expect(request.body).to.deep.equal({
+        'section-id': 'section-2',
+        'answer-1': ['1'],
+        'answer-2': ['2', '5'],
+        'answer-3': ['6']
+      })
     })
 
     // On to Section 3
@@ -262,12 +284,15 @@ describe('Completing Section 3', () => {
 
     // Check the answer request has the correct data sent
     cy.wait('@answer-submission').then(({ request }) => {
-      expect(request.body.get('answer-1')).to.eql('Hon')
-      expect(request.body.get('answer-2')).to.eql('i')
-      expect(request.body.get('answer-3')).to.eql('Po')
-      expect(request.body.get('answer-4')).to.eql('ise')
-      expect(request.body.get('answer-5')).to.eql('ly')
-      expect(request.body.get('answer-6')).to.eql('win')
+      expect(request.body).to.deep.equal({
+        'section-id': 'section-3',
+        'answer-1': 'Hon',
+        'answer-2': 'i',
+        'answer-3': 'Po',
+        'answer-4': 'ise',
+        'answer-5': 'ly',
+        'answer-6': 'win'
+      })
     })
 
     // On to Section 4
@@ -318,12 +343,15 @@ describe('Completing Section 4', () => {
 
     // Check the answer request has the correct data sent
     cy.wait('@answer-submission').then(({ request }) => {
-      expect(request.body.get('answer-1')).to.equal('rising')
-      expect(request.body.get('answer-2')).to.equal('level')
-      expect(request.body.get('answer-3')).to.equal('level')
-      expect(request.body.get('answer-4')).to.equal('falling')
-      expect(request.body.get('answer-5')).to.equal('falling')
-      expect(request.body.get('answer-6')).to.equal('rising')
+      expect(request.body).to.deep.equal({
+        'section-id': 'section-4',
+        'answer-1': 'rising',
+        'answer-2': 'level',
+        'answer-3': 'level',
+        'answer-4': 'falling',
+        'answer-5': 'falling',
+        'answer-6': 'rising'
+      })
     })
 
     // On to Summary

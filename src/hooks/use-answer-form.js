@@ -1,18 +1,22 @@
 import { useState } from 'react'
 import axios from 'axios'
+import serialize from 'form-serialize'
 
 import useToken from './use-token'
 
-function useAnswerForm({ onSuccess }) {
+function useAnswerForm({ sectionId, onSuccess }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { token } = useToken()
 
   async function onSubmit(e) {
     e.preventDefault()
-    const data = new FormData(e.target)
+    const data = {
+      'section-id': sectionId,
+      ...serialize(e.target, { hash: true })
+    }
     await axios.post(`/api/session/${token}/answers`, data, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'application/json'
       }
     })
     setIsSubmitting(true)

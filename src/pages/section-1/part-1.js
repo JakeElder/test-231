@@ -20,14 +20,15 @@ import useAnswerForm from '../../hooks/use-answer-form'
 
 import audio from '../../audio/section-1-part-1.mp3'
 
-const q1Choice = word => <WordInput name="answer-1">{word}</WordInput>
-const q2Choice = word => <WordInput name="answer-2">{word}</WordInput>
-const q3Choice = word => <WordInput name="answer-3">{word}</WordInput>
+const q1Choice = word => <WordInput name="answer-1[]">{word}</WordInput>
+const q2Choice = word => <WordInput name="answer-2[]">{word}</WordInput>
+const q3Choice = word => <WordInput name="answer-3[]">{word}</WordInput>
 
 function Section1Part1Page() {
   const title = useTitle()
 
   const { onSubmit, isSubmitting } = useAnswerForm({
+    sectionId: 'section-1-part-1',
     onSuccess: () => navigate('/section-1/part-2')
   })
 
