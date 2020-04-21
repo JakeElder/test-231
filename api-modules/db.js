@@ -1,3 +1,6 @@
+const { MongoClient } = require('mongodb')
+const url = require('url')
+
 let cachedDb = null
 
 async function connectToDatabase(uri) {
@@ -12,6 +15,12 @@ async function connectToDatabase(uri) {
   return db
 }
 
+async function addSession({ user }) {
+
+}
+
 module.exports = {
-  conntectToDatabase
+  connect: connectToDatabase,
+  connectToDatabase,
+  addSession
 }

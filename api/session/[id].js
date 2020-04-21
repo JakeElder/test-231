@@ -1,7 +1,4 @@
-const url = require('url')
-const { MongoClient } = require('mongodb')
-
-const { connectToDatabase } = require('../api-modules/db')
+const { connectToDatabase } = require('../../api-modules/db')
 
 module.exports = async (req, res) => {
   const db = await connectToDatabase(process.env.MONGODB_URI)
