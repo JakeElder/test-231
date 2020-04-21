@@ -59,8 +59,8 @@ function Section1Part1Page() {
                       <em>Listen to the following dialogue.</em>
                     </p>
                     <p>
-                      As you listen, follow along with the transcript below, and
-                      click on the focus words in each hightlighted statement.
+                      As you listen, follow along with the transcript below and
+                      click on the focus words in each clickable section.
                       For example, <W disabled>are</W>
                       <W disabled>you</W>
                       <W disabled selected>

@@ -40,18 +40,17 @@ function IntroductionPage() {
 
                 <p>
                   This test is comprised of 4 sections, some of which contain
-                  multiple sections.
+                  parts.
                 </p>
 
                 <p>
-                  You will be required to answer the questions by reading the
-                  instructions, and selecting the answers using the provided
-                  interface.
+                  You will be required to answer the questions by first reading the
+                  instructions then playing an audio clip and selecting the answers using the provided interface.
                 </p>
 
                 <p>
-                  Some questions will require that you listen to an audio clip,
-                  so please ensure you are in a suitable environment, have
+                  As some questions require that you listen to an audio clip,
+                  please ensure you are in a suitable environment, have
                   headphones equipped where necessary and have your volume
                   turned up to a reasonable level.
                 </p>
