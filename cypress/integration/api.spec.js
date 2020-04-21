@@ -2,9 +2,7 @@ const sid = '0033-jjkl'
 
 describe('API Modules', () => {
   beforeEach(() => {
-    // cy.task('get').then((...args) => {
-    // console.log(args)
-    // })
+    cy.exec('yarn db:reset && yarn db:seed')
   })
 
   context('POST /api/session', () => {
@@ -22,15 +20,13 @@ describe('API Modules', () => {
   })
 
   context('POST /api/session/[id]/answers', () => {
-    it('is adds to the answers array', function() {
-      const body = new FormData()
-      body.append('section-id', 'section-1-part-1')
-
-      cy.formRequest({
+    it.only('is adds to the answers array', function() {
+      cy.request({
+        method: 'POST',
         url: `/api/session/${sid}/answers`,
-        body
+        body: { 'section-id': 1 }
       }).then(response => {
-        console.log(response)
+        expect(response.status).to.equal(200)
       })
     })
   })

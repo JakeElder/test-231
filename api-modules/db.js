@@ -54,5 +54,6 @@ module.exports = {
   addSession,
   reset,
   seed,
-  prepareSession
+  prepareSession,
+  uuid: () => uuid.new()
 }

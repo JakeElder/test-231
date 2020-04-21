@@ -1,27 +1,21 @@
-const short = require('short-uuid')
-
-const { connect } = require('../api-modules/db')
-
-const uuid = short('abcdefghijklmnopqrstuvwxyz0123456789-')
+const { connect, uuid } = require('../api-modules/db')
 
 module.exports = async (req, res) => {
+  if (req.method !== 'POST') {
+    res.status(404).send()
+    return
+  }
+
   const db = await connect(process.env.MONGODB_URI)
   const collection = await db.collection('sessions')
 
   const session = {
-    id: uuid.new(),
+    id: uuid(),
     name: req.body.name,
     answers: []
   }
 
-  const r = await collection.insertOne(session)
+  await collection.insertOne(session)
 
-  if (req.method === 'POST') {
-    res.json({
-      data: {
-        session
-      }
-    })
-  }
-  res.status(404).send()
+  res.json({ data: { session } })
 }
