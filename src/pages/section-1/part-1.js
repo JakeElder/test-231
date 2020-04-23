@@ -60,16 +60,16 @@ function Section1Part1Page() {
                       <em>Listen to the following dialogue.</em>
                     </p>
                     <p>
-                      As you listen, follow along with the transcript below and
-                      click on the focus words in each clickable section.
-                      For example, <W disabled>are</W>
+                      click the focus words in each clickable section, numbers 1
+                      through 6. For example, <W disabled>are</W>
                       <W disabled>you</W>
                       <W disabled selected>
                         listening
                       </W>
                       <W disabled>to</W>
                       <W disabled>me</W>? Some of the statements may have more
-                      than one focus word. You may listen to the dialogue twice.
+                      than one focus word. You will hear each dialogue{' '}
+                      <em>twice</em>.
                     </p>
                   </BodyCopy>
                 </TestPart.Instruction>

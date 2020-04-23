@@ -57,8 +57,8 @@ function Section2Page() {
                 <TestPart.Instruction>
                   <BodyCopy>
                     <p>
-                      Listen to the following sentences. Mark the slash at the
-                      end of each thought group. For example: I<S />
+                      Listen to the following sentences. Mark a slash at the end
+                      of each thought group. For example: I<S disabled />
                       know
                       <S disabled />
                       when
@@ -69,7 +69,7 @@ function Section2Page() {
                       <S selected disabled />
                       and
                       <S disabled />
-                      you?
+                      you? You will hear each sentence <em>twice</em>.
                     </p>
                   </BodyCopy>
                 </TestPart.Instruction>
@@ -82,7 +82,7 @@ function Section2Page() {
                       {[
                         'Sentence 1',
                         <div data-question={1} key="question">
-                          {'The students wanted to meet the dean but they have to wait tilll tomorrow'
+                          {'The students wanted to meet the dean but they have to wait till tomorrow'
                             .split(' ')
                             .map((w, idx) => [w, q1Choice(idx)])
                             .flat()

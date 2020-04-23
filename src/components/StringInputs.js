@@ -141,7 +141,7 @@ export const PureSyllableInput = (() => {
 
   return function({ children: syllable, selected, disabled, name, onClick }) {
     const control = name ? (
-      <Radio
+      <Checkbox
         name={name}
         value={syllable}
         checked={selected}
@@ -159,12 +159,12 @@ export const PureSyllableInput = (() => {
 })()
 
 export function SyllableInput({ children: syllable, name, ...rest }) {
-  const { selected, select } = useRadio(name, syllable)
+  const { checked, toggle } = useCheckbox()
   return (
     <PureSyllableInput
-      selected={selected}
+      selected={checked}
       name={name}
-      onClick={select}
+      onClick={toggle}
       {...rest}
     >
       {syllable}
@@ -176,15 +176,15 @@ export const PureSpaceInput = (() => {
   const base = css`
     ${common.base}
     ${bounded.base}
-    padding-left: 2px;
-    padding-right: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
     margin-left: 3px;
     margin-right: 3px;
   `
   const unselected = css`
     ${common.unselected}
     ${bounded.unselected}
-    color: #dfdfdf;
+    color: #fff;
   `
   const selected = css`
     ${common.selected}

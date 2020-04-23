@@ -20,7 +20,7 @@ describe('API Modules', () => {
   })
 
   context('POST /api/session/[id]/answers', () => {
-    it.only('is adds to the answers array', function() {
+    it('is adds to the answers array', function() {
       cy.request({
         method: 'POST',
         url: `/api/session/${sid}/answers`,

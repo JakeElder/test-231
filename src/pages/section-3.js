@@ -63,8 +63,10 @@ function Section3Page() {
                     </p>
                     <p>
                       Mark the <em>tonic syllable</em>. You must mark the{' '}
-                      <em>specific syllable</em> that is the tonic syllable. You
-                      will hear each sentence twice.
+                      <em>specific syllable</em> that is the tonic syllable. In
+                      a multisyllabic word, made of two syllables or more,
+                      selecting the entire word result in <em>0</em>. You will
+                      hear each dialogue <em>twice</em>.
                     </p>
                   </BodyCopy>
                 </TestPart.Instruction>
@@ -79,9 +81,10 @@ function Section3Page() {
                         <div data-sentence={1} key="question">
                           {r(1, 'Hon')}
                           {r(1, 'est')}
-                          {r(1, 'y')} is the best {r(2, 'pol')}
-                          {r(2, 'i')}
-                          {r(2, 'cy')}.
+                          {r(1, 'y')} {r(1, 'is')} {r(1, 'the')} {r(1, 'best')}{' '}
+                          {r(1, 'pol')}
+                          {r(1, 'i')}
+                          {r(1, 'cy')}.
                         </div>
                       ]}
                     </DemarkedCopy.Line>
@@ -89,11 +92,12 @@ function Section3Page() {
                       {[
                         'Sentence 2',
                         <div data-sentence={2} key="question">
-                          {r(3, 'Po')}
-                          {r(3, 'li')}
-                          {r(3, 'tic')}
-                          {r(3, 'ians')} hardly keep their {r(4, 'prom')}
-                          {r(4, 'ise')}.
+                          {r(2, 'My')} {r(2, 'Fam')}
+                          {r(2, 'i')}
+                          {r(2, 'ly')} {r(2, 'will')} {r(2, 'be')} {r(2, 'in')}{' '}
+                          {r(2, 'New')} {r(2, 'York')} {r(2, 'this')}{' '}
+                          {r(2, 'win')}
+                          {r(2, 'ter')}.
                         </div>
                       ]}
                     </DemarkedCopy.Line>
@@ -101,11 +105,10 @@ function Section3Page() {
                       {[
                         'Sentence 3',
                         <div data-sentence={3} key="question">
-                          My
-                          {r(5, 'Fam')}
-                          {r(5, 'i')}
-                          {r(5, 'ly')} will be in New York this {r(6, 'win')}
-                          {r(6, 'ter')}.
+                          {r(3, 'Do')} {r(3, 'we')} {r(3, 'have')}{' '}
+                          {r(3, 'home')}
+                          {r(3, 'work')} {r(3, 'to')}
+                          {r(3, 'night')}?
                         </div>
                       ]}
                     </DemarkedCopy.Line>

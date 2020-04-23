@@ -13,7 +13,7 @@ import Sidebar from '../../components/Sidebar'
 import PlainButton from '../../components/PlainButton'
 import AudioPlayer from '../../components/AudioPlayer'
 import { PureDemarkedCopy as DemarkedCopy } from '../../components/DemarkedCopy'
-import { WordInput } from '../../components/StringInputs'
+import { WordInput, PureWordInput as W } from '../../components/StringInputs'
 
 import useTitle from '../../hooks/use-title'
 import useAnswerForm from '../../hooks/use-answer-form'
@@ -57,8 +57,19 @@ function Section1Part2Page() {
                 <TestPart.Instruction>
                   <BodyCopy>
                     <p>
-                      Listen to the following dialogue. As you listen, click on
-                      the focus words in the same manner as the previous part.
+                      <em>Listen to the following dialogue.</em>
+                    </p>
+                    <p>
+                      click the focus words in each clickable section, numbers 1
+                      through 6. For example, <W disabled>are</W>
+                      <W disabled>you</W>
+                      <W disabled selected>
+                        listening
+                      </W>
+                      <W disabled>to</W>
+                      <W disabled>me</W>? Some of the statements may have more
+                      than one focus word. You will hear each dialogue{' '}
+                      <em>twice</em>.
                     </p>
                   </BodyCopy>
                 </TestPart.Instruction>
@@ -92,7 +103,7 @@ function Section1Part2Page() {
                             {q2Choice('and')}
                             {q2Choice('lose')}
                             {q2Choice('weight')}
-                            {q2Choice('quickly')}
+                            {q2Choice('quickly')}.
                           </div>
                         ]
                       ]}

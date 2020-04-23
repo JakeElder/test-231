@@ -246,7 +246,7 @@ describe('Completing Section 2', () => {
 })
 
 describe('Completing Section 3', () => {
-  it('Sends the correct data and redirects to section 4', () => {
+  it.only('Sends the correct data and redirects to section 4', () => {
     // Start server
     cy.server()
 
@@ -266,15 +266,15 @@ describe('Completing Section 3', () => {
     // Interact with questions
     cy.get('[data-sentence=1]').within(() => {
       cy.contains('Hon').click()
-      cy.contains('i').click()
+      cy.contains('best').click()
     })
     cy.get('[data-sentence=2]').within(() => {
-      cy.contains('Po').click()
-      cy.contains('ise').click()
+      cy.contains('New').click()
+      cy.contains('win').click()
     })
     cy.get('[data-sentence=3]').within(() => {
-      cy.contains('ly').click()
-      cy.contains('win').click()
+      cy.contains('home').click()
+      cy.contains('work').click()
     })
     // Stub answer submission
     cy.stubAnswerSubmission({ token, as: 'answer-submission' })
@@ -286,12 +286,9 @@ describe('Completing Section 3', () => {
     cy.wait('@answer-submission').then(({ request }) => {
       expect(request.body).to.deep.equal({
         'section-id': 'section-3',
-        'answer-1': 'Hon',
-        'answer-2': 'i',
-        'answer-3': 'Po',
-        'answer-4': 'ise',
-        'answer-5': 'ly',
-        'answer-6': 'win'
+        'answer-1': ['Hon', 'best'],
+        'answer-2': ['New', 'win'],
+        'answer-3': ['home', 'work']
       })
     })
 
