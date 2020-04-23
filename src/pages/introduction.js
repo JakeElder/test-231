@@ -44,8 +44,9 @@ function IntroductionPage() {
                 </p>
 
                 <p>
-                  You will be required to answer the questions by first reading the
-                  instructions then playing an audio clip and selecting the answers using the provided interface.
+                  You will be required to answer the questions by first reading
+                  the instructions then playing an audio clip and selecting the
+                  answers using the provided interface.
                 </p>
 
                 <p>

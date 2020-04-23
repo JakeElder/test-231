@@ -1,4 +1,4 @@
-const sid = '0033-jjkl' 
+const sid = '0033-jjkl'
 
 describe('API Modules', () => {
   beforeEach(() => {

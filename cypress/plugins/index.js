@@ -1,6 +1,5 @@
 module.exports = (on, config) => {
   on('task', {
-    getSession(id) {
-    }
+    getSession(id) {}
   })
 }
