@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components'
 import { PureToneIcon } from './ToneIcon'
 
 import useCheckbox from '../hooks/use-checkbox'
-import useRadio from '../hooks/use-radio'
 
 const common = {
   base: css`

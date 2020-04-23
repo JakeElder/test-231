@@ -1,7 +1,3 @@
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`
-})
-
 const siteUrl = (() => {
   if (process.env.NODE_ENV === 'production') {
     if (process.env.NOW_GITHUB_DEPLOYMENT) {

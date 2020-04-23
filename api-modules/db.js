@@ -6,7 +6,7 @@ const uuid = short('abcdefghijklmnopqrstuvwxyz0123456789-')
 let cachedDb = null
 let cachedClient = null
 
-async function connectToDatabase(uri) {
+async function connectToDatabase(uri, dbName) {
   if (cachedDb) {
     return cachedDb
   }
@@ -15,21 +15,14 @@ async function connectToDatabase(uri) {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  const db = await client.db(url.parse(uri).pathname.substr(1))
+
+  dbName = dbName || url.parse(uri).pathname.substr(1)
+  const db = await client.db(dbName)
 
   cachedDb = db
   cachedClient = client
 
   return db
-}
-
-async function addSession({ session }) {}
-
-async function reset() {
-  const db = await connectToDatabase(process.env.MONGODB_URI)
-  const collection = await db.collection('sessions')
-  await collection.deleteMany({})
-  await cachedClient.close()
 }
 
 function prepareSession(session) {
@@ -40,8 +33,23 @@ function prepareSession(session) {
   }
 }
 
+async function addSession({ session }) {}
+
+async function reset() {
+  const db = await connectToDatabase(
+    process.env.MONGODB_URI,
+    process.env.MONGODB_DB_NAME
+  )
+  const collection = await db.collection('sessions')
+  await collection.deleteMany({})
+  await cachedClient.close()
+}
+
 async function seed() {
-  const db = await connectToDatabase(process.env.MONGODB_URI)
+  const db = await connectToDatabase(
+    process.env.MONGODB_URI,
+    process.env.MONGODB_DB_NAME
+  )
   const collection = await db.collection('sessions')
   const sessions = require('../seed.json').map(prepareSession)
   await collection.insertMany(sessions)

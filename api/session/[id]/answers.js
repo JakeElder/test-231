@@ -21,8 +21,4 @@ module.exports = async (req, res) => {
   )
 
   res.status(200).send()
-
-  // await collection.insertOne(session)
-
-  // res.json({ data: { session } })
 }
