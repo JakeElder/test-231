@@ -17,6 +17,8 @@ const Root = styled.div`
 `
 
 const Passed = styled.div`
+  width: 90px;
+  text-align: center;
   font-size: 37px;
 `
 

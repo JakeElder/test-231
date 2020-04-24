@@ -22,7 +22,10 @@ module.exports = async (req, res) => {
         if (session.commenced === null) {
           return 0
         }
-        const timePassed = Date.now() - new Date(session.commenced).getTime()
+        if (session.completed !== null) {
+          return session.completed.getTime() - session.commenced.getTime()
+        }
+        const timePassed = Date.now() - session.commenced.getTime()
         return Math.min(timePassed, session.timeAllocated)
       })()
     }
