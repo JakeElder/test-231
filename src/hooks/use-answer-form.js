@@ -14,12 +14,12 @@ function useAnswerForm({ sectionId, onSuccess }) {
       'section-id': sectionId,
       ...serialize(e.target, { hash: true })
     }
+    setIsSubmitting(true)
     await axios.post(`/api/session/${token}/answers`, data, {
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    setIsSubmitting(true)
     onSuccess()
   }
 
