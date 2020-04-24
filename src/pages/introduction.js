@@ -16,7 +16,6 @@ import PlainButton from '../components/PlainButton'
 import useTitle from '../hooks/use-title'
 import useCurrentSession from '../hooks/use-current-session'
 
-
 function IntroductionPage() {
   const title = useTitle()
   const [commencing, setCommencing] = useState(false)
@@ -70,7 +69,11 @@ function IntroductionPage() {
               </BodyCopy>
             </TestPart.Body>
             <TestPart.Footer>
-              <PlainButton disabled={commencing} type="button" onClick={onContinueClick}>
+              <PlainButton
+                disabled={commencing}
+                type="button"
+                onClick={onContinueClick}
+              >
                 <Button disabled={commencing}>Continue</Button>
               </PlainButton>
             </TestPart.Footer>
