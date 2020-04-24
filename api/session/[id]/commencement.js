@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     { _id: user._id },
     {
       $set: {
-        commencementDate: new Date(),
+        commenced: new Date(),
       }
     }
   )

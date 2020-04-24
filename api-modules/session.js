@@ -16,7 +16,13 @@ async function all() {
   return cursor.toArray()
 }
 
+async function insert(session) {
+  const collection = await getSessionsCollection()
+  return collection.insertOne(session)
+}
+
 module.exports = {
   all,
-  find
+  find,
+  insert
 }

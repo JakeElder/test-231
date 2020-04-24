@@ -33,8 +33,6 @@ function prepareSession(session) {
   }
 }
 
-async function addSession({ session }) {}
-
 async function reset() {
   const db = await connectToDatabase(
     process.env.MONGODB_URI,
@@ -59,7 +57,6 @@ async function seed() {
 module.exports = {
   connect: connectToDatabase,
   connectToDatabase,
-  addSession,
   reset,
   seed,
   prepareSession,

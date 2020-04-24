@@ -42,18 +42,45 @@ describe('API Modules', () => {
   })
 
   context('POST /api/session/[id]/commencement', () => {
-    it.only('Sets the commencement time in the session', () => {
+    it('Sets the commencement time in the session', () => {
       cy.request({
         method: 'POST',
         url: `/api/session/${sid}/commencement`
       }).then(response => {
         expect(response.status).to.equal(200)
         cy.task('getSession', { id: sid }).then(session => {
-          // Check the commencementDate has been updated to the current time.
+          // Check `commenced` has been updated to the current time.
           expect(
-            Date.now() -
-            new Date(session.commencementDate).getTime()
+            Date.now() - new Date(session.commenced).getTime()
           ).to.be.below(3000)
+        })
+      })
+    })
+  })
+
+  context('GET /api/session/[id]/section/[section-id]', () => {
+    context('Before commencement', () => {
+      it.only('Returns information about a section', () => {
+        const session = {
+          id: 't3st',
+          name: 'Someone B. Personson',
+          answers: [],
+          commenced: null
+        }
+        cy.task('insertSession', session)
+
+        cy.request({
+          method: 'GET',
+          url: `/api/session/${session.id}/section/section-1-part-1`
+        }).then(response => {
+          expect(response.status).to.equal(200)
+          expect(response.body).to.eql({
+            data: {
+              id: 'section-1-part-1',
+              completed: false,
+              canSubmit: false
+            }
+          })
         })
       })
     })
