@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { formatDuration } from '../utils/number-utils'
+import useCurrentSession from '../hooks/use-current-session'
 
 const Root = styled.div`
   max-width: 300px;
@@ -33,18 +34,24 @@ const Allotted = styled.div`
   font-size: 18px;
 `
 
-export function PureTimer({ passed, allotted }) {
+export function PureTimer({ passed, allocated }) {
   return (
     <Root>
-      <Passed>{formatDuration(passed)}</Passed>
+      <Passed data-time-passed>{formatDuration(passed)}</Passed>
       <Divider />
-      <Allotted>{formatDuration(allotted)}</Allotted>
+      <Allotted>{formatDuration(allocated)}</Allotted>
     </Root>
   )
 }
 
 function Timer() {
-  return <PureTimer passed={0} allotted={15 * 60 * 1000} />
+  const session = useCurrentSession()
+  if (session === null) {
+    return null
+  }
+  return (
+    <PureTimer passed={session.timePassed} allocated={session.timeAllocated} />
+  )
 }
 
 export default Timer

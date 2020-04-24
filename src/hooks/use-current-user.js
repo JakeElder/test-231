@@ -1,20 +1,11 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-
-import useToken from '../hooks/use-token'
+import useCurrentSession from '../hooks/use-current-session'
 
 function useCurrentUser() {
-  const { token } = useToken()
-  const [user, set] = useState(null)
-
-  useEffect(() => {
-    ;(async () => {
-      const res = await axios.get(`/api/session/${token}`)
-      set(res.data.data)
-    })()
-  }, [set, token])
-
-  return { user }
+  const session = useCurrentSession()
+  if (session === null) {
+    return null
+  }
+  return session.name
 }
 
 export default useCurrentUser

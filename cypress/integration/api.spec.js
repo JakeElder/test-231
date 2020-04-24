@@ -2,12 +2,38 @@ import humanInterval from 'human-interval'
 
 const sid = '0033-jjkl'
 
-describe('API Modules', () => {
+const baseSession = {
+  id: 't3st',
+  name: 'Someone B. Personson',
+  answers: [],
+  commenced: null,
+  timePassed: 0,
+  timeAllocated: humanInterval('15 minutes')
+}
+
+function mockSession(testData) {
+  return { ...baseSession, ...testData }
+}
+
+describe('API', () => {
   beforeEach(() => {
     cy.exec('yarn db:reset && yarn db:seed')
   })
 
-  context('POST /api/session', () => {
+  describe('GET /api/session/[id]', () => {
+    it('Retrieves a session', () => {
+      const session = mockSession()
+      cy.task('insertSession', session)
+      cy.request(`/api/session/${session.id}`).then(res => {
+        expect(res.status).to.equal(200)
+        expect(res.body).to.nested.include({
+          'data.name': baseSession.name
+        })
+      })
+    })
+  })
+
+  describe('POST /api/session', () => {
     it('Adds a session', () => {
       const name = 'Someone B. Personson'
       cy.request({
@@ -26,7 +52,7 @@ describe('API Modules', () => {
     })
   })
 
-  context('POST /api/session/[id]/answers', () => {
+  describe('POST /api/session/[id]/answers', () => {
     it('Adds to the answers array', () => {
       const formData = { 'section-id': 1, 'answer-1': ['One', 'two'] }
       cy.request({
@@ -43,7 +69,7 @@ describe('API Modules', () => {
     })
   })
 
-  context('POST /api/session/[id]/commencement', () => {
+  describe('POST /api/session/[id]/commencement', () => {
     it('Sets the commencement time in the session', () => {
       cy.request({
         method: 'POST',
@@ -60,20 +86,8 @@ describe('API Modules', () => {
     })
   })
 
-  context.only('GET /api/session/[id]/section/[section-id]', () => {
-    const baseSession = {
-      id: 't3st',
-      name: 'Someone B. Personson',
-      answers: [],
-      commenced: null,
-      timeAllocated: humanInterval('15 minutes')
-    }
-
+  describe('GET /api/session/[id]/section/[section-id]', () => {
     const sectionId = 'section-1-part-1'
-
-    function mockSession(testData) {
-      return { ...baseSession, ...testData }
-    }
 
     context('Before commencement', () => {
       it('Returns uncompleted and closed', () => {
@@ -142,7 +156,7 @@ describe('API Modules', () => {
       })
     })
 
-    context('After session allocatedTime', () => {
+    context('After session allocated time', () => {
       it('Returns closed regardless of completion state', () => {
         const session = mockSession({
           commenced: Date.now() - humanInterval('20 minutes')

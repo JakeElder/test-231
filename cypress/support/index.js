@@ -8,7 +8,7 @@ Cypress.on('window:before:load', win => {
 Cypress.Server.defaults({
   whitelist: req => {
     const { pathname } = url.parse(req.url)
-    if (/^\/(page-data|socket\.io)/.test(pathname)) {
+    if (/^\/(page-data|socket\.io|static)/.test(pathname)) {
       return true
     }
     return false

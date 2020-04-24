@@ -1,5 +1,6 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React, { useState } from 'react'
+import { navigate } from 'gatsby'
+import axios from 'axios'
 
 import App from '../components/App/App'
 import { PureTestPage as TestPage } from '../layouts/TestPage'
@@ -10,11 +11,22 @@ import { PureStandardTitle as Title } from '../components/StandardTitle'
 import { PureSubtitle as Subtitle } from '../components/Subtitle'
 import { PureButton as Button } from '../components/Button'
 import Sidebar from '../components/Sidebar'
+import PlainButton from '../components/PlainButton'
 
 import useTitle from '../hooks/use-title'
+import useCurrentSession from '../hooks/use-current-session'
+
 
 function IntroductionPage() {
   const title = useTitle()
+  const [commencing, setCommencing] = useState(false)
+  const session = useCurrentSession()
+
+  async function onContinueClick() {
+    setCommencing(true)
+    await axios.post(`/api/session/${session.id}/commencement`, {})
+    navigate('/section-1/part-1')
+  }
 
   return (
     <App>
@@ -58,9 +70,9 @@ function IntroductionPage() {
               </BodyCopy>
             </TestPart.Body>
             <TestPart.Footer>
-              <Link to="/section-1/part-1">
-                <Button>Continue</Button>
-              </Link>
+              <PlainButton disabled={commencing} type="button" onClick={onContinueClick}>
+                <Button disabled={commencing}>Continue</Button>
+              </PlainButton>
             </TestPart.Footer>
           </TestPart>
         </TestPage.TestPart>

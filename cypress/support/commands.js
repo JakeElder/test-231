@@ -1,3 +1,5 @@
+const humanInterval = require('human-interval')
+
 Cypress.Commands.add('stubSessionPostRequest', ({ status, response } = {}) => {
   cy.route({
     method: 'post',
@@ -17,31 +19,37 @@ Cypress.Commands.add('expectSessionPostRequest', ({ token }) => {
   })
 })
 
-Cypress.Commands.add('stubSessionGetRequest', ({ token, status = 200 }) => {
-  const props = (() => {
-    if (status === 200) {
-      return {
-        status,
-        response: {
-          data: {
-            name: 'Jake Elder',
-            id: 'jake-elder'
+Cypress.Commands.add(
+  'stubSessionGetRequest',
+  ({ token, status = 200, response = {} }) => {
+    const props = (() => {
+      if (status === 200) {
+        return {
+          status,
+          response: {
+            data: {
+              name: 'Jake Elder',
+              id: token,
+              timePassed: 0,
+              timeAllocated: humanInterval('15 minutes'),
+              ...response
+            }
           }
         }
       }
-    }
-    return {
-      status: 404,
-      response: {}
-    }
-  })()
+      return {
+        status: 404,
+        response: {}
+      }
+    })()
 
-  cy.route({
-    method: 'get',
-    url: `/api/session/${token}`,
-    ...props
-  }).as('session-get-request')
-})
+    cy.route({
+      method: 'get',
+      url: `/api/session/${token}`,
+      ...props
+    }).as('session-get-request')
+  }
+)
 
 Cypress.Commands.add('expectSessionGetRequest', () => {
   cy.wait('@session-get-request')
