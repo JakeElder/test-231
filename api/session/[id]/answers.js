@@ -15,10 +15,21 @@ module.exports = async (req, res) => {
     return
   }
 
-  await collection.updateOne(
-    { _id: user._id },
-    { $push: { answers: req.body } }
-  )
+  const update = (() => {
+    const base = { $push: { answers: req.body } }
+    const afterCompletionCheck = (() => {
+      if (req.body['section-id'] === 'section-4') {
+        return {
+          ...base,
+          $set: { completed: new Date() }
+        }
+      }
+      return base
+    })()
+    return afterCompletionCheck
+  })()
+
+  await collection.updateOne({ _id: user._id }, update)
 
   res.status(200).send()
 }

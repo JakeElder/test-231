@@ -67,6 +67,24 @@ describe('API', () => {
         })
       })
     })
+
+    it('Sets the complete property when posting the last answers', () => {
+      const formData = { 'section-id': 'section-4', 'answer-1': ['One', 'two'] }
+      cy.request({
+        method: 'POST',
+        url: `/api/session/${sid}/answers`,
+        body: formData
+      }).then(response => {
+        expect(response.status).to.equal(200)
+        cy.task('getSession', { id: sid }).then(session => {
+          expect(session).to.not.be.null
+          expect(session.completed).to.not.be.null
+          expect(
+            Date.now() - new Date(session.completed).getTime()
+          ).to.be.below(3000)
+        })
+      })
+    })
   })
 
   describe('POST /api/session/[id]/commencement', () => {

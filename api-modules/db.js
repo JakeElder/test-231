@@ -32,6 +32,7 @@ function prepareSession(session) {
     id: session.id || uuid.new(),
     answers: session.answers || [],
     commenced: null,
+    completed: null,
     timeAllocated: humanInterval('15 minutes')
   }
 }

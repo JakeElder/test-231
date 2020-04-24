@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
       name: session.name,
       answers: session.answers,
       commenced: session.commenced,
+      completed: session.completed,
       timeAllocated: session.timeAllocated,
       timePassed: (() => {
         if (session.commenced === null) {
