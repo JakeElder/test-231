@@ -68,3 +68,21 @@ describe('Test Commencement', () => {
     cy.get('[data-time-passed]').contains('00:01')
   })
 })
+
+describe('Pre Commencement Section Access', () => {
+  context('Without Valid Session Id', () => {
+    it('Redirects back to introduction', () => {
+      // Start server
+      cy.server()
+
+      // Load the first section
+      cy.visit('/section-1/part-1')
+
+      // It redirects back to the root
+      cy.url().should('eq', `${Cypress.config().baseUrl}/`)
+
+      // Then to test-unavailable
+      cy.url().should('eq', `${Cypress.config().baseUrl}/test-unavailable`)
+    })
+  })
+})

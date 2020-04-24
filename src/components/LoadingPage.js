@@ -8,8 +8,12 @@ function LoadingPage({ token }) {
   const { set: setToken } = useToken()
 
   useEffect(() => {
-    ;(async () => {
-      const res = await axios.get(`/api/session/${token}`)
+    if (!token) {
+      navigate('/test-unavailable')
+      return
+    }
+
+    axios.get(`/api/session/${token}`).then(res => {
       if (res.status === 404) {
         navigate('/test-unavailable')
       }
@@ -17,7 +21,7 @@ function LoadingPage({ token }) {
         setToken(token)
         navigate('/introduction')
       }
-    })()
+    })
   }, [token, setToken])
 
   return <div data-page="loading-page">loading</div>

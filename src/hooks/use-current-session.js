@@ -11,6 +11,9 @@ function useCurrentSession() {
   const intervalId = useRef(null)
 
   useEffect(() => {
+    if (token === null) {
+      return
+    }
     axios.get(`/api/session/${token}`).then(res => {
       const session = res.data.data
       set(session)

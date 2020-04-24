@@ -14,7 +14,7 @@ function useToken() {
   const ls = getLocalStorage()
   return {
     set: token => ls.setItem('sid', token),
-    token: ls.getItem('sid')
+    token: ls.getItem('sid') || null
   }
 }
 
