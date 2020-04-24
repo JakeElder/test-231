@@ -8,15 +8,25 @@ module.exports = async (req, res) => {
 
   const db = await connect(process.env.MONGODB_URI)
   const collection = await db.collection('sessions')
-  const user = await collection.findOne({ id: req.query.id })
+  const session = await collection.findOne({ id: req.query.id })
 
-  if (!user) {
+  if (!session) {
     res.status(404).send()
     return
   }
 
+  console.log('wat', session.commenced)
+  if (session.commenced !== null) {
+    console.log('wat')
+    res.status(200).json({
+      error: 'ALREADY_COMMENCED'
+    })
+    return
+  }
+
+
   const r = await collection.updateOne(
-    { _id: user._id },
+    { _id: session._id },
     {
       $set: {
         commenced: new Date()

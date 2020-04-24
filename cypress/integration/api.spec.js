@@ -102,6 +102,25 @@ describe('API', () => {
         })
       })
     })
+
+    it("Can't be called twice", () => {
+      const commenced = new Date(Date.now() - humanInterval('4 minute'))
+
+      const session = mockSession({ commenced })
+      cy.task('insertSession', session)
+
+      cy.request({
+        method: 'POST',
+        url: `/api/session/${baseSession.id}/commencement`
+      }).then(response => {
+        expect(response.status).to.equal(200)
+        expect(response.body.error).to.equal('ALREADY_COMMENCED')
+        cy.task('getSession', { id: baseSession.id }).then(session => {
+          // Check `commenced` has not been updated
+          expect(session.commenced).to.equal(commenced.toISOString())
+        })
+      })
+    })
   })
 
   describe('GET /api/session/[id]/section/[section-id]', () => {
