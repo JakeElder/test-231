@@ -14,7 +14,12 @@ describe('API Modules', () => {
         body: { name }
       }).then(response => {
         expect(response.status).to.equal(200)
-        expect(response.body).to.nested.include({ 'data.session.name': name })
+        expect(response.body).to.nested.include({
+          'data.session.name': name
+        })
+        cy.task('getSession', { name }).then(
+          session => expect(session).to.not.be.null
+        )
       })
     })
   })
