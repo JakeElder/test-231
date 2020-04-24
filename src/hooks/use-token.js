@@ -13,7 +13,13 @@ function getLocalStorage() {
 function useToken() {
   const ls = getLocalStorage()
   return {
-    set: token => ls.setItem('sid', token),
+    set: token => {
+      if (token) {
+        ls.setItem('sid', token)
+        return
+      }
+      ls.removeItem('sid')
+    },
     token: ls.getItem('sid') || null
   }
 }

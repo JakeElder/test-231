@@ -69,19 +69,83 @@ describe('Test Commencement', () => {
   })
 })
 
-describe('Pre Commencement Section Access', () => {
-  context('Without Valid Session Id', () => {
-    it('Redirects back to introduction', () => {
+describe('Token Ingestion', () => {
+  context('With valid session Id', () => {
+    it('Redirects to tokenless URL', () => {
       // Start server
       cy.server()
 
-      // Load the first section
-      cy.visit('/section-1/part-1')
+      // Stub session get request
+      cy.stubSessionGetRequest({ token })
 
-      // It redirects back to the root
-      cy.url().should('eq', `${Cypress.config().baseUrl}/`)
+      // Load the entry point
+      cy.visit(`/?token=${token}`)
 
-      // Then to test-unavailable
+      // Wait for session get request
+      cy.expectSessionGetRequest()
+
+      // Check it redirects back to root without token
+      cy.url()
+        .should('eq', `${Cypress.config().baseUrl}/`)
+        .then(() => {
+          // Token should be saved to local storage
+          expect(localStorage.getItem('sid')).to.equal(token)
+        })
+    })
+
+    it('Redirects to introduction', () => {
+      // Start server
+      cy.server()
+
+      // Stub session get request
+      cy.stubSessionGetRequest({ token })
+
+      // Load the entry point
+      cy.visit(`/`, {
+        onBeforeLoad(win) {
+          win.localStorage.setItem('sid', token)
+        }
+      })
+
+      // Wait for session get request
+      cy.expectSessionGetRequest()
+
+      // Check it redirects back to root without token
+      cy.url().should('eq', `${Cypress.config().baseUrl}/introduction`)
+    })
+  })
+
+  context('With invalid session Id', () => {
+    it('Redirects to tokenless URL', () => {
+      // Start server
+      cy.server()
+
+      // Stub session get request
+      cy.stubSessionGetRequest({ token, status: 404 })
+
+      // Load the entry point
+      cy.visit(`/?token=${token}`)
+
+      // Wait for session get request
+      cy.expectSessionGetRequest()
+
+      // Check it redirects back to root without token
+      cy.url()
+        .should('eq', `${Cypress.config().baseUrl}/`)
+        .then(() => {
+          // Token should be null
+          expect(localStorage.getItem('sid')).to.be.null
+        })
+    })
+
+    it('Redirects to /test-unavailable', () => {
+      // Start server
+      cy.server()
+
+      // Load the entry point
+      cy.visit(`/`)
+
+      // Check it redirects back to root without token
       cy.url().should('eq', `${Cypress.config().baseUrl}/test-unavailable`)
     })
   })
