@@ -6,7 +6,7 @@ describe('API Modules', () => {
   })
 
   context('POST /api/session', () => {
-    it('is adds a session', function() {
+    it('Adds a session', () => {
       const name = 'Someone B. Personson'
       cy.request({
         url: '/api/session',
@@ -25,13 +25,18 @@ describe('API Modules', () => {
   })
 
   context('POST /api/session/[id]/answers', () => {
-    it('is adds to the answers array', function() {
+    it('Adds to the answers array', () => {
+      const formData = { 'section-id': 1, 'answer-1': ['One', 'two'] }
       cy.request({
         method: 'POST',
         url: `/api/session/${sid}/answers`,
-        body: { 'section-id': 1 }
+        body: formData
       }).then(response => {
         expect(response.status).to.equal(200)
+        cy.task('getSession', { id: sid }).then(session => {
+          expect(session).to.not.be.null
+          expect(session.answers[0]).to.eql(formData)
+        })
       })
     })
   })
