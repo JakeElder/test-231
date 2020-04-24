@@ -40,4 +40,22 @@ describe('API Modules', () => {
       })
     })
   })
+
+  context('POST /api/session/[id]/commencement', () => {
+    it.only('Sets the commencement time in the session', () => {
+      cy.request({
+        method: 'POST',
+        url: `/api/session/${sid}/commencement`
+      }).then(response => {
+        expect(response.status).to.equal(200)
+        cy.task('getSession', { id: sid }).then(session => {
+          // Check the commencementDate has been updated to the current time.
+          expect(
+            Date.now() -
+            new Date(session.commencementDate).getTime()
+          ).to.be.below(3000)
+        })
+      })
+    })
+  })
 })
