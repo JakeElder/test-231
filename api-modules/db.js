@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb')
 const url = require('url')
 const short = require('short-uuid')
+const humanInterval = require('human-interval')
 const uuid = short('abcdefghijklmnopqrstuvwxyz0123456789-')
 
 let cachedDb = null
@@ -29,7 +30,9 @@ function prepareSession(session) {
   return {
     name: session.name,
     id: session.id || uuid.new(),
-    answers: session.answers || []
+    answers: session.answers || [],
+    commenced: null,
+    timeAllocated: humanInterval('15 minutes')
   }
 }
 

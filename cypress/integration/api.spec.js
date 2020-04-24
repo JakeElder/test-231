@@ -1,3 +1,5 @@
+import humanInterval from 'human-interval'
+
 const sid = '0033-jjkl'
 
 describe('API Modules', () => {
@@ -58,30 +60,107 @@ describe('API Modules', () => {
     })
   })
 
-  context('GET /api/session/[id]/section/[section-id]', () => {
+  context.only('GET /api/session/[id]/section/[section-id]', () => {
+    const baseSession = {
+      id: 't3st',
+      name: 'Someone B. Personson',
+      answers: [],
+      commenced: null,
+      timeAllocated: humanInterval('15 minutes')
+    }
+
+    const sectionId = 'section-1-part-1'
+
+    function mockSession(testData) {
+      return { ...baseSession, ...testData }
+    }
+
     context('Before commencement', () => {
-      it.only('Returns information about a section', () => {
-        const session = {
-          id: 't3st',
-          name: 'Someone B. Personson',
-          answers: [],
-          commenced: null
-        }
+      it('Returns uncompleted and closed', () => {
+        const session = mockSession()
         cy.task('insertSession', session)
 
-        cy.request({
-          method: 'GET',
-          url: `/api/session/${session.id}/section/section-1-part-1`
-        }).then(response => {
-          expect(response.status).to.equal(200)
-          expect(response.body).to.eql({
-            data: {
-              id: 'section-1-part-1',
-              completed: false,
-              canSubmit: false
+        cy.request(`/api/session/${session.id}/section/${sectionId}`).then(
+          response => {
+            expect(response.status).to.equal(200)
+            expect(response.body).to.eql({
+              data: {
+                id: sectionId,
+                completed: false,
+                open: false
+              }
+            })
+          }
+        )
+      })
+    })
+
+    context('During commenced session', () => {
+      const commenced = new Date(Date.now() - humanInterval('1 minute'))
+
+      context('When unanswered', () => {
+        it('Returns incomplete and open', () => {
+          const session = mockSession({ commenced })
+          cy.task('insertSession', session)
+
+          cy.request(`/api/session/${session.id}/section/${sectionId}`).then(
+            response => {
+              expect(response.status).to.equal(200)
+              expect(response.body).to.eql({
+                data: {
+                  id: sectionId,
+                  completed: false,
+                  open: true
+                }
+              })
             }
-          })
+          )
         })
+      })
+
+      context('When already answered', () => {
+        it('Returns complete and closed', () => {
+          const session = mockSession({
+            commenced,
+            answers: [{ sectionId, 'question-1': true }]
+          })
+          cy.task('insertSession', session)
+
+          cy.request(`/api/session/${session.id}/section/${sectionId}`).then(
+            response => {
+              expect(response.status).to.equal(200)
+              expect(response.body).to.eql({
+                data: {
+                  id: sectionId,
+                  completed: true,
+                  open: false
+                }
+              })
+            }
+          )
+        })
+      })
+    })
+
+    context('After session allocatedTime', () => {
+      it('Returns closed regardless of completion state', () => {
+        const session = mockSession({
+          commenced: Date.now() - humanInterval('20 minutes')
+        })
+        cy.task('insertSession', session)
+
+        cy.request(`/api/session/${session.id}/section/${sectionId}`).then(
+          response => {
+            expect(response.status).to.equal(200)
+            expect(response.body).to.eql({
+              data: {
+                id: sectionId,
+                completed: false,
+                open: false
+              }
+            })
+          }
+        )
       })
     })
   })
