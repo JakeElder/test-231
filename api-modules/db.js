@@ -26,6 +26,12 @@ async function connectToDatabase(uri, dbName) {
   return db
 }
 
+async function closeConnection() {
+  await cachedClient.close()
+  cachedClient = null
+  cachedDb = null
+}
+
 function prepareSession(session) {
   return {
     name: session.name,
@@ -44,7 +50,7 @@ async function reset() {
   )
   const collection = await db.collection('sessions')
   await collection.deleteMany({})
-  await cachedClient.close()
+  await closeConnection()
 }
 
 async function seed() {
@@ -55,7 +61,7 @@ async function seed() {
   const collection = await db.collection('sessions')
   const sessions = require('../seed.json').map(prepareSession)
   await collection.insertMany(sessions)
-  await cachedClient.close()
+  await closeConnection()
 }
 
 module.exports = {

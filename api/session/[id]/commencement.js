@@ -15,9 +15,7 @@ module.exports = async (req, res) => {
     return
   }
 
-  console.log('wat', session.commenced)
   if (session.commenced !== null) {
-    console.log('wat')
     res.status(200).json({
       error: 'ALREADY_COMMENCED'
     })
