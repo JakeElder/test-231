@@ -14,6 +14,7 @@ function IndexPage({ location }) {
   useEffect(() => {
     const t = newToken ? newToken : token
     if (t) {
+      console.log(t)
       axios.get(`/api/session/${t}`).then(res => {
         if (res.status === 200) {
           if (newToken) {

@@ -116,7 +116,7 @@ describe('Token Ingestion', () => {
   })
 
   context('With invalid session Id', () => {
-    it('Redirects to tokenless URL', () => {
+    it.only('Redirects to tokenless URL', () => {
       // Start server
       cy.server()
 
@@ -147,6 +147,48 @@ describe('Token Ingestion', () => {
 
       // Check it redirects back to root without token
       cy.url().should('eq', `${Cypress.config().baseUrl}/test-unavailable`)
+    })
+  })
+})
+
+describe('Pre Commencement Access Attempts', () => {
+  context('Without no session id', () => {
+    it('Redirects back to introduction', () => {
+      // Start server
+      cy.server()
+
+      // Load the first section without a token
+      cy.visit('/section-1/part-1')
+
+      // Then to test-unavailable
+      cy.url().should('eq', `${Cypress.config().baseUrl}/test-unavailable`)
+    })
+  })
+
+  context('With a valid session Id', () => {
+    it('Renders the page', () => {
+      // Start server
+      cy.server()
+
+      // Stub session get request
+      cy.stubSessionGetRequest({ token })
+
+      // Load the first section with a token
+      cy.visit('/section-1/part-1', {
+        onBeforeLoad(win) {
+          win.localStorage.setItem('sid', token)
+        }
+      })
+
+      // It should show the loading page before the session is checked
+      cy.get('[data-page=loading-page]').should('exist')
+
+      // Wait for session get request
+      cy.expectSessionGetRequest()
+
+      // Then it should show the page
+      cy.contains('Section 1')
+      cy.contains('Jake Elder')
     })
   })
 })
