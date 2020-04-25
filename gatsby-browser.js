@@ -24,42 +24,23 @@ const Wrapper = ({ props, children }) => {
   ]
 
   useEffect(() => {
-    if (['PRE', 'NEW_TOKEN_INGESTED', 'NEW_TOKEN_REJECTED'].includes(authStep)) {
-      if (props.uri === '/') {
-        // First, check if there is qs token
-        if (newToken) {
-          // If there is, validate it
-          axios.get(`/api/session/${newToken}`).then(({ status }) => {
-            if (status === 200) {
-              // If valid, store the token as sid
-              setLSToken(newToken)
-              setAuthStep('NEW_TOKEN_INGESTED')
-            } else {
-              // Otherwise remove any ls token and
-              setLSToken(null)
-              setAuthStep('NEW_TOKEN_REJECTED')
-            }
-          })
-        } else {
-          // If there isn't a new token, check if there is an existing one
-          if (!existingToken) {
-            // If not, on to next step
-            setAuthStep('ESTABLISHED_TOKEN_MISSING')
+    if (props.uri === '/') {
+      // First, check if there is qs token
+      if (newToken) {
+        // If there is, validate it
+        axios.get(`/api/session/${newToken}`).then(({ status }) => {
+          if (status === 200) {
+            // If valid, store the token as sid
+            setLSToken(newToken)
+            setAuthStep('NEW_TOKEN_INGESTED')
           } else {
-            // If there is, validate it
-            axios.get(`/api/session/${existingToken}`).then(({ status }) => {
-              if (status === 200) {
-                // If valid, update state accordingly
-                setAuthStep('EXISTING_TOKEN_VALIDATED')
-              } else {
-                // Otherwise remove the stored token and update state
-                setLSToken(null)
-                setAuthStep('EXISTING_TOKEN_REJECTED')
-              }
-            })
+            // Otherwise remove any ls token and
+            setLSToken(null)
+            setAuthStep('NEW_TOKEN_REJECTED')
           }
-        }
-      } else if (props.uri === '/test-unavailable') {
+        })
+      } else {
+        // If there isn't a new token, check if there is an existing one
         if (!existingToken) {
           // If not, on to next step
           setAuthStep('ESTABLISHED_TOKEN_MISSING')
@@ -67,54 +48,71 @@ const Wrapper = ({ props, children }) => {
           // If there is, validate it
           axios.get(`/api/session/${existingToken}`).then(({ status }) => {
             if (status === 200) {
-              // What are you doing here guy?!
+              // If valid, update state accordingly
               setAuthStep('EXISTING_TOKEN_VALIDATED')
             } else {
-              // If non OK status, remove the stored token and update state
+              // Otherwise remove the stored token and update state
               setLSToken(null)
               setAuthStep('EXISTING_TOKEN_REJECTED')
             }
           })
         }
-      } else if (props.uri === '/introduction') {
-        if (!existingToken) {
-          // If not, on to next step
-          setAuthStep('ESTABLISHED_TOKEN_MISSING')
-        } else {
-          // If there is, validate it
-          axios.get(`/api/session/${existingToken}`).then(({ status }) => {
-            if (status === 200) {
-              // What are you doing here guy?!
+      }
+    } else if (props.uri === '/test-unavailable') {
+      if (!existingToken) {
+        // If not, on to next step
+        setAuthStep('ESTABLISHED_TOKEN_MISSING')
+      } else {
+        // If there is, validate it
+        axios.get(`/api/session/${existingToken}`).then(({ status }) => {
+          if (status === 200) {
+            // What are you doing here guy?!
+            setAuthStep('EXISTING_TOKEN_VALIDATED')
+          } else {
+            // If non OK status, remove the stored token and update state
+            setLSToken(null)
+            setAuthStep('EXISTING_TOKEN_REJECTED')
+          }
+        })
+      }
+    } else if (props.uri === '/introduction') {
+      if (!existingToken) {
+        // If not, on to next step
+        setAuthStep('ESTABLISHED_TOKEN_MISSING')
+      } else {
+        // If there is, validate it
+        axios.get(`/api/session/${existingToken}`).then(({ status }) => {
+          if (status === 200) {
+            // What are you doing here guy?!
+            setAuthStep('EXISTING_TOKEN_VALIDATED')
+          } else {
+            // If non OK status, remove the stored token and update state
+            setLSToken(null)
+            setAuthStep('EXISTING_TOKEN_REJECTED')
+          }
+        })
+      }
+    } else if (testURIs.includes(props.uri)) {
+      if (!existingToken) {
+        // If not, on to next step
+        setAuthStep('ESTABLISHED_TOKEN_MISSING')
+      } else {
+        // If there is, validate it
+        axios.get(`/api/session/${existingToken}`).then(({ status, data }) => {
+          if (status === 200) {
+            // Welcome!
+            const session = data.data
+            if (session.commenced) {
               setAuthStep('EXISTING_TOKEN_VALIDATED')
             } else {
-              // If non OK status, remove the stored token and update state
-              setLSToken(null)
-              setAuthStep('EXISTING_TOKEN_REJECTED')
+              setAuthStep('ESTABLISHED_TEST_URI_BEFORE_COMMENCEMENT')
             }
-          })
-        }
-      } else if (testURIs.includes(props.uri)) {
-        if (!existingToken) {
-          // If not, on to next step
-          setAuthStep('ESTABLISHED_TOKEN_MISSING')
-        } else {
-          // If there is, validate it
-          axios.get(`/api/session/${existingToken}`).then(({ status, data }) => {
-            if (status === 200) {
-              // Welcome!
-              const session = data.data
-              if (session.commenced) {
-                setAuthStep('EXISTING_TOKEN_VALIDATED')
-              } else {
-                setAuthStep('ESTABLISHED_TEST_URI_BEFORE_COMMENCEMENT')
-              }
-            } else {
-              // If non OK status, remove the stored token and update state
-              setLSToken(null)
-              setAuthStep('EXISTING_TOKEN_REJECTED')
-            }
-          })
-        }
+          } else {
+            // If non OK status, remove the stored token and update state
+            setLSToken(null)
+            setAuthStep('EXISTING_TOKEN_REJECTED')
+          }
+        })
       }
     }
   }, [authStep, props.uri, newToken, setLSToken, existingToken, testURIs])
@@ -151,10 +149,7 @@ const Wrapper = ({ props, children }) => {
     return children
   }
 
-  if (
-    testURIs.includes(props.uri) &&
-    authStep === 'EXISTING_TOKEN_VALIDATED'
-  ) {
+  if (testURIs.includes(props.uri) && authStep === 'EXISTING_TOKEN_VALIDATED') {
     return children
   }
 

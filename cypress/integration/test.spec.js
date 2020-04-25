@@ -353,5 +353,8 @@ describe('Completing Section 4', () => {
 
     // On to Summary
     cy.url().should('eq', `${Cypress.config().baseUrl}/summary`)
+    cy.get('[data-component=subtitle]').within(() => {
+      cy.contains('Summary')
+    })
   })
 })

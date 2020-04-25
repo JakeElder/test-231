@@ -153,7 +153,7 @@ describe('Auth', () => {
     context('With invalid token in local storage', () => {
       it('Shows test unavailable page', () => {
         cy.server()
-        cy.stubSessionGetRequest({ token, status: 404 })
+        cy.stubSessionGetRequest({ token, status: 404, delay: 100 })
         cy.visitWithToken(`/test-unavailable`, token)
         cy.get('[data-page=loading-page]').should('exist')
         cy.expectSessionGetRequest()
