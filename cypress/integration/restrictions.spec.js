@@ -73,8 +73,8 @@ function absUrl(url) {
   return `${Cypress.config().baseUrl}${url}`
 }
 
-describe('Auth', () => {
-  context.only('Index page', () => {
+describe.only('Auth', () => {
+  context('Index page', () => {
     context('With token in query', () => {
 
       context('With invalid token in query', () => {
@@ -107,21 +107,45 @@ describe('Auth', () => {
 
     context('Without token in query', () => {
       context('Without token in local storage', () => {
-        it.only('Redirects to /test-unavailable', () => {
+        it('Redirects to /test-unavailable', () => {
           cy.server()
           cy.visit(`/`)
+          cy.get('[data-page=loading-page]').should('exist')
           cy.url().should('eq', absUrl('/test-unavailable'))
         })
       })
+
+      context('With invalid token in local storage', () => {
+        it('Redirects to /test-unavailable', () => {
+          cy.server()
+          cy.stubSessionGetRequest({ token, status: 404 })
+          cy.visitWithToken(`/`, token)
+          cy.get('[data-page=loading-page]').should('exist')
+          cy.expectSessionGetRequest()
+          cy.url().should('eq', absUrl('/test-unavailable'))
+        })
+      })
+
       context('With valid token in local storage', () => {
-        it('Redirects to /introduction', () => {})
+        it('Redirects to /introduction', () => {
+          cy.server()
+          cy.stubSessionGetRequest({ token })
+          cy.visitWithToken(`/`, token)
+          cy.get('[data-page=loading-page]').should('exist')
+          cy.expectSessionGetRequest()
+          cy.url().should('eq', absUrl('/introduction'))
+        })
       })
     })
   })
 
   context('Test unavailable page', () => {
-    context('Without valid token in local storage', () => {
-      it('Stays on /test-unavailable', () => {})
+    context('Without token in local storage', () => {
+      it('Shows the test unavailable page', () => {
+        cy.server()
+        cy.visit(`/test-unavailable`)
+        cy.contains('Test Unavailable')
+      })
     })
     context('With valid token in local storage', () => {
       it('Redirects to /introduction', () => {})

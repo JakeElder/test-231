@@ -65,8 +65,8 @@ Cypress.Commands.add('stubAnswerSubmission', ({ token, as, delay = 0 }) => {
   }).as(as)
 })
 
-Cypress.Commands.add('visitWithToken', token => {
-  cy.visit('/section-1/part-1', {
+Cypress.Commands.add('visitWithToken', (url, token) => {
+  cy.visit(url, {
     onBeforeLoad(win) {
       win.localStorage.setItem('sid', token)
     }
