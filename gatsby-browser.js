@@ -19,11 +19,12 @@ const Wrapper = ({ props, children }) => {
     '/section-1/part-2',
     '/section-2',
     '/section-3',
-    '/section-4'
+    '/section-4',
+    '/summary'
   ]
 
   useEffect(() => {
-    if (authStep === 'PRE') {
+    if (['PRE', 'NEW_TOKEN_INGESTED', 'NEW_TOKEN_REJECTED'].includes(authStep)) {
       if (props.uri === '/') {
         // First, check if there is qs token
         if (newToken) {

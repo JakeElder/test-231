@@ -32,6 +32,7 @@ Cypress.Commands.add(
               id: token,
               timePassed: 0,
               timeAllocated: humanInterval('15 minutes'),
+              commenced: new Date(Date.now() - humanInterval('2 minutes')),
               ...response
             }
           }
