@@ -58,6 +58,8 @@ const Wrapper = ({ props, children }) => {
           // If there is, validate it
           axios.get(`/api/session/${existingToken}`).then(({ status }) => {
             if (status === 200) {
+              // What are you doing here guy?!
+              setAuthStep('EXISTING_TOKEN_VALIDATED')
             } else {
               // If non OK status, remove the stored token and update state
               setLSToken(null)

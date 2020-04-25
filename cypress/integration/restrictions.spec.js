@@ -149,13 +149,24 @@ describe.only('Auth', () => {
     })
 
     context('With invalid token in local storage', () => {
-      it('Redirects to /introduction', () => {
+      it('Shows test unavailable page', () => {
         cy.server()
         cy.stubSessionGetRequest({ token, status: 404 })
         cy.visitWithToken(`/test-unavailable`, token)
         cy.get('[data-page=loading-page]').should('exist')
         cy.expectSessionGetRequest()
         cy.contains('Test Unavailable')
+      })
+    })
+
+    context('With valid token in local storage', () => {
+      it('Redirects to /introduction', () => {
+        cy.server()
+        cy.stubSessionGetRequest({ token })
+        cy.visitWithToken(`/test-unavailable`, token)
+        cy.get('[data-page=loading-page]').should('exist')
+        cy.expectSessionGetRequest()
+        cy.url().should('eq', absUrl('/introduction'))
       })
     })
   })
