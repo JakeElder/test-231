@@ -14,6 +14,14 @@ const Wrapper = ({ props, children }) => {
   const { token: newToken } = queryString.parse(props.location.search)
   const { token: existingToken, set: setLSToken } = useToken()
 
+  const testURIs = [
+    '/section-1/part-1',
+    '/section-1/part-2',
+    '/section-2',
+    '/section-3',
+    '/section-4'
+  ]
+
   useEffect(() => {
     if (authStep === 'PRE') {
       if (props.uri === '/') {
@@ -84,9 +92,31 @@ const Wrapper = ({ props, children }) => {
             }
           })
         }
+      } else if (testURIs.includes(props.uri)) {
+        if (!existingToken) {
+          // If not, on to next step
+          setAuthStep('ESTABLISHED_TOKEN_MISSING')
+        } else {
+          // If there is, validate it
+          axios.get(`/api/session/${existingToken}`).then(({ status, data }) => {
+            if (status === 200) {
+              // Welcome!
+              const session = data.data
+              if (session.commenced) {
+                setAuthStep('EXISTING_TOKEN_VALIDATED')
+              } else {
+                setAuthStep('ESTABLISHED_TEST_URI_BEFORE_COMMENCEMENT')
+              }
+            } else {
+              // If non OK status, remove the stored token and update state
+              setLSToken(null)
+              setAuthStep('EXISTING_TOKEN_REJECTED')
+            }
+          })
+        }
       }
     }
-  }, [authStep, props.uri, newToken, setLSToken, existingToken])
+  }, [authStep, props.uri, newToken, setLSToken, existingToken, testURIs])
 
   if (['NEW_TOKEN_INGESTED', 'NEW_TOKEN_REJECTED'].includes(authStep)) {
     navigate('/', { replace: true })
@@ -101,7 +131,7 @@ const Wrapper = ({ props, children }) => {
   }
 
   if (authStep === 'EXISTING_TOKEN_VALIDATED') {
-    if (props.uri !== '/introduction') {
+    if (['/', '/test-unavailable'].includes(props.uri)) {
       navigate('/introduction')
     }
   }
@@ -113,15 +143,25 @@ const Wrapper = ({ props, children }) => {
     return children
   }
 
-  if (props.uri === '/introduction' && authStep === 'EXISTING_TOKEN_VALIDATED') {
+  if (
+    props.uri === '/introduction' &&
+    authStep === 'EXISTING_TOKEN_VALIDATED'
+  ) {
     return children
   }
 
-  if (authStep !== 'AUTH_VALID') {
-    return <LoadingPage />
+  if (
+    testURIs.includes(props.uri) &&
+    authStep === 'EXISTING_TOKEN_VALIDATED'
+  ) {
+    return children
   }
 
-  return children
+  if (authStep === 'ESTABLISHED_TEST_URI_BEFORE_COMMENCEMENT') {
+    navigate('/introduction')
+  }
+
+  return <LoadingPage />
 }
 
 export function wrapPageElement({ element, props }) {

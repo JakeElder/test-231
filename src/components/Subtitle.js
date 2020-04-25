@@ -5,7 +5,7 @@ import { PurePartIndicator } from './PartIndicator'
 
 import { wrapMatches } from '../utils/string-utils'
 
-const Root = styled.div`
+const Root = styled.div.attrs({ 'data-component': 'subtitle' })`
   font-weight: 200;
   font-size: 20px;
   display: flex;

@@ -73,7 +73,7 @@ function absUrl(url) {
   return `${Cypress.config().baseUrl}${url}`
 }
 
-describe.only('Auth', () => {
+describe('Auth', () => {
   context('Index page', () => {
     context('With token in query', () => {
       context('With invalid token in query', () => {
@@ -205,12 +205,56 @@ describe.only('Auth', () => {
     })
   })
 
-  context('Auth required pages', () => {
-    context('Without valid token in local storage', () => {
-      it('Redirects to /test-unavailable', () => {})
+  context('Test pages', () => {
+    context('Without token in local storage', () => {
+      it('Redirects to /test-unavailable', () => {
+        cy.server()
+        cy.visit(`/section-1/part-1`)
+        cy.url().should('eq', absUrl('/test-unavailable'))
+      })
     })
+
+    context('With invalid token in local storage', () => {
+      it('Redirects to /test-unavailable', () => {
+        cy.server()
+        cy.stubSessionGetRequest({ token, status: 404 })
+        cy.visitWithToken(`/section-1/part-1`, token)
+        cy.get('[data-page=loading-page]').should('exist')
+        cy.expectSessionGetRequest()
+        cy.url().should('eq', absUrl('/test-unavailable'))
+      })
+    })
+
     context('With valid token in local storage', () => {
-      it('Renders the section', () => {})
+      context('With commenced session', () => {
+        it('Shows the test page', () => {
+          cy.server()
+          cy.stubSessionGetRequest({
+            token,
+            response: {
+              commenced: new Date(Date.now() - humanInterval('2 minutes'))
+            }
+          })
+          cy.visitWithToken(`/section-1/part-1`, token)
+          cy.get('[data-page=loading-page]').should('exist')
+          cy.expectSessionGetRequest()
+          cy.get('[data-component=subtitle]').contains('Section 1')
+        })
+      })
+
+      context('With uncommenced session', () => {
+        it('Redirects to the introduction page', () => {
+          cy.server()
+          cy.stubSessionGetRequest({
+            token,
+            response: { commenced: null }
+          })
+          cy.visitWithToken(`/section-1/part-1`, token)
+          cy.get('[data-page=loading-page]').should('exist')
+          cy.expectSessionGetRequest()
+          cy.url().should('eq', absUrl('/introduction'))
+        })
+      })
     })
   })
 })
