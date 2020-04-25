@@ -64,3 +64,15 @@ Cypress.Commands.add('stubAnswerSubmission', ({ token, as, delay = 0 }) => {
     response: {}
   }).as(as)
 })
+
+Cypress.Commands.add('visitWithToken', token => {
+  cy.visit('/section-1/part-1', {
+    onBeforeLoad(win) {
+      win.localStorage.setItem('sid', token)
+    }
+  })
+})
+
+Cypress.Commands.add('expectLocalStorageToken', token => {
+  expect(localStorage.getItem('sid')).to.equal(token)
+})

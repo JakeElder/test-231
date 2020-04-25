@@ -20,7 +20,7 @@ function useToken() {
       }
       ls.removeItem('sid')
     },
-    token: ls.getItem('sid') || null
+    token: ls.getItem('sid')
   }
 }
 
