@@ -40,7 +40,6 @@ const Progress = styled.div`
   content: '';
   display: block;
   height: 100%;
-  width: ${props => props.position}%;
   background: #84b5eb;
 `
 
@@ -54,12 +53,13 @@ const Timeline = styled.div`
 `
 
 const TimeInfo = styled.div`
+  color: #838383;
   display: flex;
   font-size: 12px;
 `
 
 const Position = styled.div`
-  color: #f0f0f0;
+  color: ${props => (props['data-loading'] ? '' : '#f0f0f0')};
   width: 32px;
 `
 
@@ -71,12 +71,27 @@ const Divider = styled.div`
   }
 `
 
-const Duration = styled.div`
-  color: #838383;
-`
+const Duration = styled.div``
 
 function LoadingAudioPlayer() {
-  return <Root />
+  return (
+    <Root>
+      <PlayPauseButtons>
+        <PlayButton>
+          <PlayIcon />
+        </PlayButton>
+        <PauseButton>
+          <PauseIcon />
+        </PauseButton>
+      </PlayPauseButtons>
+      <Timeline></Timeline>
+      <TimeInfo>
+        <Position data-loading>00:00</Position>
+        <Divider />
+        <Duration>00:00</Duration>
+      </TimeInfo>
+    </Root>
+  )
 }
 
 function PlayingAudioPlayer({ playing, position, duration, onToggleClick }) {

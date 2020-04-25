@@ -36,7 +36,11 @@ const Allotted = styled.div`
   font-size: 18px;
 `
 
-export function PureTimer({ passed, allocated }) {
+export function PureTimer({ passed, allocated, loading }) {
+  if (loading) {
+    return <Root />
+  }
+
   return (
     <Root>
       <Passed data-time-passed>{formatDuration(passed)}</Passed>
@@ -49,7 +53,7 @@ export function PureTimer({ passed, allocated }) {
 function Timer() {
   const session = useCurrentSession()
   if (session === null) {
-    return null
+    return <PureTimer loading />
   }
   return (
     <PureTimer passed={session.timePassed} allocated={session.timeAllocated} />
