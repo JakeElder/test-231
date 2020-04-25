@@ -147,8 +147,16 @@ describe.only('Auth', () => {
         cy.contains('Test Unavailable')
       })
     })
-    context('With valid token in local storage', () => {
-      it('Redirects to /introduction', () => {})
+
+    context('With invalid token in local storage', () => {
+      it('Redirects to /introduction', () => {
+        cy.server()
+        cy.stubSessionGetRequest({ token, status: 404 })
+        cy.visitWithToken(`/test-unavailable`, token)
+        cy.get('[data-page=loading-page]').should('exist')
+        cy.expectSessionGetRequest()
+        cy.contains('Test Unavailable')
+      })
     })
   })
 

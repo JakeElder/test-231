@@ -54,10 +54,20 @@ const Wrapper = ({ props, children }) => {
         if (!existingToken) {
           // If not, on to next step
           setAuthStep('ESTABLISHED_TOKEN_MISSING')
+        } else {
+          // If there is, validate it
+          axios.get(`/api/session/${existingToken}`).then(({ status }) => {
+            if (status === 200) {
+            } else {
+              // If non OK status, remove the stored token and update state
+              setLSToken(null)
+              setAuthStep('EXISTING_TOKEN_REJECTED')
+            }
+          })
         }
       }
     }
-  })
+  }, [authStep, props.uri, newToken, setLSToken, existingToken])
 
   if (['NEW_TOKEN_INGESTED', 'NEW_TOKEN_REJECTED'].includes(authStep)) {
     navigate('/', { replace: true })
@@ -77,7 +87,7 @@ const Wrapper = ({ props, children }) => {
 
   if (
     props.uri === '/test-unavailable' &&
-    authStep === 'ESTABLISHED_TOKEN_MISSING'
+    ['ESTABLISHED_TOKEN_MISSING', 'EXISTING_TOKEN_REJECTED'].includes(authStep)
   ) {
     return children
   }
