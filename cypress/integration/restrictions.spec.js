@@ -76,7 +76,6 @@ function absUrl(url) {
 describe.only('Auth', () => {
   context('Index page', () => {
     context('With token in query', () => {
-
       context('With invalid token in query', () => {
         it('Redirects to / leaving the localStorage sid undefined', () => {
           cy.server()
@@ -84,9 +83,11 @@ describe.only('Auth', () => {
           cy.visit(`/?token=${token}`)
           cy.get('[data-page=loading-page]').should('exist')
           cy.expectSessionGetRequest()
-          cy.url().should('eq', absUrl('/')).then(() => {
-            cy.expectLocalStorageToken(null)
-          })
+          cy.url()
+            .should('eq', absUrl('/'))
+            .then(() => {
+              cy.expectLocalStorageToken(null)
+            })
         })
       })
 
@@ -97,12 +98,13 @@ describe.only('Auth', () => {
           cy.visit(`/?token=${token}`)
           cy.get('[data-page=loading-page]').should('exist')
           cy.expectSessionGetRequest()
-          cy.url().should('eq', absUrl('/')).then(() => {
-            cy.expectLocalStorageToken(token)
-          })
+          cy.url()
+            .should('eq', absUrl('/'))
+            .then(() => {
+              cy.expectLocalStorageToken(token)
+            })
         })
       })
-
     })
 
     context('Without token in query', () => {
@@ -167,6 +169,38 @@ describe.only('Auth', () => {
         cy.get('[data-page=loading-page]').should('exist')
         cy.expectSessionGetRequest()
         cy.url().should('eq', absUrl('/introduction'))
+      })
+    })
+  })
+
+  context('Introduction page', () => {
+    context('Without token in local storage', () => {
+      it('Redirects to /test-unavailable', () => {
+        cy.server()
+        cy.visit(`/introduction`)
+        cy.url().should('eq', absUrl('/test-unavailable'))
+      })
+    })
+
+    context('With invalid token in local storage', () => {
+      it('Redirects to /test-unavailable', () => {
+        cy.server()
+        cy.stubSessionGetRequest({ token, status: 404 })
+        cy.visitWithToken(`/introduction`, token)
+        cy.get('[data-page=loading-page]').should('exist')
+        cy.expectSessionGetRequest()
+        cy.url().should('eq', absUrl('/test-unavailable'))
+      })
+    })
+
+    context('With valid token in local storage', () => {
+      it('Shows the introduction page', () => {
+        cy.server()
+        cy.stubSessionGetRequest({ token })
+        cy.visitWithToken(`/introduction`, token)
+        cy.get('[data-page=loading-page]').should('exist')
+        cy.expectSessionGetRequest()
+        cy.contains('Introduction')
       })
     })
   })
