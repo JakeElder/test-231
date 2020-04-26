@@ -74,7 +74,7 @@ function absUrl(url) {
 }
 
 describe('Auth', () => {
-  context.only('Index page', () => {
+  context('Index page', () => {
     context('With token in query', () => {
       context('With invalid token in query', () => {
         it('Redirects to / leaving the localStorage sid undefined', () => {

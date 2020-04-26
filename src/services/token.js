@@ -1,3 +1,5 @@
+import qs from 'qs'
+
 function getLocalStorage() {
   if (typeof window !== 'undefined') {
     return window.localStorage
@@ -18,5 +20,13 @@ function current() {
   return ls.getItem('sid')
 }
 
+function fromSearch(search) {
+  const { token } = qs.parse(search, {
+    ignoreQueryPrefix: true
+  })
+  return token || null
+}
+
 export { set }
 export { current }
+export { fromSearch }

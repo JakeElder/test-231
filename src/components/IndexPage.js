@@ -1,31 +1,32 @@
 import React, { useEffect } from 'react'
 import { navigate } from 'gatsby'
-import qs from 'qs'
 
 import LoadingPage from './LoadingPage'
 
-import * as session from '../services/session'
-import * as token from '../services/token'
+import * as Session from '../services/session'
+import * as Token from '../services/token'
 
 function IndexPage({ location }) {
-  const { token: newToken } = qs.parse(location.search, {
-    ignoreQueryPrefix: true
-  })
-  const existingToken = token.current()
+  const newToken = Token.fromSearch(location.search)
+  const existingToken = Token.current()
 
   useEffect(() => {
+    if (!newToken && !existingToken) {
+      navigate('/test-unavailable')
+      return 
+    }
+
     if (newToken) {
-      session.checkToken(newToken).then(isValid => {
-        token.set(isValid ? newToken : null)
+      Session.checkToken(newToken).then(isValid => {
+        Token.set(isValid ? newToken : null)
         navigate('/', { push: true })
       })
-    } else if (existingToken) {
-      session.checkToken(existingToken).then(isValid => {
-        navigate(isValid ? '/introduction' : '/test-unavailable')
-      })
-    } else {
-      navigate('/test-unavailable')
-    }
+      return
+    } 
+
+    Session.checkToken(existingToken).then(isValid => {
+      navigate(isValid ? '/introduction' : '/test-unavailable')
+    })
   }, [location.pathname, existingToken, newToken])
 
   return <LoadingPage />
