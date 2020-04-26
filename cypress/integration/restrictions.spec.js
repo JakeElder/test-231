@@ -74,10 +74,10 @@ function absUrl(url) {
 }
 
 describe('Auth', () => {
-  context('Index page', () => {
+  context.only('Index page', () => {
     context('With token in query', () => {
       context('With invalid token in query', () => {
-        it.only('Redirects to / leaving the localStorage sid undefined', () => {
+        it('Redirects to / leaving the localStorage sid undefined', () => {
           cy.server()
           cy.stubSessionGetRequest({ token, status: 404 })
           cy.visit(`/?token=${token}`)

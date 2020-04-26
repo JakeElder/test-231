@@ -1,8 +1,6 @@
 import React from 'react'
 import 'reset-css'
 import { Router } from '@reach/router'
-import { Link } from 'gatsby'
-import styled from 'styled-components'
 
 import GlobalStyles from '../GlobalStyles'
 import Route from '../Route'

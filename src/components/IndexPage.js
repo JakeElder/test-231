@@ -1,34 +1,32 @@
 import React, { useEffect } from 'react'
-import axios from 'axios'
 import { navigate } from 'gatsby'
 import qs from 'qs'
 
 import LoadingPage from './LoadingPage'
 
 import useToken from '../hooks/use-token'
+import * as session from '../services/session'
 
 function IndexPage({ location }) {
-  const { set: setToken } = useToken()
-  const { token } = qs.parse(location.search, {
+  const { token: existingToken, set: setToken } = useToken()
+  const { token: newToken } = qs.parse(location.search, {
     ignoreQueryPrefix: true
   })
 
   useEffect(() => {
-    if (token) {
-      console.log(token)
-      axios.get(`/api/session/${token}`).then(({ status }) => {
-        if (status === 200) {
-          // If valid, store the token as sid
-          // setToken(newToken)
-          // setAuthStep('NEW_TOKEN_INGESTED')
-        } else {
-          // Otherwise remove any ls token and
-          setToken(null)
-          navigate('/', { push: true })
-        }
+    if (newToken) {
+      session.checkToken(newToken).then(isValid => {
+        setToken(isValid ? newToken : null)
+        navigate('/', { push: true })
       })
+    } else if (existingToken) {
+      session.checkToken(existingToken).then(isValid => {
+        navigate(isValid ? '/introduction' : '/test-unavailable')
+      })
+    } else {
+      navigate('/test-unavailable')
     }
-  }, [token, setToken])
+  }, [location.pathname, existingToken, newToken, setToken])
 
   return <LoadingPage />
 }
