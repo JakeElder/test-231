@@ -7,7 +7,7 @@ import Route from '../Route'
 import IndexPage from '../IndexPage'
 import TestUnavailablePage from '../../client-pages/test-unavailable'
 import IntroductionPage from '../../client-pages/introduction'
-// import Section1Part1Page from '../../client-pages/section-1-part-1'
+import Section1Part1Page from '../../client-pages/section-1-part-1'
 
 // import useTitle from '../../hooks/use-title'
 import useAdminReset from '../../hooks/use-admin-reset'
@@ -28,7 +28,12 @@ const App = () => {
           checkAuth
         />
         <Route path="/introduction" requireAuth component={IntroductionPage} />
-        <Route path="/section-1/part-1" requireAuth requireCommencement />
+        <Route
+          path="/section-1/part-1"
+          requireAuth
+          requireCommencement
+          component={Section1Part1Page}
+        />
         <Route path="/section-1/part-2" requireAuth requireCommencement />
         <Route path="/section-2" requireAuth requireCommencement />
         <Route path="/section-3" requireAuth requireCommencement />

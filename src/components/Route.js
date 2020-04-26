@@ -53,6 +53,19 @@ function Route({
     return <LoadingPage />
   }
 
+  // If commencement is required, the session request has finished,
+  // and the session hasn't been commenced, return to /introduction
+  if (
+    requireAuth &&
+    requireCommencement &&
+    authState === 'CONFIRMED' &&
+    session !== null &&
+    session.commenced === null
+  ) {
+    navigate('/introduction')
+    return <LoadingPage />
+  }
+
   // If necessary session checking is complete, render component.
   // `session` can be null
   return (
