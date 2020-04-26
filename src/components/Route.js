@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { navigate } from 'gatsby'
 
 import LoadingPage from './LoadingPage'
 
@@ -14,9 +15,8 @@ function Route({
   component: Component,
   ...rest
 }) {
-  const [authState, setAuthState] = useState(
-    requireAuth ? 'UNCONFIRMED' : 'NOT_REQUIRED'
-  )
+  const defaultAuthState = requireAuth ? 'UNCONFIRMED' : 'NOT_REQUIRED'
+  const [authState, setAuthState] = useState(defaultAuthState)
   const [session, setSession] = useState(null)
 
   useEffect(() => {
@@ -25,9 +25,10 @@ function Route({
       return
     }
 
-    // Confirm as unauthenticated if there is no token
+    // Confirm (unauthenticated) if there is no token
     if (!Token.current()) {
       setAuthState('CONFIRMED')
+      return
     }
 
     // Otherwise check session exists
@@ -38,10 +39,22 @@ function Route({
     })
   }, [checkAuth, requireAuth])
 
+  // If auth check required and the session request hasn't finished,
+  // show the loading page
   if ((requireAuth || checkAuth) && authState !== 'CONFIRMED') {
     return <LoadingPage />
   }
 
+  // If auth is _required_, session request and finished and there
+  // is no valid session, navigate to /test-unavailable.
+  // Render <LoadingPage /> for easier reconcilliation
+  if (requireAuth && authState === 'CONFIRMED' && session === null) {
+    navigate('/test-unavailable')
+    return <LoadingPage />
+  }
+
+  // If necessary session checking is complete, render component.
+  // `session` can be null
   return (
     <SessionContext.Provider value={session}>
       <Component {...rest} />

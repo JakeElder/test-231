@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { navigate } from 'gatsby'
 import axios from 'axios'
 
-import App from '../components/App/App'
 import { PureTestPage as TestPage } from '../layouts/TestPage'
 import { PureTestPart as TestPart } from '../layouts/TestPart'
 import { PureTestPartHeader as Header } from '../layouts/TestPartHeader'
@@ -28,11 +27,10 @@ function IntroductionPage() {
   }
 
   return (
-    <App>
-      <TestPage>
-        <TestPage.SideBar>
-          <Sidebar current="introduction" />
-        </TestPage.SideBar>
+    <TestPage>
+      <TestPage.SideBar>
+        <Sidebar current="introduction" />
+      </TestPage.SideBar>
         <TestPage.TestPart>
           <TestPart>
             <TestPart.Header>
@@ -79,8 +77,7 @@ function IntroductionPage() {
             </TestPart.Footer>
           </TestPart>
         </TestPage.TestPart>
-      </TestPage>
-    </App>
+    </TestPage>
   )
 }
 

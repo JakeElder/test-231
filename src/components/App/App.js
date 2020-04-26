@@ -6,7 +6,7 @@ import GlobalStyles from '../GlobalStyles'
 import Route from '../Route'
 import IndexPage from '../IndexPage'
 import TestUnavailablePage from '../../client-pages/test-unavailable'
-// import IntroductionPage from '../../client-pages/introduction'
+import IntroductionPage from '../../client-pages/introduction'
 // import Section1Part1Page from '../../client-pages/section-1-part-1'
 
 // import useTitle from '../../hooks/use-title'
@@ -22,8 +22,12 @@ const App = () => {
     <GlobalStyles>
       <Router basepath="/">
         <Route path="/" component={IndexPage} />
-        <Route path="/test-unavailable" component={TestUnavailablePage} requireAuth />
-        <Route path="/introduction" requireAuth component={() => null} />
+        <Route
+          path="/test-unavailable"
+          component={TestUnavailablePage}
+          checkAuth
+        />
+        <Route path="/introduction" requireAuth component={IntroductionPage} />
         <Route path="/section-1/part-1" requireAuth requireCommencement />
         <Route path="/section-1/part-2" requireAuth requireCommencement />
         <Route path="/section-2" requireAuth requireCommencement />
