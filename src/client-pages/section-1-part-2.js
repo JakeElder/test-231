@@ -1,35 +1,35 @@
 import React from 'react'
 import { navigate } from 'gatsby'
 
-import App from '../../components/App/App'
-import { PureTestPage as TestPage } from '../../layouts/TestPage'
-import { PureTestPart as TestPart } from '../../layouts/TestPart'
-import { PureTestPartHeader as Header } from '../../layouts/TestPartHeader'
-import { PureBodyCopy as BodyCopy } from '../../components/BodyCopy'
-import { PureStandardTitle as Title } from '../../components/StandardTitle'
-import { PureSubtitle as Subtitle } from '../../components/Subtitle'
-import { PureButton as Button } from '../../components/Button'
-import Sidebar from '../../components/Sidebar'
-import PlainButton from '../../components/PlainButton'
-import AudioPlayer from '../../components/AudioPlayer'
-import { PureDemarkedCopy as DemarkedCopy } from '../../components/DemarkedCopy'
-import { WordInput, PureWordInput as W } from '../../components/StringInputs'
+import App from '../components/App/App'
+import { PureTestPage as TestPage } from '../layouts/TestPage'
+import { PureTestPart as TestPart } from '../layouts/TestPart'
+import { PureTestPartHeader as Header } from '../layouts/TestPartHeader'
+import { PureBodyCopy as BodyCopy } from '../components/BodyCopy'
+import { PureStandardTitle as Title } from '../components/StandardTitle'
+import { PureSubtitle as Subtitle } from '../components/Subtitle'
+import { PureButton as Button } from '../components/Button'
+import Sidebar from '../components/Sidebar'
+import PlainButton from '../components/PlainButton'
+import AudioPlayer from '../components/AudioPlayer'
+import { PureDemarkedCopy as DemarkedCopy } from '../components/DemarkedCopy'
+import { WordInput, PureWordInput as W } from '../components/StringInputs'
 
-import useTitle from '../../hooks/use-title'
-import useAnswerForm from '../../hooks/use-answer-form'
+import useTitle from '../hooks/use-title'
+import useAnswerForm from '../hooks/use-answer-form'
 
-import audio from '../../audio/section-1-part-1.mp3'
+import audio from '../audio/section-1-part-2.mp3'
 
 const q1Choice = word => <WordInput name="answer-1[]">{word}</WordInput>
 const q2Choice = word => <WordInput name="answer-2[]">{word}</WordInput>
 const q3Choice = word => <WordInput name="answer-3[]">{word}</WordInput>
 
-function Section1Part1Page() {
+function Section1Part2Page() {
   const title = useTitle()
 
   const { onSubmit, isSubmitting } = useAnswerForm({
-    sectionId: 'section-1-part-1',
-    onSuccess: () => navigate('/section-1/part-2')
+    sectionId: 'section-1-part-2',
+    onSuccess: () => navigate('/section-2')
   })
 
   return (
@@ -47,7 +47,7 @@ function Section1Part1Page() {
                     <Title>{title}</Title>
                   </Header.Title>
                   <Header.Subtitle>
-                    <Subtitle part={[1, 2]}>
+                    <Subtitle part={[2, 2]}>
                       Quiz 3 | Section 1: Identify the Focus Words
                     </Subtitle>
                   </Header.Subtitle>
@@ -79,28 +79,13 @@ function Section1Part1Page() {
                 <TestPart.AnswerArea>
                   <DemarkedCopy>
                     <DemarkedCopy.Line>
-                      {['Person A', 'I am so happy. I passed the test.']}
-                    </DemarkedCopy.Line>
-                    <DemarkedCopy.Line>
-                      {[
-                        'Person B',
-                        <div data-question={1} key="question">
-                          {q1Choice('Which')}
-                          {q1Choice('test')}
-                          {q1Choice('do')}
-                          {q1Choice('you')}
-                          {q1Choice('mean')}?
-                        </div>
-                      ]}
-                    </DemarkedCopy.Line>
-                    <DemarkedCopy.Line>
                       {[
                         'Person A',
-                        <div data-question={2} key="question">
-                          {q2Choice("It's")}
-                          {q2Choice('the')}
-                          {q2Choice('driving')}
-                          {q2Choice('test')}.
+                        <div data-question={1} key="question">
+                          I want to get in shape. {q1Choice('What')}
+                          {q1Choice('should')}
+                          {q1Choice('I')}
+                          {q1Choice('do')}?
                         </div>
                       ]}
                     </DemarkedCopy.Line>
@@ -108,19 +93,41 @@ function Section1Part1Page() {
                       {[
                         'Person B',
                         [
-                          'Congratulations!',
-                          <div data-question={3} key="question">
-                            {q3Choice('Now')}
-                            {q3Choice('you')}
-                            {q3Choice('can')}
-                            {q3Choice('give')}
-                            {q3Choice('me')}
-                            {q3Choice('a')}
-                            {q3Choice('ride')}
-                            {q3Choice('to')}
-                            {q3Choice('school')}.
+                          'Umm... You can go swimming or cycling.',
+                          <div data-question={2} key="question">
+                            {q2Choice('Both')}
+                            {q2Choice('help')}
+                            {q2Choice('you')}
+                            {q2Choice('get')}
+                            {q2Choice('fit')}
+                            {q2Choice('and')}
+                            {q2Choice('lose')}
+                            {q2Choice('weight')}
+                            {q2Choice('quickly')}.
                           </div>
                         ]
+                      ]}
+                    </DemarkedCopy.Line>
+                    <DemarkedCopy.Line>
+                      {[
+                        'Person A',
+                        [
+                          'Cycling sounds exciting.',
+                          <div data-question={3} key="question">
+                            Unfortunately,
+                            {q3Choice('I')}
+                            {q3Choice("don't")}
+                            {q3Choice('have')}
+                            {q3Choice('a')}
+                            {q3Choice('bicycle')}
+                          </div>
+                        ]
+                      ]}
+                    </DemarkedCopy.Line>
+                    <DemarkedCopy.Line>
+                      {[
+                        'Person B',
+                        'Then, go swimming. All you need is a suit.'
                       ]}
                     </DemarkedCopy.Line>
                   </DemarkedCopy>
@@ -139,4 +146,4 @@ function Section1Part1Page() {
   )
 }
 
-export default Section1Part1Page
+export default Section1Part2Page

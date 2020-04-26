@@ -77,7 +77,7 @@ describe('Auth', () => {
   context('Index page', () => {
     context('With token in query', () => {
       context('With invalid token in query', () => {
-        it('Redirects to / leaving the localStorage sid undefined', () => {
+        it.only('Redirects to / leaving the localStorage sid undefined', () => {
           cy.server()
           cy.stubSessionGetRequest({ token, status: 404 })
           cy.visit(`/?token=${token}`)

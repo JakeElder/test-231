@@ -1,5 +1,1 @@
-function IndexPage() {
-  return null
-}
-
-export default IndexPage
+export { default } from '../components/App/App'

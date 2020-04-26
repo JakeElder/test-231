@@ -9,8 +9,8 @@ const Root = styled.div`
   overflow: hidden;
 `
 
-export function PureTestPage({ children }) {
-  return <Root>{children}</Root>
+export function PureTestPage({ children, ...rest }) {
+  return <Root {...rest}>{children}</Root>
 }
 
 const SideBar = (() => {
