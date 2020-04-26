@@ -17,8 +17,7 @@ describe('Test Commencement', () => {
       }
     })
 
-    // Check two session requests made (Ident + Timer)
-    cy.expectSessionGetRequest()
+    // Wait for session request
     cy.expectSessionGetRequest()
 
     // Check the ident is rendered with returned users name
@@ -60,8 +59,8 @@ describe('Test Commencement', () => {
       }
     })
 
-    // Check two session requests made (Ident + Timer)
-    cy.wait('@session-get-request').wait('@session-get-request')
+    // Check session request is made
+    cy.wait('@session-get-request')
 
     // Check the ident is rendered with returned users name
     cy.contains('Jake Elder')

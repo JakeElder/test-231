@@ -18,7 +18,7 @@ const Title = styled.h1`
 `
 
 function TestUnavailablePage() {
-  const session = useSession()
+  const [session] = useSession()
 
   if (session !== null) {
     navigate('/introduction')

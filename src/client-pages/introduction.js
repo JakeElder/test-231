@@ -13,12 +13,12 @@ import Sidebar from '../components/Sidebar'
 import PlainButton from '../components/PlainButton'
 
 import useTitle from '../hooks/use-title'
-import useCurrentSession from '../hooks/use-current-session'
+import useSession from '../hooks/use-session'
 
 function IntroductionPage() {
   const title = useTitle()
   const [commencing, setCommencing] = useState(false)
-  const session = useCurrentSession()
+  const [session] = useSession()
 
   async function onContinueClick() {
     setCommencing(true)

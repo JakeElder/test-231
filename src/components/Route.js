@@ -6,7 +6,7 @@ import LoadingPage from './LoadingPage'
 import * as Session from '../services/session'
 import * as Token from '../services/token'
 
-import { SessionContext } from '../hooks/use-session'
+import useSession from '../hooks/use-session'
 
 function Route({
   checkAuth,
@@ -17,7 +17,7 @@ function Route({
 }) {
   const defaultAuthState = requireAuth ? 'UNCONFIRMED' : 'NOT_REQUIRED'
   const [authState, setAuthState] = useState(defaultAuthState)
-  const [session, setSession] = useState(null)
+  const [session, setSession] = useSession(null)
 
   useEffect(() => {
     // No need to do anything if auth check isn't required
@@ -37,7 +37,7 @@ function Route({
       setSession(s)
       setAuthState('CONFIRMED')
     })
-  }, [checkAuth, requireAuth])
+  }, [checkAuth, requireAuth, setSession])
 
   // If auth check required and the session request hasn't finished,
   // show the loading page
@@ -67,12 +67,8 @@ function Route({
   }
 
   // If necessary session checking is complete, render component.
-  // `session` can be null
-  return (
-    <SessionContext.Provider value={session}>
-      <Component {...rest} />
-    </SessionContext.Provider>
-  )
+  // useSession()[0] can still be null
+  return <Component {...rest} />
 }
 
 export default Route

@@ -1,10 +1,18 @@
-import { createContext, useContext } from 'react'
+import React from 'react'
+import globalHook from './use-global-hook'
 
-const SessionContext = createContext(null)
+const initialState = { session: null }
+const actions = {
+  set(store, value) {
+    store.setState({ session: value })
+  }
+}
+
+const useGlobal = globalHook(React, initialState, actions)
 
 function useSession() {
-  return useContext(SessionContext)
+  const [{ session }, { set }] = useGlobal()
+  return [session, set]
 }
 
 export default useSession
-export { SessionContext }

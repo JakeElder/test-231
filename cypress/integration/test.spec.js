@@ -153,7 +153,7 @@ describe('Completing Section 1 [Part 2]', () => {
     })
 
     // Check required content exists
-    cy.get('[data-component=ident]').contains('Jake Elder')
+    cy.contains('Jake Elder')
 
     // Interact with question
     cy.get('[data-question=1]').within(() => {
@@ -209,7 +209,7 @@ describe('Completing Section 2', () => {
     })
 
     // Check required content exists
-    cy.get('[data-component=ident]').contains('Jake Elder')
+    cy.contains('Jake Elder')
 
     // Interact with question
     cy.get('[data-question=1]').within(() => {
@@ -261,7 +261,7 @@ describe('Completing Section 3', () => {
     })
 
     // Check required content exists
-    cy.get('[data-component=ident]').contains('Jake Elder')
+    cy.contains('Jake Elder')
 
     // Interact with questions
     cy.get('[data-sentence=1]').within(() => {
@@ -314,7 +314,7 @@ describe('Completing Section 4', () => {
     })
 
     // Check required content exists
-    cy.get('[data-component=ident]').contains('Jake Elder')
+    cy.contains('Jake Elder')
 
     // Interact with questions
     cy.get('[data-line=2]').within(() => {

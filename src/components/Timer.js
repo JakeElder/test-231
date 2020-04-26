@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { formatDuration } from '../utils/number-utils'
-import useCurrentSession from '../hooks/use-current-session'
+import useSession from '../hooks/use-session'
 
 const Root = styled.div`
   max-width: 300px;
@@ -51,7 +51,7 @@ export function PureTimer({ passed, allocated, loading }) {
 }
 
 function Timer() {
-  const session = useCurrentSession()
+  const [session] = useSession()
   if (session === null) {
     return <PureTimer loading />
   }

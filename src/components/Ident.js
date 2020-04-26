@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import useCurrentUser from '../hooks/use-current-user'
+import useSession from '../hooks/use-session'
 
 import defaultAvatar from '../images/default-avatar.svg'
 
@@ -94,7 +94,8 @@ export function PureIdent({ name, institute }) {
 }
 
 function Ident() {
-  const user = useCurrentUser()
+  const [session] = useSession()
+  const user = session === null ? null : session.name
   const institute = user === null ? null : 'Chiang Mai University'
   return <PureIdent name={user} institute={institute} />
 }
