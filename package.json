@@ -2,7 +2,7 @@
   "name": "test-231",
   "private": true,
   "description": "Testing tool for CMU",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Jake Elder <jake@mindfulstudio.io>",
   "dependencies": {
     "@babel/plugin-proposal-pipeline-operator": "^7.8.3",
