@@ -5,7 +5,8 @@ module.exports.createPages = function createPages({ actions }) {
     '/test-unavailable',
     '/introduction',
     '/section-1/part-1',
-    '/section-2/part-2',
+    '/section-1/part-2',
+    '/section-2',
     '/section-3',
     '/section-4',
     '/summary'
