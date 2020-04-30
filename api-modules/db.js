@@ -3,6 +3,7 @@ const url = require('url')
 const short = require('short-uuid')
 const humanInterval = require('human-interval')
 const uuid = short('abcdefghijklmnopqrstuvwxyz0123456789-')
+const ObjectsToCsv = require('objects-to-csv')
 
 let cachedDb = null
 let cachedClient = null
@@ -59,8 +60,19 @@ async function seed() {
     process.env.MONGODB_DB_NAME
   )
   const collection = await db.collection('sessions')
-  const sessions = require('../seed.json').map(prepareSession)
+  const seedData = require('../seed.json')
+  const sessions = seedData.map(prepareSession)
   await collection.insertMany(sessions)
+  const csv = new ObjectsToCsv(
+    sessions.map((s, idx) => {
+      return {
+        Name: s.name,
+        Recipient: seedData[idx].email,
+        Token: s.id
+      }
+    })
+  )
+  await csv.toDisk('./mailing-list.csv')
   await closeConnection()
 }
 

@@ -269,7 +269,6 @@ describe('Completing Section 3', () => {
       cy.contains('best').click()
     })
     cy.get('[data-sentence=2]').within(() => {
-      cy.contains('New').click()
       cy.contains('win').click()
     })
     cy.get('[data-sentence=3]').within(() => {
@@ -287,7 +286,7 @@ describe('Completing Section 3', () => {
       expect(request.body).to.deep.equal({
         'section-id': 'section-3',
         'answer-1': ['Hon', 'best'],
-        'answer-2': ['New', 'win'],
+        'answer-2': ['win'],
         'answer-3': ['home', 'work']
       })
     })
