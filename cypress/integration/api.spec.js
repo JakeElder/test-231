@@ -20,6 +20,15 @@ describe('API', () => {
     cy.exec('yarn db:reset && yarn db:seed')
   })
 
+  describe('GET /api/session', () => {
+    it('Retrieves all sessions', () => {
+      cy.request(`/api/session`).then(res => {
+        expect(res.status).to.equal(200)
+        expect(res.body.data.length).to.equal(require('../../seed.json').length)
+      })
+    })
+  })
+
   describe('GET /api/session/[id]', () => {
     it('Retrieves a session', () => {
       const session = mockSession()
