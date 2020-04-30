@@ -70,3 +70,5 @@ yarn-error.log
 
 .now
 Session.vim
+mailing-list.csv
+seed.json

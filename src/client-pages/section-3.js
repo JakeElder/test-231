@@ -20,7 +20,7 @@ import useAnswerForm from '../hooks/use-answer-form'
 import audio from '../audio/section-3.mp3'
 
 const r = (n, v) => (
-  <SyllableInput key={v} name={`answer-${n}`}>
+  <SyllableInput key={v} name={`answer-${n}[]`}>
     {v}
   </SyllableInput>
 )
