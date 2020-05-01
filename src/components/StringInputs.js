@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled, { css } from 'styled-components'
 
 import { PureToneIcon } from './ToneIcon'
 
 import useCheckbox from '../hooks/use-checkbox'
+
+import SessionContext from '../contexts/SessionContext'
 
 const common = {
   base: css`
@@ -102,11 +104,31 @@ export const PureWordInput = (() => {
 
 export function WordInput({ children: word, name, ...rest }) {
   const { checked, toggle } = useCheckbox()
-  return (
-    <PureWordInput selected={checked} name={name} onClick={toggle} {...rest}>
-      {word}
-    </PureWordInput>
-  )
+  const session = useContext(SessionContext)
+  const props = (() => {
+    if (!session) {
+      return {
+        selected: checked,
+        name,
+        onClick: toggle,
+        ...rest
+      }
+    }
+    const selected = (() => {
+      const answers = session.data.answers.find(
+        a => a['section-id'] === session.sectionId
+      )
+      return answers[name.replace(/\[\]$/, '')].includes(word)
+    })()
+    return {
+      selected,
+      onClick: () => {},
+      disabled: true,
+      ...rest
+    }
+  })()
+
+  return <PureWordInput {...props}>{word}</PureWordInput>
 }
 
 export const PureSyllableInput = (() => {
