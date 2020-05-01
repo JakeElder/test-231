@@ -23,6 +23,62 @@ const q1Choice = word => <WordInput name="answer-1[]">{word}</WordInput>
 const q2Choice = word => <WordInput name="answer-2[]">{word}</WordInput>
 const q3Choice = word => <WordInput name="answer-3[]">{word}</WordInput>
 
+function Question() {
+  return (
+    <DemarkedCopy>
+      <DemarkedCopy.Line>
+        {[
+          'Person A',
+          <div data-question={1} key="question">
+            I want to get in shape. {q1Choice('What')}
+            {q1Choice('should')}
+            {q1Choice('I')}
+            {q1Choice('do')}?
+          </div>
+        ]}
+      </DemarkedCopy.Line>
+      <DemarkedCopy.Line>
+        {[
+          'Person B',
+          [
+            'Umm... You can go swimming or cycling.',
+            <div data-question={2} key="question">
+              {q2Choice('Both')}
+              {q2Choice('help')}
+              {q2Choice('you')}
+              {q2Choice('get')}
+              {q2Choice('fit')}
+              {q2Choice('and')}
+              {q2Choice('lose')}
+              {q2Choice('weight')}
+              {q2Choice('quickly')}.
+            </div>
+          ]
+        ]}
+      </DemarkedCopy.Line>
+      <DemarkedCopy.Line>
+        {[
+          'Person A',
+          [
+            'Cycling sounds exciting.',
+            <div data-question={3} key="question">
+              Unfortunately,
+              {q3Choice('I')}
+              {q3Choice("don't")}
+              {q3Choice('have')}
+              {q3Choice('a')}
+              {q3Choice('bicycle')}
+            </div>
+          ]
+        ]}
+      </DemarkedCopy.Line>
+      <DemarkedCopy.Line>
+        {['Person B', 'Then, go swimming. All you need is a suit.']}
+      </DemarkedCopy.Line>
+    </DemarkedCopy>
+  )
+}
+
 function Section1Part2Page() {
   const title = useTitle()
 
@@ -75,57 +131,7 @@ function Section1Part2Page() {
                 <AudioPlayer src={audio} />
               </TestPart.AudioPlayer>
               <TestPart.AnswerArea>
-                <DemarkedCopy>
-                  <DemarkedCopy.Line>
-                    {[
-                      'Person A',
-                      <div data-question={1} key="question">
-                        I want to get in shape. {q1Choice('What')}
-                        {q1Choice('should')}
-                        {q1Choice('I')}
-                        {q1Choice('do')}?
-                      </div>
-                    ]}
-                  </DemarkedCopy.Line>
-                  <DemarkedCopy.Line>
-                    {[
-                      'Person B',
-                      [
-                        'Umm... You can go swimming or cycling.',
-                        <div data-question={2} key="question">
-                          {q2Choice('Both')}
-                          {q2Choice('help')}
-                          {q2Choice('you')}
-                          {q2Choice('get')}
-                          {q2Choice('fit')}
-                          {q2Choice('and')}
-                          {q2Choice('lose')}
-                          {q2Choice('weight')}
-                          {q2Choice('quickly')}.
-                        </div>
-                      ]
-                    ]}
-                  </DemarkedCopy.Line>
-                  <DemarkedCopy.Line>
-                    {[
-                      'Person A',
-                      [
-                        'Cycling sounds exciting.',
-                        <div data-question={3} key="question">
-                          Unfortunately,
-                          {q3Choice('I')}
-                          {q3Choice("don't")}
-                          {q3Choice('have')}
-                          {q3Choice('a')}
-                          {q3Choice('bicycle')}
-                        </div>
-                      ]
-                    ]}
-                  </DemarkedCopy.Line>
-                  <DemarkedCopy.Line>
-                    {['Person B', 'Then, go swimming. All you need is a suit.']}
-                  </DemarkedCopy.Line>
-                </DemarkedCopy>
+                <Question />
               </TestPart.AnswerArea>
             </TestPart.Body>
             <TestPart.Footer>
@@ -141,3 +147,4 @@ function Section1Part2Page() {
 }
 
 export default Section1Part2Page
+export { Question }

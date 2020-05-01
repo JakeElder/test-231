@@ -23,6 +23,58 @@ const q1Choice = word => <WordInput name="answer-1[]">{word}</WordInput>
 const q2Choice = word => <WordInput name="answer-2[]">{word}</WordInput>
 const q3Choice = word => <WordInput name="answer-3[]">{word}</WordInput>
 
+function Question() {
+  return (
+    <DemarkedCopy>
+      <DemarkedCopy.Line>
+        {['Person A', 'I am so happy. I passed the test.']}
+      </DemarkedCopy.Line>
+      <DemarkedCopy.Line>
+        {[
+          'Person B',
+          <div data-question={1} key="question">
+            {q1Choice('Which')}
+            {q1Choice('test')}
+            {q1Choice('do')}
+            {q1Choice('you')}
+            {q1Choice('mean')}?
+          </div>
+        ]}
+      </DemarkedCopy.Line>
+      <DemarkedCopy.Line>
+        {[
+          'Person A',
+          <div data-question={2} key="question">
+            {q2Choice("It's")}
+            {q2Choice('the')}
+            {q2Choice('driving')}
+            {q2Choice('test')}.
+          </div>
+        ]}
+      </DemarkedCopy.Line>
+      <DemarkedCopy.Line>
+        {[
+          'Person B',
+          [
+            'Congratulations!',
+            <div data-question={3} key="question">
+              {q3Choice('Now')}
+              {q3Choice('you')}
+              {q3Choice('can')}
+              {q3Choice('give')}
+              {q3Choice('me')}
+              {q3Choice('a')}
+              {q3Choice('ride')}
+              {q3Choice('to')}
+              {q3Choice('school')}.
+            </div>
+          ]
+        ]}
+      </DemarkedCopy.Line>
+    </DemarkedCopy>
+  )
+}
+
 function Section1Part1Page() {
   const title = useTitle()
 
@@ -75,53 +127,7 @@ function Section1Part1Page() {
                 <AudioPlayer src={audio} />
               </TestPart.AudioPlayer>
               <TestPart.AnswerArea>
-                <DemarkedCopy>
-                  <DemarkedCopy.Line>
-                    {['Person A', 'I am so happy. I passed the test.']}
-                  </DemarkedCopy.Line>
-                  <DemarkedCopy.Line>
-                    {[
-                      'Person B',
-                      <div data-question={1} key="question">
-                        {q1Choice('Which')}
-                        {q1Choice('test')}
-                        {q1Choice('do')}
-                        {q1Choice('you')}
-                        {q1Choice('mean')}?
-                      </div>
-                    ]}
-                  </DemarkedCopy.Line>
-                  <DemarkedCopy.Line>
-                    {[
-                      'Person A',
-                      <div data-question={2} key="question">
-                        {q2Choice("It's")}
-                        {q2Choice('the')}
-                        {q2Choice('driving')}
-                        {q2Choice('test')}.
-                      </div>
-                    ]}
-                  </DemarkedCopy.Line>
-                  <DemarkedCopy.Line>
-                    {[
-                      'Person B',
-                      [
-                        'Congratulations!',
-                        <div data-question={3} key="question">
-                          {q3Choice('Now')}
-                          {q3Choice('you')}
-                          {q3Choice('can')}
-                          {q3Choice('give')}
-                          {q3Choice('me')}
-                          {q3Choice('a')}
-                          {q3Choice('ride')}
-                          {q3Choice('to')}
-                          {q3Choice('school')}.
-                        </div>
-                      ]
-                    ]}
-                  </DemarkedCopy.Line>
-                </DemarkedCopy>
+                <Question />
               </TestPart.AnswerArea>
             </TestPart.Body>
             <TestPart.Footer>
@@ -137,3 +143,4 @@ function Section1Part1Page() {
 }
 
 export default Section1Part1Page
+export { Question }
