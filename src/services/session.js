@@ -13,5 +13,14 @@ async function find(token) {
   return data.data
 }
 
+async function all() {
+  const { status, data } = await axios(`/api/session`)
+  if (status !== 200) {
+    return null
+  }
+  return data.data
+}
+
 export { checkToken }
 export { find }
+export { all }
