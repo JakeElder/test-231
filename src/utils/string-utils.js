@@ -21,9 +21,9 @@ export function splitMarkParens(input) {
 }
 
 export function wrapMarked(input, Wrapper) {
-  return input.map(([substring, isMarked]) => {
+  return input.map(([substring, isMarked], index) => {
     if (isMarked) {
-      return <Wrapper key={substring}>{substring}</Wrapper>
+      return <Wrapper key={`${substring}.${index}`}>{substring}</Wrapper>
     }
     return substring
   })
