@@ -14,8 +14,12 @@ const Heading = styled.div`
   margin-bottom: 20px;
 `
 
+const Instruction = styled.div`
+`
+
 PureReviewPage.Header = Header
 PureReviewPage.Section = Section
 PureReviewPage.Heading = Heading
+PureReviewPage.Instruction = Instruction
 
 export { PureReviewPage }
