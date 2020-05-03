@@ -23,6 +23,27 @@ const q1Choice = word => <WordInput name="answer-1[]">{word}</WordInput>
 const q2Choice = word => <WordInput name="answer-2[]">{word}</WordInput>
 const q3Choice = word => <WordInput name="answer-3[]">{word}</WordInput>
 
+function Instruction() {
+  return (
+    <BodyCopy>
+      <p>
+        <em>Listen to the following dialogue.</em>
+      </p>
+      <p>
+        click the focus words in each clickable section, numbers 1 through 6.
+        For example, <W disabled>are</W>
+        <W disabled>you</W>
+        <W disabled selected>
+          listening
+        </W>
+        <W disabled>to</W>
+        <W disabled>me</W>? Some of the statements may have more than one focus
+        word. You will hear each dialogue <em>twice</em>.
+      </p>
+    </BodyCopy>
+  )
+}
+
 function Question() {
   return (
     <DemarkedCopy>
@@ -109,23 +130,7 @@ function Section1Part2Page() {
             </TestPart.Header>
             <TestPart.Body>
               <TestPart.Instruction>
-                <BodyCopy>
-                  <p>
-                    <em>Listen to the following dialogue.</em>
-                  </p>
-                  <p>
-                    click the focus words in each clickable section, numbers 1
-                    through 6. For example, <W disabled>are</W>
-                    <W disabled>you</W>
-                    <W disabled selected>
-                      listening
-                    </W>
-                    <W disabled>to</W>
-                    <W disabled>me</W>? Some of the statements may have more
-                    than one focus word. You will hear each dialogue{' '}
-                    <em>twice</em>.
-                  </p>
-                </BodyCopy>
+                <Instruction />
               </TestPart.Instruction>
               <TestPart.AudioPlayer>
                 <AudioPlayer src={audio} />
