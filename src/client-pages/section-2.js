@@ -23,6 +23,78 @@ const q1Choice = v => <SpaceInput key={v} name="answer-1[]" value={v} />
 const q2Choice = v => <SpaceInput key={v} name="answer-2[]" value={v} />
 const q3Choice = v => <SpaceInput key={v} name="answer-3[]" value={v} />
 
+export function Instruction() {
+  return (
+    <BodyCopy>
+      <p>
+        Listen to the following sentences. Mark a slash at the end of each
+        thought group. For example: I<S disabled />
+        know
+        <S disabled />
+        when
+        <S disabled />
+        to
+        <S disabled />
+        pause
+        <S selected disabled />
+        and
+        <S disabled />
+        you? You will hear each sentence <em>twice</em>.
+      </p>
+    </BodyCopy>
+  )
+}
+
+export function Audio() {
+  return <AudioPlayer src={audio} />
+}
+
+export function Question() {
+  return (
+    <DemarkedCopy>
+      <DemarkedCopy.Line>
+        {[
+          'Sentence 1',
+          <div data-question={1} key="question">
+            {'The students wanted to meet the dean but they have to wait till tomorrow'
+              .split(' ')
+              .map((w, idx) => [w, q1Choice(idx)])
+              .flat()
+              .slice(0, -1)}
+            .
+          </div>
+        ]}
+      </DemarkedCopy.Line>
+      <DemarkedCopy.Line>
+        {[
+          'Sentence 2',
+          <div data-question={2} key="question">
+            {'Adam said Jane wanted to buy a new house'
+              .split(' ')
+              .map((w, idx) => [w, q2Choice(idx)])
+              .flat()
+              .slice(0, -1)}
+            .
+          </div>
+        ]}
+      </DemarkedCopy.Line>
+      <DemarkedCopy.Line>
+        {[
+          'Sentence 3',
+          <div data-question={3} key="question">
+            {'Before moving to Phuket Jane was a trainer at a fitness center'
+              .split(' ')
+              .map((w, idx) => [w, q3Choice(idx)])
+              .flat()
+              .slice(0, -1)}
+            .
+          </div>
+        ]}
+      </DemarkedCopy.Line>
+    </DemarkedCopy>
+  )
+}
+
 function Section2Page() {
   const title = useTitle()
 
@@ -53,69 +125,13 @@ function Section2Page() {
             </TestPart.Header>
             <TestPart.Body>
               <TestPart.Instruction>
-                <BodyCopy>
-                  <p>
-                    Listen to the following sentences. Mark a slash at the end
-                    of each thought group. For example: I<S disabled />
-                    know
-                    <S disabled />
-                    when
-                    <S disabled />
-                    to
-                    <S disabled />
-                    pause
-                    <S selected disabled />
-                    and
-                    <S disabled />
-                    you? You will hear each sentence <em>twice</em>.
-                  </p>
-                </BodyCopy>
+                <Instruction />
               </TestPart.Instruction>
               <TestPart.AudioPlayer>
-                <AudioPlayer src={audio} />
+                <Audio />
               </TestPart.AudioPlayer>
               <TestPart.AnswerArea>
-                <DemarkedCopy>
-                  <DemarkedCopy.Line>
-                    {[
-                      'Sentence 1',
-                      <div data-question={1} key="question">
-                        {'The students wanted to meet the dean but they have to wait till tomorrow'
-                          .split(' ')
-                          .map((w, idx) => [w, q1Choice(idx)])
-                          .flat()
-                          .slice(0, -1)}
-                        .
-                      </div>
-                    ]}
-                  </DemarkedCopy.Line>
-                  <DemarkedCopy.Line>
-                    {[
-                      'Sentence 2',
-                      <div data-question={2} key="question">
-                        {'Adam said Jane wanted to buy a new house'
-                          .split(' ')
-                          .map((w, idx) => [w, q2Choice(idx)])
-                          .flat()
-                          .slice(0, -1)}
-                        .
-                      </div>
-                    ]}
-                  </DemarkedCopy.Line>
-                  <DemarkedCopy.Line>
-                    {[
-                      'Sentence 3',
-                      <div data-question={3} key="question">
-                        {'Before moving to Phuket Jane was a trainer at a fitness center'
-                          .split(' ')
-                          .map((w, idx) => [w, q3Choice(idx)])
-                          .flat()
-                          .slice(0, -1)}
-                        .
-                      </div>
-                    ]}
-                  </DemarkedCopy.Line>
-                </DemarkedCopy>
+                <Question />
               </TestPart.AnswerArea>
             </TestPart.Body>
             <TestPart.Footer>
