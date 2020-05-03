@@ -44,6 +44,10 @@ function Instruction() {
   )
 }
 
+function Audio() {
+  return <AudioPlayer src={audio} />
+}
+
 function Question() {
   return (
     <DemarkedCopy>
@@ -133,7 +137,7 @@ function Section1Part2Page() {
                 <Instruction />
               </TestPart.Instruction>
               <TestPart.AudioPlayer>
-                <AudioPlayer src={audio} />
+                <Audio />
               </TestPart.AudioPlayer>
               <TestPart.AnswerArea>
                 <Question />
@@ -152,4 +156,6 @@ function Section1Part2Page() {
 }
 
 export default Section1Part2Page
+export { Instruction }
+export { Audio }
 export { Question }
