@@ -14,6 +14,7 @@ import { PureReviewSectionHeader as SectionHeader } from '../components/ReviewSe
 // Section Components
 import * as S1P1 from '../client-pages/section-1-part-1'
 import * as S1P2 from '../client-pages/section-1-part-2'
+import * as S2 from '../client-pages/section-2'
 
 // Contexts
 import SessionContext from '../contexts/SessionContext'
@@ -54,24 +55,24 @@ function ReviewPage() {
   return (
     <GlobalStyles>
       <Root>
-        <SessionContext.Provider
-          value={{
-            sectionId: 'section-1-part-1',
-            data: session
-          }}
-        >
-          <Review>
-            <Review.Header>
-              <Header>
-                <Header.Title>
-                  <StandardTitle>English 231: English Phonetics</StandardTitle>
-                </Header.Title>
-                <Header.Subtitle>
-                  <Subtitle>Quiz 3 | Answers | {session.name}</Subtitle>
-                </Header.Subtitle>
-              </Header>
-            </Review.Header>
+        <Review>
+          <Review.Header>
+            <Header>
+              <Header.Title>
+                <StandardTitle>English 231: English Phonetics</StandardTitle>
+              </Header.Title>
+              <Header.Subtitle>
+                <Subtitle>Quiz 3 | Answers | {session.name}</Subtitle>
+              </Header.Subtitle>
+            </Header>
+          </Review.Header>
 
+          <SessionContext.Provider
+            value={{
+              sectionId: 'section-1-part-1',
+              data: session
+            }}
+          >
             <Review.Section>
               <Review.Heading>
                 <SectionHeader>Section 1 Part 1</SectionHeader>
@@ -86,7 +87,14 @@ function ReviewPage() {
                 <S1P1.Question />
               </Review.Response>
             </Review.Section>
+          </SessionContext.Provider>
 
+          <SessionContext.Provider
+            value={{
+              sectionId: 'section-1-part-2',
+              data: session
+            }}
+          >
             <Review.Section>
               <Review.Heading>
                 <SectionHeader>Section 1 Part 2</SectionHeader>
@@ -101,8 +109,30 @@ function ReviewPage() {
                 <S1P2.Question />
               </Review.Response>
             </Review.Section>
-          </Review>
-        </SessionContext.Provider>
+          </SessionContext.Provider>
+
+          <SessionContext.Provider
+            value={{
+              sectionId: 'section-2',
+              data: session
+            }}
+          >
+            <Review.Section>
+              <Review.Heading>
+                <SectionHeader>Section 2</SectionHeader>
+              </Review.Heading>
+              <Review.Instruction>
+                <S2.Instruction />
+              </Review.Instruction>
+              <Review.AudioPlayer>
+                <S2.Audio />
+              </Review.AudioPlayer>
+              <Review.Response>
+                <S2.Question />
+              </Review.Response>
+            </Review.Section>
+          </SessionContext.Provider>
+        </Review>
       </Root>
     </GlobalStyles>
   )
