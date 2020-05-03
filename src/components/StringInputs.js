@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { PureToneIcon } from './ToneIcon'
 
 import useCheckbox from '../hooks/use-checkbox'
-
-import SessionContext from '../contexts/SessionContext'
 
 const common = {
   base: css`
