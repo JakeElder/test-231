@@ -31,52 +31,52 @@ function IntroductionPage() {
       <TestPage.SideBar>
         <Sidebar current="introduction" />
       </TestPage.SideBar>
-        <TestPage.TestPart>
-          <TestPart>
-            <TestPart.Header>
-              <Header>
-                <Header.Title>
-                  <Title>{title}</Title>
-                </Header.Title>
-                <Header.Subtitle>
-                  <Subtitle>Quiz 3 | Introduction</Subtitle>
-                </Header.Subtitle>
-              </Header>
-            </TestPart.Header>
-            <TestPart.Body>
-              <BodyCopy>
-                <h1>Welcome to English 231: English Phonetics Quiz 3</h1>
+      <TestPage.TestPart>
+        <TestPart>
+          <TestPart.Header>
+            <Header>
+              <Header.Title>
+                <Title>{title}</Title>
+              </Header.Title>
+              <Header.Subtitle>
+                <Subtitle>Quiz 3 | Introduction</Subtitle>
+              </Header.Subtitle>
+            </Header>
+          </TestPart.Header>
+          <TestPart.Body>
+            <BodyCopy>
+              <h1>Welcome to English 231: English Phonetics Quiz 3</h1>
 
-                <p>
-                  This test is comprised of 4 sections, some of which contain
-                  parts.
-                </p>
+              <p>
+                This test is comprised of 4 sections, some of which contain
+                parts.
+              </p>
 
-                <p>
-                  You will be required to answer the questions by first reading
-                  the instructions then playing an audio clip and selecting the
-                  answers using the provided interface.
-                </p>
+              <p>
+                You will be required to answer the questions by first reading
+                the instructions then playing an audio clip and selecting the
+                answers using the provided interface.
+              </p>
 
-                <p>
-                  As some questions require that you listen to an audio clip,
-                  please ensure you are in a suitable environment, have
-                  headphones equipped where necessary and have your volume
-                  turned up to a reasonable level.
-                </p>
-              </BodyCopy>
-            </TestPart.Body>
-            <TestPart.Footer>
-              <PlainButton
-                disabled={commencing}
-                type="button"
-                onClick={onContinueClick}
-              >
-                <Button disabled={commencing}>Continue</Button>
-              </PlainButton>
-            </TestPart.Footer>
-          </TestPart>
-        </TestPage.TestPart>
+              <p>
+                As some questions require that you listen to an audio clip,
+                please ensure you are in a suitable environment, have headphones
+                equipped where necessary and have your volume turned up to a
+                reasonable level.
+              </p>
+            </BodyCopy>
+          </TestPart.Body>
+          <TestPart.Footer>
+            <PlainButton
+              disabled={commencing}
+              type="button"
+              onClick={onContinueClick}
+            >
+              <Button disabled={commencing}>Continue</Button>
+            </PlainButton>
+          </TestPart.Footer>
+        </TestPart>
+      </TestPage.TestPart>
     </TestPage>
   )
 }

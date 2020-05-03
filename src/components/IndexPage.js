@@ -13,7 +13,7 @@ function IndexPage({ location }) {
   useEffect(() => {
     if (!newToken && !existingToken) {
       navigate('/test-unavailable')
-      return 
+      return
     }
 
     if (newToken) {
@@ -22,7 +22,7 @@ function IndexPage({ location }) {
         navigate('/', { push: true })
       })
       return
-    } 
+    }
 
     Session.checkToken(existingToken).then(isValid => {
       navigate(isValid ? '/introduction' : '/test-unavailable')
