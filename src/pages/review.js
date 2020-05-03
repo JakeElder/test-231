@@ -13,6 +13,7 @@ import { PureReviewSectionHeader as SectionHeader } from '../components/ReviewSe
 
 // Section Components
 import * as S1P1 from '../client-pages/section-1-part-1'
+import * as S1P2 from '../client-pages/section-1-part-2'
 
 // Contexts
 import SessionContext from '../contexts/SessionContext'
@@ -83,6 +84,21 @@ function ReviewPage() {
               </Review.AudioPlayer>
               <Review.Response>
                 <S1P1.Question />
+              </Review.Response>
+            </Review.Section>
+
+            <Review.Section>
+              <Review.Heading>
+                <SectionHeader>Section 1 Part 2</SectionHeader>
+              </Review.Heading>
+              <Review.Instruction>
+                <S1P2.Instruction />
+              </Review.Instruction>
+              <Review.AudioPlayer>
+                <S1P2.Audio />
+              </Review.AudioPlayer>
+              <Review.Response>
+                <S1P2.Question />
               </Review.Response>
             </Review.Section>
           </Review>

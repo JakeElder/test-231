@@ -7,14 +7,16 @@ const Header = styled.div`
   margin-bottom: 28px;
 `
 
-const Section = styled.div``
+const Section = styled.div`
+  margin-bottom: 34px;
+`
 
 const Heading = styled.div`
   margin-bottom: 20px;
 `
 
 const Instruction = styled.div`
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 `
 
 const AudioPlayer = styled.div`
