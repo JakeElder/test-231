@@ -3,6 +3,9 @@ import React from 'react'
 export function splitMarkPattern(input, pattern) {
   let match
   const output = []
+  if (Array.isArray(input)) {
+    input = input.join('')
+  }
   while ((match = input.match(pattern))) {
     if (match.index > 0) {
       output.push([input.substr(0, match.index), false])
