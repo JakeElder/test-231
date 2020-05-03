@@ -1,12 +1,31 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
-function useCheckbox() {
+import SessionContext from '../contexts/SessionContext'
+
+function isCheckedInSession(name, value, session) {
+  const answers = session.data.answers.find(
+    answer => answer['section-id'] === session.sectionId
+  )
+  return answers[name.replace(/\[\]$/, '')].includes(value.toString())
+}
+
+function useCheckbox(name, value) {
   const [checked, setChecked] = useState(false)
-  return {
-    checked,
-    toggle: () => {
-      setChecked(!checked)
+  const session = useContext(SessionContext)
+
+  if (!session) {
+    return {
+      name,
+      checked,
+      disabled: false,
+      onClick: () => setChecked(!checked)
     }
+  }
+
+  return {
+    checked: isCheckedInSession(name, value, session),
+    onClick: () => {},
+    disabled: true
   }
 }
 

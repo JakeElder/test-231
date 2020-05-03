@@ -103,32 +103,13 @@ export const PureWordInput = (() => {
 })()
 
 export function WordInput({ children: word, name, ...rest }) {
-  const { checked, toggle } = useCheckbox()
-  const session = useContext(SessionContext)
-  const props = (() => {
-    if (!session) {
-      return {
-        selected: checked,
-        name,
-        onClick: toggle,
-        ...rest
-      }
-    }
-    const selected = (() => {
-      const answers = session.data.answers.find(
-        a => a['section-id'] === session.sectionId
-      )
-      return answers[name.replace(/\[\]$/, '')].includes(word)
-    })()
-    return {
-      selected,
-      onClick: () => {},
-      disabled: true,
-      ...rest
-    }
-  })()
+  const { checked, ...props } = useCheckbox(name, word)
 
-  return <PureWordInput {...props}>{word}</PureWordInput>
+  return (
+    <PureWordInput selected={checked} {...props} {...rest}>
+      {word}
+    </PureWordInput>
+  )
 }
 
 export const PureSyllableInput = (() => {
@@ -180,14 +161,9 @@ export const PureSyllableInput = (() => {
 })()
 
 export function SyllableInput({ children: syllable, name, ...rest }) {
-  const { checked, toggle } = useCheckbox()
+  const { checked, ...props } = useCheckbox(name, syllable)
   return (
-    <PureSyllableInput
-      selected={checked}
-      name={name}
-      onClick={toggle}
-      {...rest}
-    >
+    <PureSyllableInput selected={checked} {...props} {...rest}>
       {syllable}
     </PureSyllableInput>
   )
@@ -253,15 +229,9 @@ export const PureSpaceInput = (() => {
 })()
 
 export function SpaceInput({ value, name, ...rest }) {
-  const { checked, toggle } = useCheckbox()
+  const { checked, ...props } = useCheckbox(name, value)
   return (
-    <PureSpaceInput
-      selected={checked}
-      name={name}
-      value={value}
-      onClick={toggle}
-      {...rest}
-    />
+    <PureSpaceInput selected={checked} {...props} value={value} {...rest} />
   )
 }
 
