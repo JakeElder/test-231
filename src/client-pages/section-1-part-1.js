@@ -96,6 +96,10 @@ function Question() {
   )
 }
 
+function Audio() {
+  return <AudioPlayer src={audio} />
+}
+
 function Section1Part1Page() {
   const title = useTitle()
 
@@ -129,7 +133,7 @@ function Section1Part1Page() {
                 <Instruction />
               </TestPart.Instruction>
               <TestPart.AudioPlayer>
-                <AudioPlayer src={audio} />
+                <Audio />
               </TestPart.AudioPlayer>
               <TestPart.AnswerArea>
                 <Question />
@@ -149,4 +153,5 @@ function Section1Part1Page() {
 
 export default Section1Part1Page
 export { Instruction }
+export { Audio }
 export { Question }
