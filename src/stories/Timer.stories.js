@@ -12,6 +12,4 @@ export const Default = () => (
   <PureTimer passed="35 seconds" allocated="1 minute 50 seconds" />
 )
 
-export const Loading = () => (
-  <PureTimer loading />
-)
+export const Loading = () => <PureTimer loading />

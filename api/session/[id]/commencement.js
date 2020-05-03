@@ -22,7 +22,6 @@ module.exports = async (req, res) => {
     return
   }
 
-
   const r = await collection.updateOne(
     { _id: session._id },
     {
