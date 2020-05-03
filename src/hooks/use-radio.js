@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
 import globalHook from './use-global-hook'
+import SessionContext from '../contexts/SessionContext'
 
 const initialState = { selections: [] }
 const actions = {
@@ -14,11 +16,29 @@ const actions = {
 
 const useGlobal = globalHook(React, initialState, actions)
 
+function isSelectedInSession(name, value, session) {
+  const answers = session.data.answers.find(
+    answer => answer['section-id'] === session.sectionId
+  )
+  return answers[name.replace(/\[\]$/, '')] === value.toString()
+}
+
 export default function(name, value) {
   const [{ selections }, { select }] = useGlobal()
+  const session = useContext(SessionContext)
   const selected = selections.some(s => s[0] === name && s[1] === value)
+
+  if (!session) {
+    return {
+      selected,
+      select: () => select(name, value),
+      disabled: false
+    }
+  }
+
   return {
-    selected,
-    select: () => select(name, value)
+    selected: isSelectedInSession(name, value, session),
+    select: () => {},
+    disabled: true
   }
 }

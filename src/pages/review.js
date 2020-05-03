@@ -16,6 +16,7 @@ import * as S1P1 from '../client-pages/section-1-part-1'
 import * as S1P2 from '../client-pages/section-1-part-2'
 import * as S2 from '../client-pages/section-2'
 import * as S3 from '../client-pages/section-3'
+import * as S4 from '../client-pages/section-4'
 
 // Contexts
 import SessionContext from '../contexts/SessionContext'
@@ -152,6 +153,28 @@ function ReviewPage() {
               </Review.AudioPlayer>
               <Review.Response>
                 <S3.Question />
+              </Review.Response>
+            </Review.Section>
+          </SessionContext.Provider>
+
+          <SessionContext.Provider
+            value={{
+              sectionId: 'section-4',
+              data: session
+            }}
+          >
+            <Review.Section>
+              <Review.Heading>
+                <SectionHeader>Section 4</SectionHeader>
+              </Review.Heading>
+              <Review.Instruction>
+                <S4.Instruction />
+              </Review.Instruction>
+              <Review.AudioPlayer>
+                <S4.Audio />
+              </Review.AudioPlayer>
+              <Review.Response>
+                <S4.Question />
               </Review.Response>
             </Review.Section>
           </SessionContext.Provider>
