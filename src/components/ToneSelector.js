@@ -76,6 +76,11 @@ export function ToneSelector({ name }) {
   }
 
   return (
-    <PureToneSelector name={name} selected={selected} onSelect={onSelect} />
+    <PureToneSelector
+      disabled={Object.values(radios).some(r => r.disabled)}
+      name={name}
+      selected={selected}
+      onSelect={onSelect}
+    />
   )
 }
