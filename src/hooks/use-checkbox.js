@@ -6,10 +6,11 @@ function isCheckedInSession(name, value, session) {
   const answers = session.data.answers.find(
     answer => answer['section-id'] === session.sectionId
   )
-  if (!answers) {
+  const key = name.replace(/\[\]$/, '')
+  if (!answers || !answers[key]) {
     return false
   }
-  return answers[name.replace(/\[\]$/, '')].includes(value.toString())
+  return answers[key].includes(value.toString())
 }
 
 function useCheckbox(name, value) {
