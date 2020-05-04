@@ -1,4 +1,5 @@
-const { connect, uuid } = require('../api-modules/db')
+const { connect, uuid, prepareSession } = require('./db')
+const { normalizeSession } = require('../api/session/[id]')
 
 async function getSessionsCollection() {
   const db = await connect(process.env.MONGODB_URI)
@@ -18,11 +19,19 @@ async function all() {
 
 async function insert(session) {
   const collection = await getSessionsCollection()
-  return collection.insertOne(session)
+  return collection.insertOne(normalizeSession(prepareSession(session)))
+}
+
+async function insertMany(sessions) {
+  const collection = await getSessionsCollection()
+  return collection.insertMany(
+    sessions.map(s => normalizeSession(prepareSession(s)))
+  )
 }
 
 module.exports = {
   all,
   find,
-  insert
+  insert,
+  insertMany
 }
