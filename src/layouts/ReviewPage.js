@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-const PureReviewPage = styled.div``
+const PureReviewPage = styled.div`
+  @media print {
+    page-break-after: always;
+  }
+`
 
 const Header = styled.div`
   margin-bottom: 28px;

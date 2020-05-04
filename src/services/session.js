@@ -21,6 +21,21 @@ async function all() {
   return data.data
 }
 
+async function where({ complete }) {
+  const qs = (() => {
+    if (complete) {
+      return '?complete=true'
+    }
+    return ''
+  })()
+  const { status, data } = await axios(`/api/session${qs}`)
+  if (status !== 200) {
+    return null
+  }
+  return data.data
+}
+
 export { checkToken }
 export { find }
 export { all }
+export { where }
