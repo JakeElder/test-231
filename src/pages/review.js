@@ -2,6 +2,7 @@
 import 'reset-css'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { Helmet } from 'react-helmet'
 
 // Components
 import GlobalStyles from '../components/GlobalStyles'
@@ -23,6 +24,9 @@ import SessionContext from '../contexts/SessionContext'
 
 // Services
 import * as Session from '../services/session'
+
+// Hooks
+import useTitle from '../hooks/use-title'
 
 // Global CSS
 import '../components/App/App.css'
@@ -174,6 +178,7 @@ function SingleReview({ session }) {
 
 function ReviewPage() {
   const sessions = useSessions()
+  const title = useTitle()
 
   if (sessions === null) {
     return null
@@ -181,6 +186,10 @@ function ReviewPage() {
 
   return (
     <GlobalStyles>
+      <Helmet>
+        <meta name="robots" content="noindex" />
+        <title>{title}</title>
+      </Helmet>
       <Root>
         {sessions.map(s => (
           <SingleReview key={s.id} session={s} />
