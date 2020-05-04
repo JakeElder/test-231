@@ -1,9 +1,10 @@
-const session = require('../../api-modules/session')
+const Session = require('../../api-modules/session')
 
 module.exports = (on, config) => {
   on('task', {
-    getSession: session.find,
-    getSessions: session.all,
-    insertSession: session.insert
+    getSession: Session.find,
+    getSessions: Session.all,
+    insertSession: Session.insert,
+    insertSessions: Session.insertMany
   })
 }

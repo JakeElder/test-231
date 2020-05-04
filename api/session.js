@@ -11,7 +11,15 @@ module.exports = async (req, res) => {
   const collection = await db.collection('sessions')
 
   if (req.method === 'GET') {
-    const cursor = await collection.find({})
+    const query = (() => {
+      if (!req.query.complete) {
+        return {}
+      }
+      return {
+        completed: { $ne: null }
+      }
+    })()
+    const cursor = await collection.find(query)
     const data = await cursor.toArray()
     res.status(200).json({ data: data.map(normalizeSession) })
     return

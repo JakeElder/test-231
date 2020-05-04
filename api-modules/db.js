@@ -38,8 +38,8 @@ function prepareSession(session) {
     name: session.name,
     id: session.id || uuid.new(),
     answers: session.answers || [],
-    commenced: null,
-    completed: null,
+    commenced: session.commenced ? new Date(session.commenced) : null,
+    completed: session.completed ? new Date(session.completed) : null,
     timeAllocated: humanInterval('15 minutes')
   }
 }
