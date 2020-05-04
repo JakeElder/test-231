@@ -39,10 +39,137 @@ function useSessions() {
   const [sessions, setSessions] = useState(null)
 
   useEffect(() => {
-    Session.all().then(setSessions)
+    Session.where({ complete: true }).then(setSessions)
   }, [])
 
   return sessions
+}
+
+function SingleReview({ session }) {
+  return (
+    <Review>
+      <Review.Header>
+        <Header>
+          <Header.Title>
+            <StandardTitle>English 231: English Phonetics</StandardTitle>
+          </Header.Title>
+          <Header.Subtitle>
+            <Subtitle>Quiz 3 | Answers | {session.name}</Subtitle>
+          </Header.Subtitle>
+        </Header>
+      </Review.Header>
+
+      <SessionContext.Provider
+        value={{
+          sectionId: 'section-1-part-1',
+          data: session
+        }}
+      >
+        <Review.Section>
+          <Review.Heading>
+            <SectionHeader>Section 1 Part 1</SectionHeader>
+          </Review.Heading>
+          <Review.Instruction>
+            <S1P1.Instruction />
+          </Review.Instruction>
+          <Review.AudioPlayer>
+            <S1P1.Audio />
+          </Review.AudioPlayer>
+          <Review.Response>
+            <S1P1.Question />
+          </Review.Response>
+        </Review.Section>
+      </SessionContext.Provider>
+
+      <SessionContext.Provider
+        value={{
+          sectionId: 'section-1-part-2',
+          data: session
+        }}
+      >
+        <Review.Section>
+          <Review.Heading>
+            <SectionHeader>Section 1 Part 2</SectionHeader>
+          </Review.Heading>
+          <Review.Instruction>
+            <S1P2.Instruction />
+          </Review.Instruction>
+          <Review.AudioPlayer>
+            <S1P2.Audio />
+          </Review.AudioPlayer>
+          <Review.Response>
+            <S1P2.Question />
+          </Review.Response>
+        </Review.Section>
+      </SessionContext.Provider>
+
+      <SessionContext.Provider
+        value={{
+          sectionId: 'section-2',
+          data: session
+        }}
+      >
+        <Review.Section>
+          <Review.Heading>
+            <SectionHeader>Section 2</SectionHeader>
+          </Review.Heading>
+          <Review.Instruction>
+            <S2.Instruction />
+          </Review.Instruction>
+          <Review.AudioPlayer>
+            <S2.Audio />
+          </Review.AudioPlayer>
+          <Review.Response>
+            <S2.Question />
+          </Review.Response>
+        </Review.Section>
+      </SessionContext.Provider>
+
+      <SessionContext.Provider
+        value={{
+          sectionId: 'section-3',
+          data: session
+        }}
+      >
+        <Review.Section>
+          <Review.Heading>
+            <SectionHeader>Section 3</SectionHeader>
+          </Review.Heading>
+          <Review.Instruction>
+            <S3.Instruction />
+          </Review.Instruction>
+          <Review.AudioPlayer>
+            <S3.Audio />
+          </Review.AudioPlayer>
+          <Review.Response>
+            <S3.Question />
+          </Review.Response>
+        </Review.Section>
+      </SessionContext.Provider>
+
+      <SessionContext.Provider
+        value={{
+          sectionId: 'section-4',
+          data: session
+        }}
+      >
+        <Review.Section>
+          <Review.Heading>
+            <SectionHeader>Section 4</SectionHeader>
+          </Review.Heading>
+          <Review.Instruction>
+            <S4.Instruction />
+          </Review.Instruction>
+          <Review.AudioPlayer>
+            <S4.Audio />
+          </Review.AudioPlayer>
+          <Review.Response>
+            <S4.Question />
+          </Review.Response>
+        </Review.Section>
+      </SessionContext.Provider>
+    </Review>
+  )
 }
 
 function ReviewPage() {
@@ -52,133 +179,12 @@ function ReviewPage() {
     return null
   }
 
-  const session = sessions[0]
-
   return (
     <GlobalStyles>
       <Root>
-        <Review>
-          <Review.Header>
-            <Header>
-              <Header.Title>
-                <StandardTitle>English 231: English Phonetics</StandardTitle>
-              </Header.Title>
-              <Header.Subtitle>
-                <Subtitle>Quiz 3 | Answers | {session.name}</Subtitle>
-              </Header.Subtitle>
-            </Header>
-          </Review.Header>
-
-          <SessionContext.Provider
-            value={{
-              sectionId: 'section-1-part-1',
-              data: session
-            }}
-          >
-            <Review.Section>
-              <Review.Heading>
-                <SectionHeader>Section 1 Part 1</SectionHeader>
-              </Review.Heading>
-              <Review.Instruction>
-                <S1P1.Instruction />
-              </Review.Instruction>
-              <Review.AudioPlayer>
-                <S1P1.Audio />
-              </Review.AudioPlayer>
-              <Review.Response>
-                <S1P1.Question />
-              </Review.Response>
-            </Review.Section>
-          </SessionContext.Provider>
-
-          <SessionContext.Provider
-            value={{
-              sectionId: 'section-1-part-2',
-              data: session
-            }}
-          >
-            <Review.Section>
-              <Review.Heading>
-                <SectionHeader>Section 1 Part 2</SectionHeader>
-              </Review.Heading>
-              <Review.Instruction>
-                <S1P2.Instruction />
-              </Review.Instruction>
-              <Review.AudioPlayer>
-                <S1P2.Audio />
-              </Review.AudioPlayer>
-              <Review.Response>
-                <S1P2.Question />
-              </Review.Response>
-            </Review.Section>
-          </SessionContext.Provider>
-
-          <SessionContext.Provider
-            value={{
-              sectionId: 'section-2',
-              data: session
-            }}
-          >
-            <Review.Section>
-              <Review.Heading>
-                <SectionHeader>Section 2</SectionHeader>
-              </Review.Heading>
-              <Review.Instruction>
-                <S2.Instruction />
-              </Review.Instruction>
-              <Review.AudioPlayer>
-                <S2.Audio />
-              </Review.AudioPlayer>
-              <Review.Response>
-                <S2.Question />
-              </Review.Response>
-            </Review.Section>
-          </SessionContext.Provider>
-
-          <SessionContext.Provider
-            value={{
-              sectionId: 'section-3',
-              data: session
-            }}
-          >
-            <Review.Section>
-              <Review.Heading>
-                <SectionHeader>Section 3</SectionHeader>
-              </Review.Heading>
-              <Review.Instruction>
-                <S3.Instruction />
-              </Review.Instruction>
-              <Review.AudioPlayer>
-                <S3.Audio />
-              </Review.AudioPlayer>
-              <Review.Response>
-                <S3.Question />
-              </Review.Response>
-            </Review.Section>
-          </SessionContext.Provider>
-
-          <SessionContext.Provider
-            value={{
-              sectionId: 'section-4',
-              data: session
-            }}
-          >
-            <Review.Section>
-              <Review.Heading>
-                <SectionHeader>Section 4</SectionHeader>
-              </Review.Heading>
-              <Review.Instruction>
-                <S4.Instruction />
-              </Review.Instruction>
-              <Review.AudioPlayer>
-                <S4.Audio />
-              </Review.AudioPlayer>
-              <Review.Response>
-                <S4.Question />
-              </Review.Response>
-            </Review.Section>
-          </SessionContext.Provider>
-        </Review>
+        {sessions.map(s => (
+          <SingleReview key={s.id} session={s} />
+        ))}
       </Root>
     </GlobalStyles>
   )
