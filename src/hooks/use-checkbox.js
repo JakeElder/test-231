@@ -6,6 +6,9 @@ function isCheckedInSession(name, value, session) {
   const answers = session.data.answers.find(
     answer => answer['section-id'] === session.sectionId
   )
+  if (!answers) {
+    return false
+  }
   return answers[name.replace(/\[\]$/, '')].includes(value.toString())
 }
 

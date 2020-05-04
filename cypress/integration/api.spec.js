@@ -27,6 +27,31 @@ describe('API', () => {
         expect(res.body.data.length).to.equal(require('../../seed.json').length)
       })
     })
+
+    it('Allows filtering by `complete`', () => {
+      const sessions = [
+        mockSession({
+          id: 'complete-1',
+          commenced: Date.now() - humanInterval('20 minutes'),
+          completed: Date.now() - humanInterval('10 minutes')
+        }),
+        mockSession({
+          id: 'incomplete',
+          commenced: null,
+          completed: null
+        }),
+        mockSession({
+          id: 'complete-2',
+          commenced: Date.now() - humanInterval('18 minutes'),
+          completed: Date.now() - humanInterval('9 minutes')
+        })
+      ]
+      cy.task('insertSessions', sessions)
+      cy.request(`/api/session?complete=true`).then(res => {
+        expect(res.status).to.equal(200)
+        expect(res.body.data.length).to.equal(2)
+      })
+    })
   })
 
   describe('GET /api/session/[id]', () => {
