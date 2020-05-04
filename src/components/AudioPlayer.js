@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Howl } from 'howler'
+import QRCode from 'qrcode'
 
 import PlayIcon from './PlayIcon'
 import PauseIcon from './PauseIcon'
@@ -15,6 +16,9 @@ const Root = styled.div`
   display: flex;
   align-items: center;
   border-radius: 2px;
+  @media print {
+    display: none;
+  }
 `
 
 const PlayPauseButtons = styled.div`
@@ -127,6 +131,59 @@ export function PureAudioPlayer({ loading, wat, ...rest }) {
   return <PlayingAudioPlayer {...rest} />
 }
 
+const QR = (() => {
+  const Root = styled.div`
+    display: none;
+    align-items: center;
+    @media print {
+      display: flex;
+    }
+  `
+
+  const CodeContainer = styled.div`
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    margin-right: 8px;
+  `
+  const Code = styled.div`
+    position: relative;
+    top: -3px;
+    left: -3px;
+  `
+
+  const Instruction = styled.div`
+    font-weight: 300;
+    font-size: 14px;
+    color: #888;
+  `
+
+  return function QR({ url }) {
+    const [svg, setSVG] = useState(null)
+
+    useEffect(() => {
+      QRCode.toString(url, { type: 'svg', width: 56 }, (err, svg) => {
+        if (err === null) {
+          setSVG(svg)
+        }
+      })
+    }, [url, setSVG])
+
+    if (svg === null) {
+      return null
+    }
+
+    return (
+      <Root>
+        <CodeContainer>
+          <Code dangerouslySetInnerHTML={{ __html: svg }} />
+        </CodeContainer>
+        <Instruction>Scan for audio clip</Instruction>
+      </Root>
+    )
+  }
+})()
+
 function AudioPlayer({ src }) {
   const [loaded, setLoaded] = useState(false)
   const [playing, setPlaying] = useState(false)
@@ -176,12 +233,15 @@ function AudioPlayer({ src }) {
 
   if (loaded) {
     return (
-      <PureAudioPlayer
-        position={position}
-        playing={playing}
-        duration={sound.current.duration() * 1000}
-        onToggleClick={toggle}
-      />
+      <div>
+        <PureAudioPlayer
+          position={position}
+          playing={playing}
+          duration={sound.current.duration() * 1000}
+          onToggleClick={toggle}
+        />
+        <QR url={`https://cmu.run${src}`} />
+      </div>
     )
   }
 
