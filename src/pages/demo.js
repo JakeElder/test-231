@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { navigate } from 'gatsby'
+import 'reset-css'
 
 import LoadingPage from '../components/LoadingPage'
 
