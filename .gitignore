@@ -72,3 +72,6 @@ yarn-error.log
 Session.vim
 mailing-list.csv
 seed.json
+
+.nvmrc
+tags
