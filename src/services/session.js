@@ -35,7 +35,16 @@ async function where({ complete }) {
   return data.data
 }
 
+async function create({ name }) {
+  const { status, data } = await axios.post(`/api/session`, { name })
+  if (status !== 200) {
+    return null
+  }
+  return data.data
+}
+
 export { checkToken }
 export { find }
 export { all }
 export { where }
+export { create }

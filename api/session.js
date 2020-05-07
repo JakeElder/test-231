@@ -1,5 +1,6 @@
 const { connect, uuid } = require('../api-modules/db')
 const { normalizeSession } = require('./session/[id]')
+const { prepareSession } = require('../api-modules/db')
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST' && req.method !== 'GET') {
@@ -25,13 +26,12 @@ module.exports = async (req, res) => {
     return
   }
 
-  const session = {
+  const session = prepareSession({
     id: uuid(),
-    name: req.body.name,
-    answers: []
-  }
+    name: req.body.name
+  })
 
-  await collection.insertOne(session)
+  const result = await collection.insertOne(session)
 
-  res.json({ data: { session } })
+  res.json({ data: { session: normalizeSession(session) } })
 }
